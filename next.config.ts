@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        // Preserves the old unilife.com.ng/app entry point once this
+        // Preserves the old app.unilife.com.ng entry point once this
         // Next.js site takes over the root domain — visitors get
         // bounced straight to the app's new permanent home instead
         // of hitting a 404.

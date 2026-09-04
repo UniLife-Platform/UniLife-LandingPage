@@ -171,7 +171,7 @@ export default function DashboardPage() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="ada@oou.edu.ng"
+                  placeholder="ada@youruniversity.edu.ng"
                   required
                 />
                 <label>MATRIC NUMBER</label>
@@ -198,7 +198,7 @@ export default function DashboardPage() {
                   type="email"
                   value={lookupEmail}
                   onChange={(e) => setLookupEmail(e.target.value)}
-                  placeholder="ada@oou.edu.ng"
+                  placeholder="ada@youruniveristy.edu.ng"
                   required
                 />
                 {error && <p className="form-error">{error}</p>}

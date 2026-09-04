@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "ng.com.unilife.app",
+      "sha256_cert_fingerprints": [
+        "43:A5:45:DF:9A:36:58:EB:C8:CA:F1:8D:72:32:55:F3:26:61:51:6F:43:2F:6B:94:79:F0:03:83:1D:B1:EA:EB",
+        "FF:0A:84:A2:73:4D:9E:10:89:F8:AE:DD:5C:0A:F0:06:1B:82:FB:94:E9:52:60:D9:43:40:4E:0E:F2:13:4B:11"
+      ]
+    }
+  }
+]

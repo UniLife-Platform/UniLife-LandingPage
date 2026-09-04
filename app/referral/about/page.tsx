@@ -9,7 +9,7 @@ export default function ReferralAboutPage() {
       <ReferralNav active="/referral/about" />
 
       <PageHead kicker="ABOUT THE PLATFORM" title="Built by a student, for the whole campus.">
-        UniLife is the everyday app for OOU students — where you study,
+        UniLife is the everyday app open to students at any university students — where you study,
         trade, connect, and stay safe, all in one place. This referral
         challenge exists to get it into every student&apos;s hands, fast.
       </PageHead>

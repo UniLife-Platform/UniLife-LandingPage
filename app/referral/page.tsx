@@ -77,7 +77,7 @@ export default function ReferralHome() {
         <SectionHead
           kicker="01 — THE PLATFORM"
           title="Built by a student, for the whole campus."
-          description="UniLife is the everyday app for OOU students — where you study, trade, connect, and stay safe, all in one place. This challenge exists to get it into every student's hands, fast."
+          description="UniLife is the everyday app open to students at any university students — where you study, trade, connect, and stay safe, all in one place. This challenge exists to get it into every student's hands, fast."
         />
         <Reveal>
           <Grid cols={3}>

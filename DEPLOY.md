@@ -93,7 +93,7 @@ Once the Firebase console shows the domain as **Connected**, visit
 - [ ] Deploy the Flutter web build to `app.unilife.com.ng` (same
       Firebase-App-Hosting-custom-domain process, or Firebase Hosting if
       that's what the Flutter build uses — different product, same idea)
-- [ ] Add a 301 redirect from `unilife.com.ng/app` → `app.unilife.com.ng`
+- [ ] Add a 301 redirect from `app.unilife.com.ng` → `app.unilife.com.ng`
       (do this in `next.config.ts` on the Next.js side using the
       `redirects()` config, since that path is now served by this site)
 - [ ] Firebase Auth → Settings → **Authorized domains** → add
@@ -102,5 +102,5 @@ Once the Firebase console shows the domain as **Connected**, visit
       to `https://app.unilife.com.ng`, add it to **Redirect URLs**
 - [ ] Google Cloud Console (OAuth) → update Authorized JavaScript origins
       and redirect URIs to include `app.unilife.com.ng`
-- [ ] Sweep the Flutter app for any hardcoded `unilife.com.ng/app` links
+- [ ] Sweep the Flutter app for any hardcoded `app.unilife.com.ng` links
       (deep links, share links, email templates) and update them
