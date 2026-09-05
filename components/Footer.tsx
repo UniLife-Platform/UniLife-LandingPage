@@ -80,6 +80,8 @@ const LEGAL_LINKS = [
   { label: "Privacy Policy", href: "/policy" },
   { label: "Terms & Conditions", href: "/terms" },
   { label: "Community Guidelines", href: "/guidelines" },
+  { label: "Child Safety Standards", href: "/child-safety" },
+  { label: "Delete Account", href: "/delete-account" },
 ];
 
 const fadeUp = {
