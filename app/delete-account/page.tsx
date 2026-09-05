@@ -1,44 +1,67 @@
-import React from 'react';
+"use client";
 
-export const metadata = {
-  title: 'Delete Account | UniLife',
-  description: 'Instructions on how to request account deletion for UniLife.',
-};
+import Link from "next/link";
+import LegalLayout, { Section, List } from "@/components/LegalLayout";
 
-export default function DeleteAccount() {
+export default function DeleteAccountContent() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black p-6">
-      <div className="max-w-2xl w-full backdrop-blur-lg bg-white/10 border border-white/20 p-8 rounded-2xl shadow-2xl text-white">
-        <h1 className="text-3xl font-bold mb-4">Account Deletion Request</h1>
-        
-        <p className="text-gray-300 mb-6 leading-relaxed">
-          At UniLife, you have full control over your data. If you wish to permanently delete your account and all associated information, follow the steps below.
+    <LegalLayout
+      active="/delete-account"
+      kicker="Your data, your control"
+      title="Account Deletion Request"
+      intro="At UniLife, you have full control over your data. If you wish to permanently delete your account and all associated information, here is how to do it."
+      effectiveDate="September 5, 2026"
+      lastUpdated="September 5, 2026"
+      heroImage="https://images.pexels.com/photos/5380642/pexels-photo-5380642.jpeg?auto=compress&cs=tinysrgb&w=1600"
+      heroImageAlt="Student using a smartphone in a campus setting"
+      badge={{ label: "Applies to", value: "All registered UniLife users" }}
+      ctaTitle="Having trouble?"
+      ctaBody="If you cannot access your registered email, contact support and we will help you verify your identity."
+    >
+      <div className="mb-10">
+        <h3 className="font-bold text-[0.95rem] text-[#14151A] mb-2">Leaving UniLife</h3>
+        <p className="text-[#46473f] text-[0.98rem] leading-relaxed">
+          We believe in giving you complete ownership of your digital footprint. When you request to delete your account, we wipe your data from our active databases. Please read below to understand exactly what is removed and how the process works.
         </p>
-
-        <div className="bg-white/5 border border-white/10 rounded-xl p-5 mb-8">
-          <h2 className="text-xl font-semibold mb-2">How to Request Deletion</h2>
-          <p className="text-gray-300">
-            Send an email to <a href="mailto:support@unilife.com.ng" className="text-blue-400 hover:underline">support@unilife.com.ng</a> from the email address registered to your account.
-          </p>
-          <div className="mt-3 p-3 bg-black/40 rounded-lg text-sm font-mono text-gray-300">
-            Subject: Account Deletion Request
-          </div>
-        </div>
-
-        <h2 className="text-xl font-semibold mb-3">What Gets Deleted?</h2>
-        <ul className="list-disc pl-5 text-gray-300 space-y-2 mb-8">
-          <li>Your profile data (Name, Username, Avatar).</li>
-          <li>All posts, polls, and media shared on the Campus Feed.</li>
-          <li>Your Campus Marketplace shop and listings.</li>
-          <li>Your Student Points (SP) balance.</li>
-        </ul>
-
-        <h2 className="text-xl font-semibold mb-3">Processing Time</h2>
-        <p className="text-gray-300 text-sm leading-relaxed mb-6">
-          Once we verify your request, your account and associated data will be permanently deleted within 7 days. This action is irreversible.
-        </p>
-
       </div>
-    </div>
+
+      <Section number="01" title="How to request deletion">
+        <p>
+          Currently, account deletions are handled via a verified email request to ensure the security of your data.
+        </p>
+        <List
+          items={[
+            <span>Send an email to <a href="mailto:support@unilife.com.ng" className="text-[#14151A] underline decoration-[#FFD23F] decoration-2 underline-offset-2 font-semibold">support@unilife.com.ng</a>.</span>,
+            "You MUST send the email from the exact address registered to your UniLife account.",
+            "Use the subject line: Account Deletion Request.",
+          ]}
+        />
+      </Section>
+
+      <Section number="02" title="What gets deleted?">
+        <p>When your account is processed for deletion, the following data is permanently erased:</p>
+        <List
+          items={[
+            "Your profile data (Name, Username, Avatar, University, Department).",
+            "All posts, polls, and media you have shared on the Campus Feed.",
+            "Your UniShop/Campus Marketplace shop and all active listings.",
+            "Your Student Points (SP) balance and earned badges.",
+          ]}
+        />
+        <p className="mt-4">
+          <em>Note: Messages you have sent to other users may remain visible in their inboxes, but your account name and avatar will be replaced with a generic "Deleted User" state.</em>
+        </p>
+      </Section>
+
+      <Section number="03" title="Processing time">
+        <p>
+          Once we verify your request, your account and associated data will be permanently deleted within 7 days. 
+        </p>
+        <p className="font-bold text-[#14151A] mt-2">
+          This action is completely irreversible. We cannot recover your account, SP balance, or posts once the deletion is processed.
+        </p>
+      </Section>
+
+    </LegalLayout>
   );
 }
