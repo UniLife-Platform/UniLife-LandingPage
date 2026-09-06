@@ -6,7 +6,7 @@ import Image from "next/image";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
 const LOGIN_URL = "https://app.unilife.com.ng";
-const APP_URL = "https://www.harrisonking.com.ng/apps/unilife";
+const APP_URL = "https://chat.whatsapp.com/I4DTryVfFCPDMqyceqxcQl";
 
 // Small hover-close buffer so moving the cursor diagonally from the
 // trigger button into the panel doesn't cause it to flicker shut.

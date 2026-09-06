@@ -6,7 +6,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-const APP_URL = "https://www.harrisonking.com.ng/apps/unilife";
+const APP_URL = "https://chat.whatsapp.com/I4DTryVfFCPDMqyceqxcQl";
 
 export default function Home() {
   return (
