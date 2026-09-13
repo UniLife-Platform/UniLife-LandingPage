@@ -6,8 +6,6 @@ import Head from "next/head";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-const APP_URL = "https://chat.whatsapp.com/I4DTryVfFCPDMqyceqxcQl";
-
 export default function Home() {
   return (
     <>
@@ -93,51 +91,38 @@ export default function Home() {
               group onto one app built for real students. No strangers, no bots —
               just the people you already share a lecture hall with.
             </p>
-            <div className="flex flex-wrap gap-3.5 mb-10">
-              {/* Forcing explicit text colors to override any global CSS conflicts */}
-              <a href={APP_URL} className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-[0.88rem] bg-[#14151A] !text-white border-2 border-[#14151A] shadow-[4px_4px_0_#ff3d81] hover:shadow-[6px_6px_0_#ff3d81] hover:-translate-y-0.5 transition-all whitespace-nowrap">
-                Join UniLife →
-              </a>
-              <a href="#study" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-[0.88rem] bg-transparent !text-[#14151A] border-2 border-[#14151A] hover:bg-[#14151A] hover:!text-white transition-all whitespace-nowrap">
+            
+            <div className="flex flex-wrap items-center gap-4 mb-10">
+              <Link href="/download" passHref>
+                <motion.a
+                  className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full font-bold text-[0.88rem] bg-[#14151A] !text-[#F6F2E7] border-2 border-[#14151A] shadow-[4px_4px_0_#ff3d81]"
+                  whileHover={{ scale: 1.04, y: -2, boxShadow: "6px 6px 0 #ff3d81" }}
+                  whileTap={{ scale: 0.96, y: 0, boxShadow: "2px 2px 0 #ff3d81" }}
+                  transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                >
+                  Download App →
+                </motion.a>
+              </Link>
+            
+              <a href="#study" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-[0.88rem] bg-transparent !text-[#14151A] border-2 border-[#14151A] hover:bg-[#14151A] hover:!text-white transition-all whitespace-nowrap h-[56px] md:h-[58px]">
                 See what&apos;s inside
               </a>
             </div>
-            <div className="flex flex-wrap gap-3 mt-9">
+
+            <div className="flex flex-wrap gap-3 mt-4">
               <span className="font-mono text-[0.74rem] px-4 py-2 rounded-full border border-[rgba(20,21,26,0.12)] text-[#8a8a7f] bg-white"><b className="text-[#14151A]">400+</b> Students in</span>
-              <span className="font-mono text-[0.74rem] px-4 py-2 rounded-full border border-[rgba(20,21,26,0.12)] text-[#8a8a7f] bg-white"><b className="text-[#14151A]">Open to students at any university</b> Live now</span>
+              <span className="font-mono text-[0.74rem] px-4 py-2 rounded-full border border-[rgba(20,21,26,0.12)] text-[#8a8a7f] bg-white"><b className="text-[#14151A]">Live now</b></span>
               <span className="font-mono text-[0.74rem] px-4 py-2 rounded-full border border-[rgba(20,21,26,0.12)] text-[#8a8a7f] bg-white"><b className="text-[#14151A]">Real</b> Verified profiles</span>
             </div>
           </motion.div>
 
           {/* ---- HERO VISUALS (3D Composition) ---- */}
           <div className="hero-visuals">
-            {/* Locked-in specific Unsplash images of students */}
-            <motion.img
-              src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=400&auto=format&fit=crop"
-              alt="Campus Event"
-              className="float-img left-float"
-              animate={{ y: [0, -15, 0], rotate: [-8, -10, -8] }}
-              transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-            />
-            <motion.img
-              src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=400&auto=format&fit=crop"
-              alt="Study Group"
-              className="float-img right-float"
-              animate={{ y: [0, 15, 0], rotate: [12, 14, 12] }}
-              transition={{ repeat: Infinity, duration: 7, ease: "easeInOut", delay: 1 }}
-            />
+            <motion.img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=400&auto=format&fit=crop" alt="Campus Event" className="float-img left-float" animate={{ y: [0, -15, 0], rotate: [-8, -10, -8] }} transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }} />
+            <motion.img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=400&auto=format&fit=crop" alt="Study Group" className="float-img right-float" animate={{ y: [0, 15, 0], rotate: [12, 14, 12] }} transition={{ repeat: Infinity, duration: 7, ease: "easeInOut", delay: 1 }} />
 
-            <motion.div 
-              className="id-card-stage"
-              initial={{ opacity: 0, y: 40, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            >
-              <motion.div 
-                className="id-card"
-                animate={{ y: [0, -8, 0] }}
-                transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-              >
+            <motion.div className="id-card-stage" initial={{ opacity: 0, y: 40, scale: 0.9 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}>
+              <motion.div className="id-card" animate={{ y: [0, -8, 0] }} transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}>
                 <div className="id-card__glare"></div>
                 <div className="id-card__pin"></div>
                 
@@ -178,7 +163,7 @@ export default function Home() {
           </div>
         </header>
 
-                {/* ---- COURSE OUTLINE ---- */}
+        {/* ---- COURSE OUTLINE ---- */}
         <section id="outline" className="py-24 px-6 md:px-16 max-w-[1160px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.85fr] gap-16 items-center mb-16">
             <motion.div
@@ -328,43 +313,43 @@ export default function Home() {
         <section id="study" className="py-24 px-6 md:px-16 max-w-[1160px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-16 items-center">
             <motion.div
-  initial={{ opacity: 0, x: -30 }}
-  whileInView={{ opacity: 1, x: 0 }}
-  viewport={{ once: true, margin: "-100px" }}
-  transition={{ duration: 0.6 }}
->
-  <span className="inline-block font-mono text-xs tracking-widest text-[#46473f] bg-white border border-[rgba(20,21,26,0.12)] px-4 py-1.5 rounded-full mb-6 uppercase">
-    Digital Library & AI
-  </span>
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6 }}
+            >
+              <span className="inline-block font-mono text-xs tracking-widest text-[#46473f] bg-white border border-[rgba(20,21,26,0.12)] px-4 py-1.5 rounded-full mb-6 uppercase">
+                Digital Library & AI
+              </span>
 
-  <h2 className="font-display text-[clamp(2rem,4vw,2.8rem)] uppercase mb-4 leading-[1.05] text-[#14151A]">
-    Study smarter, not harder.
-  </h2>
+              <h2 className="font-display text-[clamp(2rem,4vw,2.8rem)] uppercase mb-4 leading-[1.05] text-[#14151A]">
+                Study smarter, not harder.
+              </h2>
 
-  <p className="text-[#46473f] text-[1.05rem] leading-relaxed mb-8">
-    Your academic survival kit. Upload a messy lecture PDF and let the
-    built-in AI tutor explain complex concepts and generate practice
-    quizzes. Earn SP for contributing past questions.
-  </p>
+              <p className="text-[#46473f] text-[1.05rem] leading-relaxed mb-8">
+                Your academic survival kit. Upload a messy lecture PDF and let the
+                built-in AI tutor explain complex concepts and generate practice
+                quizzes. Earn SP for contributing past questions.
+              </p>
 
-  <div className="flex flex-col gap-4">
-    {[
-      { icon: "📚", title: "Past Questions & Notes", desc: "A verified library of materials for your exact courses." },
-      { icon: "🤖", title: "AI Study Tutor", desc: "Chat with your PDFs. Get instant explanations." },
-      { icon: "📈", title: "CGPA Calculator", desc: "Track your academic standing in real-time." },
-    ].map((f) => (
-      <div key={f.title} className="flex items-start gap-4">
-        <div className="w-11 h-11 shrink-0 rounded-xl bg-[rgba(79,127,255,0.1)] border border-[rgba(79,127,255,0.3)] flex items-center justify-center text-lg">
-          {f.icon}
-        </div>
-        <div>
-          <h4 className="font-bold text-[1rem] text-[#14151A] mb-0.5">{f.title}</h4>
-          <p className="text-[#46473f] text-[0.9rem] leading-relaxed">{f.desc}</p>
-        </div>
-      </div>
-    ))}
-  </div>
-</motion.div>
+              <div className="flex flex-col gap-4">
+                {[
+                  { icon: "📚", title: "Past Questions & Notes", desc: "A verified library of materials for your exact courses." },
+                  { icon: "🤖", title: "AI Study Tutor", desc: "Chat with your PDFs. Get instant explanations." },
+                  { icon: "📈", title: "CGPA Calculator", desc: "Track your academic standing in real-time." },
+                ].map((f) => (
+                  <div key={f.title} className="flex items-start gap-4">
+                    <div className="w-11 h-11 shrink-0 rounded-xl bg-[rgba(79,127,255,0.1)] border border-[rgba(79,127,255,0.3)] flex items-center justify-center text-lg">
+                      {f.icon}
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-[1rem] text-[#14151A] mb-0.5">{f.title}</h4>
+                      <p className="text-[#46473f] text-[0.9rem] leading-relaxed">{f.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
 
             <motion.div 
               className="relative w-full rounded-[24px]"
@@ -373,7 +358,6 @@ export default function Home() {
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              {/* Specific image of black students studying */}
               <img 
                 src="https://images.unsplash.com/photo-1531496730074-83b638c0a7ac?q=80&w=800&auto=format&fit=crop" 
                 alt="Nigerian Students Studying" 
@@ -412,7 +396,6 @@ export default function Home() {
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.6 }}
               >
-                {/* Specific image of student transaction/retail */}
                 <img 
                   src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=800&auto=format&fit=crop" 
                   alt="Student Seller" 
@@ -520,7 +503,7 @@ export default function Home() {
         </section>
 
         {/* ---- DOWNLOAD BAND ---- */}
-        <section className="py-24 px-6 md:px-16 max-w-[1160px] mx-auto">
+        <section className="py-24 px-6 md:px-16 max-w-[1160px] mx-auto mt-20">
           <motion.div 
             className="bg-[#14151A] text-[#F6F2E7] rounded-[32px] p-12 md:p-16 text-center relative shadow-2xl"
             initial={{ opacity: 0, scale: 0.95 }}
@@ -535,12 +518,12 @@ export default function Home() {
             <p className="text-[rgba(246,242,231,0.75)] mb-10 max-w-[500px] mx-auto leading-relaxed text-lg">
               Download the app, verify your student profile, and start earning SP from day one. No invite code needed.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              {/* Forcing explicit text colors again to beat global CSS */}
-              <a href={APP_URL} className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-bold text-[0.95rem] bg-[#FFD23F] !text-[#14151A] border-2 border-[#FFD23F] hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(0,0,0,0.3)] transition-all whitespace-nowrap">
-                Download UniLife →
-              </a>
-              <Link href="/pricing" className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-bold text-[0.95rem] bg-transparent !text-white border-2 border-[rgba(255,255,255,0.2)] hover:bg-[#F6F2E7] hover:!text-[#14151A] transition-all whitespace-nowrap">
+            
+            <div className="flex flex-wrap justify-center items-center gap-6">
+              <Link href="/download" className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-bold text-[1rem] bg-[#FFD23F] !text-[#14151A] hover:bg-[#ffe066] hover:scale-105 hover:-translate-y-1 transition-all shadow-[0_10px_25px_rgba(255,210,63,0.25)] whitespace-nowrap">
+                Get the App →
+              </Link>
+              <Link href="/pricing" className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-bold text-[1rem] bg-transparent !text-white border-2 border-[rgba(255,255,255,0.2)] hover:bg-[#F6F2E7] hover:!text-[#14151A] transition-all whitespace-nowrap h-[56px] md:h-[60px]">
                 See Pro Plans
               </Link>
             </div>

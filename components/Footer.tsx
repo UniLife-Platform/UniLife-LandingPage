@@ -74,6 +74,7 @@ const COMPANY_LINKS = [
   { label: "About & vision", href: "/about" },
   { label: "Join the team", href: "/team" },
   { label: "Contact", href: "/contact" },
+  { label: "Download App", href: "/download" },
 ];
 
 const LEGAL_LINKS = [

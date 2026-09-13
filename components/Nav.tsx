@@ -109,7 +109,7 @@ function DesktopDropdown({ title, items, active }: { title: string, items: NavIt
     >
       <button
         className={`relative flex items-center gap-1.5 text-[0.92rem] py-2 transition-colors duration-200 outline-none
-          ${isActive ? "font-bold text-[#14151A]" : "font-medium text-[#8a8a7f] hover:text-[#14151A]"}
+          ${isActive ? "font-bold text-[#14151A]" : "font-medium text-[#14151A]"}
           after:absolute after:-bottom-1 after:left-0 after:h-[2.5px] after:w-full after:origin-left after:scale-x-0 after:bg-[#FFD23F] after:rounded-full after:transition-transform after:duration-300
           ${isActive ? "after:scale-x-100" : "group-hover:after:scale-x-100"}
         `}
@@ -227,7 +227,7 @@ function MobileAccordion({
                   key={item.href}
                   href={item.href}
                   onClick={closeNav}
-                  className="px-4 py-3 rounded-xl hover:bg-[#f4f6fc] text-[0.95rem] font-medium text-[#46473f] flex items-center gap-3 transition-colors active:scale-[0.98]"
+                  className="px-4 py-3 rounded-xl bg-[#f4f6fc] text-[0.95rem] font-medium text-[#46473f] flex items-center gap-3 transition-colors active:scale-[0.98]"
                 >
                   <span className="text-xl shrink-0">{item.icon}</span>
                   {item.label}
@@ -329,13 +329,13 @@ export default function Nav({ active }: { active?: string }) {
               Sign In
             </Link>
             <motion.a
-              className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full font-bold text-[0.88rem] bg-[#14151A] !text-[#F6F2E7] border-2 border-[#14151A] shadow-[4px_4px_0_#ff3d81]"
-              href={APP_URL}
+              className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full font-bold text-[0.88rem] bg-[#14151A] text-[#F6F2E7]! border-2 border-[#14151A] shadow-[4px_4px_0_#ff3d81]"
+              href="/download"
               whileHover={prefersReducedMotion ? undefined : { scale: 1.04, y: -2, boxShadow: "6px 6px 0 #ff3d81" }}
               whileTap={prefersReducedMotion ? undefined : { scale: 0.96, y: 0, boxShadow: "2px 2px 0 #ff3d81" }}
               transition={{ type: "spring", stiffness: 400, damping: 15 }}
             >
-              Join UniLife →
+              Download App →
             </motion.a>
           </div>
 
@@ -399,8 +399,8 @@ export default function Nav({ active }: { active?: string }) {
                 <Link href={LOGIN_URL} className="flex items-center justify-center w-full py-4 rounded-full font-bold bg-[#f4f6fc] text-[#14151A] active:scale-[0.98] transition-transform">
                   Sign In
                 </Link>
-                <Link href={APP_URL} className="flex items-center justify-center w-full py-4 rounded-full font-bold bg-[#14151A] !text-white shadow-xl active:scale-[0.98] transition-transform">
-                  Join UniLife →
+                <Link href="/download"className="flex items-center justify-center w-full py-4 rounded-full font-bold bg-[#14151A] !text-white shadow-xl active:scale-[0.98] transition-transform">
+                  Download App
                 </Link>
               </motion.div>
 
