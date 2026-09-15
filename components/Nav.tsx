@@ -8,8 +8,6 @@ import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 const LOGIN_URL = "https://app.unilife.com.ng";
 const APP_URL = "https://chat.whatsapp.com/I4DTryVfFCPDMqyceqxcQl";
 
-// Small hover-close buffer so moving the cursor diagonally from the
-// trigger button into the panel doesn't cause it to flicker shut.
 const DROPDOWN_CLOSE_DELAY = 120;
 
 type NavItem = {
@@ -29,6 +27,12 @@ const SOLUTIONS: NavItem[] = [
   { href: "/students", label: "For Students", desc: "Connect, study, and earn rewards.", icon: "🎓" },
   { href: "/sellers", label: "For Sellers", desc: "Open a UniShop with zero fees.", icon: "💼" },
   { href: "/partners", label: "For School Bodies", desc: "Verified pages for unions and clubs.", icon: "🏛️" },
+];
+
+const JOIN_US: NavItem[] = [
+  { href: "/join", label: "Campus Ambassadors", desc: "Lead the expansion at your school.", icon: "📢" },
+  { href: "/join", label: "Department Partners", desc: "Digitize your faculty association.", icon: "🤝" },
+  { href: "/join", label: "Core Team", desc: "Build the future of campus tech.", icon: "💻" },
 ];
 
 // --- Social Icons ---
@@ -71,10 +75,8 @@ const slideInItem = {
   show: { opacity: 1, x: 0, y: 0, transition: { type: "spring" as const, stiffness: 400, damping: 20 } }
 };
 
-// --- Desktop Dropdown Component ---
-// Keyboard-accessible (focus/blur + Escape) and debounced on hover so it
-// doesn't snap shut while the cursor is travelling into the panel.
-function DesktopDropdown({ title, items, active }: { title: string, items: NavItem[], active?: string }) {
+// --- Desktop Mega Menu Component ---
+function DesktopMegaMenu({ active }: { active?: string }) {
   const [open, setOpen] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -90,7 +92,7 @@ function DesktopDropdown({ title, items, active }: { title: string, items: NavIt
     closeTimer.current = setTimeout(() => setOpen(false), DROPDOWN_CLOSE_DELAY);
   };
 
-  const isActive = items.some((item) => {
+  const isActive = [FEATURES, SOLUTIONS, JOIN_US].flat().some((item) => {
     const itemPath = item.href.split("#")[0];
     return itemPath === active && itemPath !== "/";
   });
@@ -123,7 +125,7 @@ function DesktopDropdown({ title, items, active }: { title: string, items: NavIt
           if (e.key === "Escape") setOpen(false);
         }}
       >
-        {title}
+        Explore
         <motion.svg
           animate={{ rotate: open ? 180 : 0 }}
           transition={{ duration: 0.2 }}
@@ -137,41 +139,96 @@ function DesktopDropdown({ title, items, active }: { title: string, items: NavIt
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: 15, scale: 0.95 }}
+            initial={{ opacity: 0, y: 15, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.98 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-[320px]"
+            className="absolute top-full left-1/2 -translate-x-1/2 pt-6 w-[880px]"
           >
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              animate="show"
-              exit="exit"
-              className="bg-white/80 backdrop-blur-2xl backdrop-saturate-150 border border-[rgba(20,21,26,0.08)] rounded-[20px] shadow-[0_24px_48px_rgba(20,21,26,0.14)] p-2 flex flex-col"
-            >
-              {items.map((item) => (
-                <motion.div key={item.href} variants={slideInItem}>
-                  <Link
-                    href={item.href}
-                    onClick={() => setOpen(false)}
-                    className="flex items-start gap-3 p-3 hover:bg-[#f4f6fc] rounded-[14px] transition-colors group"
-                  >
-                    <div className="text-xl bg-white border border-[rgba(20,21,26,0.05)] w-11 h-11 flex items-center justify-center rounded-xl shadow-sm group-hover:scale-110 group-hover:-rotate-3 transition-transform shrink-0 duration-300">
-                      {item.icon}
-                    </div>
-                    <div className="pt-0.5">
-                      <div className="font-bold text-[#14151A] text-[0.92rem] mb-0.5 group-hover:text-[#4f7fff] transition-colors">
-                        {item.label}
+            <div className="bg-white border border-[rgba(20,21,26,0.12)] rounded-[24px] shadow-[0_40px_80px_rgba(20,21,26,0.12)] p-8 flex gap-6">
+              
+              {/* Column 1: Product */}
+              <div className="flex-1">
+                <h4 className="font-mono text-[0.65rem] font-bold tracking-widest text-[#8a8a7f] uppercase mb-4 pl-3">Product</h4>
+                <div className="flex flex-col gap-1">
+                  {FEATURES.map((item, idx) => (
+                    <Link
+                      key={`${item.href}-${idx}`}
+                      href={item.href}
+                      onClick={() => setOpen(false)}
+                      className="flex items-start gap-4 p-3 hover:bg-[#f4f6fc] rounded-[14px] transition-colors group"
+                    >
+                      <div className="text-xl bg-[#fdfbf7] border border-[rgba(20,21,26,0.05)] w-11 h-11 flex items-center justify-center rounded-full shadow-sm group-hover:scale-110 group-hover:-rotate-3 transition-transform shrink-0 duration-300">
+                        {item.icon}
                       </div>
-                      <div className="text-[0.78rem] text-[#8a8a7f] leading-tight">
-                        {item.desc}
+                      <div className="pt-0.5">
+                        <div className="font-bold text-[#14151A] text-[0.92rem] mb-0.5 group-hover:text-[#4f7fff] transition-colors">
+                          {item.label}
+                        </div>
+                        <div className="text-[0.78rem] text-[#8a8a7f] leading-snug">
+                          {item.desc}
+                        </div>
                       </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
-            </motion.div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              {/* Column 2: Solutions */}
+              <div className="flex-1 border-l border-[rgba(20,21,26,0.06)] pl-6">
+                <h4 className="font-mono text-[0.65rem] font-bold tracking-widest text-[#8a8a7f] uppercase mb-4 pl-3">Solutions</h4>
+                <div className="flex flex-col gap-1">
+                  {SOLUTIONS.map((item, idx) => (
+                    <Link
+                      key={`${item.href}-${idx}`}
+                      href={item.href}
+                      onClick={() => setOpen(false)}
+                      className="flex items-start gap-4 p-3 hover:bg-[#f4f6fc] rounded-[14px] transition-colors group"
+                    >
+                      <div className="text-xl bg-[#fdfbf7] border border-[rgba(20,21,26,0.05)] w-11 h-11 flex items-center justify-center rounded-full shadow-sm group-hover:scale-110 group-hover:-rotate-3 transition-transform shrink-0 duration-300">
+                        {item.icon}
+                      </div>
+                      <div className="pt-0.5">
+                        <div className="font-bold text-[#14151A] text-[0.92rem] mb-0.5 group-hover:text-[#4f7fff] transition-colors">
+                          {item.label}
+                        </div>
+                        <div className="text-[0.78rem] text-[#8a8a7f] leading-snug">
+                          {item.desc}
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              {/* Column 3: Join Us */}
+              <div className="flex-1 border-l border-[rgba(20,21,26,0.06)] pl-6">
+                <h4 className="font-mono text-[0.65rem] font-bold tracking-widest text-[#8a8a7f] uppercase mb-4 pl-3">Join Us</h4>
+                <div className="flex flex-col gap-1">
+                  {JOIN_US.map((item, idx) => (
+                    <Link
+                      key={`${item.href}-${idx}`}
+                      href={item.href}
+                      onClick={() => setOpen(false)}
+                      className="flex items-start gap-4 p-3 hover:bg-[#f4f6fc] rounded-[14px] transition-colors group"
+                    >
+                      <div className="text-xl bg-[#fdfbf7] border border-[rgba(20,21,26,0.05)] w-11 h-11 flex items-center justify-center rounded-full shadow-sm group-hover:scale-110 group-hover:-rotate-3 transition-transform shrink-0 duration-300">
+                        {item.icon}
+                      </div>
+                      <div className="pt-0.5">
+                        <div className="font-bold text-[#14151A] text-[0.92rem] mb-0.5 group-hover:text-[#4f7fff] transition-colors">
+                          {item.label}
+                        </div>
+                        <div className="text-[0.78rem] text-[#8a8a7f] leading-snug">
+                          {item.desc}
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -180,8 +237,6 @@ function DesktopDropdown({ title, items, active }: { title: string, items: NavIt
 }
 
 // --- Mobile Accordion Component ---
-// Controlled by the parent so only one section can be open at a time
-// (previously each accordion tracked its own state independently).
 function MobileAccordion({
   title,
   items,
@@ -222,9 +277,9 @@ function MobileAccordion({
             className="overflow-hidden"
           >
             <div className="flex flex-col gap-1.5 py-3 pl-4 border-l-[3px] border-[#FFD23F]/30 ml-2 mb-2">
-              {items.map(item => (
+              {items.map((item, idx) => (
                 <Link
-                  key={item.href}
+                  key={`${item.href}-${idx}`}
                   href={item.href}
                   onClick={closeNav}
                   className="px-4 py-3 rounded-xl bg-[#f4f6fc] text-[0.95rem] font-medium text-[#46473f] flex items-center gap-3 transition-colors active:scale-[0.98]"
@@ -244,7 +299,7 @@ function MobileAccordion({
 // --- Main Nav Component ---
 export default function Nav({ active }: { active?: string }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [openSection, setOpenSection] = useState<"product" | "solutions" | null>(null);
+  const [openSection, setOpenSection] = useState<"product" | "solutions" | "join" | null>(null);
   const prefersReducedMotion = useReducedMotion();
 
   const closeNav = () => {
@@ -252,11 +307,10 @@ export default function Nav({ active }: { active?: string }) {
     setOpenSection(null);
   };
 
-  const toggleSection = (section: "product" | "solutions") => {
+  const toggleSection = (section: "product" | "solutions" | "join") => {
     setOpenSection((current) => (current === section ? null : section));
   };
 
-  // Reusable active link logic for standalone routes
   const DesktopLink = ({ href, label }: { href: string, label: string }) => {
     const isActive = active === href;
     return (
@@ -275,9 +329,6 @@ export default function Nav({ active }: { active?: string }) {
 
   return (
     <>
-      {/* ---- BACKDROP SCRIM ----
-          Sits above page content but below the nav pill/drawer, and blurs
-          + dims everything else while the mobile menu is open. Click to close. */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.button
@@ -316,9 +367,8 @@ export default function Nav({ active }: { active?: string }) {
           {/* ---- DESKTOP LINKS ---- */}
           <div className="hidden lg:flex items-center gap-8 justify-center flex-1">
             <DesktopLink href="/" label="Home" />
+            <DesktopMegaMenu active={active} />
             <DesktopLink href="/about" label="About" />
-            <DesktopDropdown title="Product" items={FEATURES} active={active} />
-            <DesktopDropdown title="Solutions" items={SOLUTIONS} active={active} />
             <DesktopLink href="/pricing" label="Pricing" />
             <DesktopLink href="/contact" label="Contact" />
           </div>
@@ -339,7 +389,7 @@ export default function Nav({ active }: { active?: string }) {
             </motion.a>
           </div>
 
-          {/* ---- MOBILE TOGGLE (Animated Hamburger) ---- */}
+          {/* ---- MOBILE TOGGLE ---- */}
           <button
             className="lg:hidden relative w-10 h-10 border border-[rgba(20,21,26,0.15)] rounded-full shrink-0 bg-white/50 flex flex-col justify-center items-center overflow-hidden"
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
@@ -362,16 +412,13 @@ export default function Nav({ active }: { active?: string }) {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.95 }}
               transition={{ duration: 0.3, type: "spring", bounce: 0.3 }}
-              className="absolute top-[calc(100%+12px)] left-4 right-4 bg-white/90 backdrop-blur-2xl backdrop-saturate-150 border border-white/40 rounded-[28px] p-6 shadow-[0_30px_60px_rgba(20,21,26,0.18)] pointer-events-auto max-h-[85vh] overflow-y-auto z-[60]"
+              className="absolute top-[calc(100%+12px)] left-4 right-4 bg-white border border-[rgba(20,21,26,0.12)] rounded-[28px] p-6 shadow-[0_30px_60px_rgba(20,21,26,0.18)] pointer-events-auto max-h-[85vh] overflow-y-auto z-[60]"
             >
               <motion.div variants={staggerContainer} initial="hidden" animate="show" className="flex flex-col gap-2 mb-6">
                 <motion.div variants={slideInItem}>
                   <Link href="/" onClick={closeNav} className="block py-3 text-[1.1rem] font-bold text-[#14151A] active:text-[#4f7fff]">Home</Link>
                 </motion.div>
-                <motion.div variants={slideInItem}>
-                  <Link href="/about" onClick={closeNav} className="block py-3 text-[1.1rem] font-bold text-[#14151A] active:text-[#4f7fff]">About</Link>
-                </motion.div>
-
+                
                 <MobileAccordion
                   title="Product"
                   items={FEATURES}
@@ -386,9 +433,19 @@ export default function Nav({ active }: { active?: string }) {
                   isOpen={openSection === "solutions"}
                   onToggle={() => toggleSection("solutions")}
                 />
+                <MobileAccordion
+                  title="Join Us"
+                  items={JOIN_US}
+                  closeNav={closeNav}
+                  isOpen={openSection === "join"}
+                  onToggle={() => toggleSection("join")}
+                />
 
                 <motion.div variants={slideInItem}>
-                  <Link href="/pricing" onClick={closeNav} className="block py-3 mt-2 text-[1.1rem] font-bold text-[#14151A] border-t border-[rgba(20,21,26,0.06)] active:text-[#4f7fff]">Pricing</Link>
+                  <Link href="/about" onClick={closeNav} className="block py-3 mt-2 text-[1.1rem] font-bold text-[#14151A] border-t border-[rgba(20,21,26,0.06)] active:text-[#4f7fff]">About</Link>
+                </motion.div>
+                <motion.div variants={slideInItem}>
+                  <Link href="/pricing" onClick={closeNav} className="block py-3 text-[1.1rem] font-bold text-[#14151A] active:text-[#4f7fff]">Pricing</Link>
                 </motion.div>
                 <motion.div variants={slideInItem}>
                   <Link href="/contact" onClick={closeNav} className="block py-3 text-[1.1rem] font-bold text-[#14151A] active:text-[#4f7fff]">Contact</Link>
@@ -402,12 +459,6 @@ export default function Nav({ active }: { active?: string }) {
                 <Link href="/download"className="flex items-center justify-center w-full py-4 rounded-full font-bold bg-[#14151A] !text-white shadow-xl active:scale-[0.98] transition-transform">
                   Download App
                 </Link>
-              </motion.div>
-
-              <motion.div variants={slideInItem} initial="hidden" animate="show" className="flex items-center justify-center gap-8 pt-8 mt-4 text-[#8a8a7f]">
-                <a href="https://x.com/unilife_connect" target="_blank" rel="noopener noreferrer" className="hover:text-[#14151A] hover:scale-110 transition-all"><XIcon size={22} /></a>
-                <a href="https://www.instagram.com/unilife_connect" target="_blank" rel="noopener noreferrer" className="hover:text-[#ff3d81] hover:scale-110 transition-all"><InstagramIcon size={22} /></a>
-                <a href="https://wa.me/2348164670694" target="_blank" rel="noopener noreferrer" className="hover:text-[#34d399] hover:scale-110 transition-all"><WhatsAppIcon size={22} /></a>
               </motion.div>
             </motion.div>
           )}

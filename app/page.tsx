@@ -93,18 +93,18 @@ export default function Home() {
             </p>
             
             <div className="flex flex-wrap items-center gap-4 mb-10">
-              <Link href="/download" passHref>
-                <motion.a
-                  className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full font-bold text-[0.88rem] bg-[#14151A] !text-[#F6F2E7] border-2 border-[#14151A] shadow-[4px_4px_0_#ff3d81]"
+              <Link href="/download" className="group">
+                <motion.div
+                  className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full font-bold text-[0.88rem] bg-[#14151A] text-[#F6F2E7] border-2 border-[#14151A] shadow-[4px_4px_0_#ff3d81]"
                   whileHover={{ scale: 1.04, y: -2, boxShadow: "6px 6px 0 #ff3d81" }}
                   whileTap={{ scale: 0.96, y: 0, boxShadow: "2px 2px 0 #ff3d81" }}
                   transition={{ type: "spring", stiffness: 400, damping: 15 }}
                 >
                   Download App →
-                </motion.a>
+                </motion.div>
               </Link>
             
-              <a href="#study" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-[0.88rem] bg-transparent !text-[#14151A] border-2 border-[#14151A] hover:bg-[#14151A] hover:!text-white transition-all whitespace-nowrap h-[56px] md:h-[58px]">
+              <a href="#study" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-[0.88rem] bg-transparent text-[#14151A] border-2 border-[#14151A] hover:bg-[#14151A] hover:text-white transition-all whitespace-nowrap h-[56px] md:h-[58px]">
                 See what&apos;s inside
               </a>
             </div>
