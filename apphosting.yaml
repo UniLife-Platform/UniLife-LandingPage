@@ -1,0 +1,25 @@
+# Firebase App Hosting configuration
+# https://firebase.google.com/docs/app-hosting/configure
+#
+# This file is safe to commit — the two env vars below are the
+# Supabase PUBLIC anon key + project URL, which are meant to be
+# exposed to the browser. Never put a service_role key here.
+
+runConfig:
+  cpu: 1
+  memoryMiB: 512
+  concurrency: 80
+  maxInstances: 2
+
+env:
+  - variable: NEXT_PUBLIC_SUPABASE_URL
+    value: "REPLACE_ME_WHEN_REFERRAL_SUPABASE_PROJECT_EXISTS"
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: NEXT_PUBLIC_SUPABASE_ANON_KEY
+    value: "REPLACE_ME_WHEN_REFERRAL_SUPABASE_PROJECT_EXISTS"
+    availability:
+      - BUILD
+      - RUNTIME

@@ -1,0 +1,6 @@
+{
+  "name": "UniLife",
+  "description": "UniLife campus network, student marketplace, verified student sponsorships, and campus grants.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
