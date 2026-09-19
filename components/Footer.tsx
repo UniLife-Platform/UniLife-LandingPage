@@ -81,6 +81,8 @@ const FOLLOW_LINKS = [
 ];
 
 const PLATFORM_LINKS = [
+  { label: "OOU Challenge 2026/27", href: "/challenge" },
+  { label: "DEI Admin Portal", href: "/challenge/admin" },
   { label: "For students", href: "/students" },
   { label: "Sponsorships & Grants", href: "/sponsorships" },
   { label: "For sellers", href: "/sellers" },
