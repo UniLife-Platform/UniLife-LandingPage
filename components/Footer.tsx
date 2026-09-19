@@ -81,8 +81,7 @@ const FOLLOW_LINKS = [
 ];
 
 const PLATFORM_LINKS = [
-  { label: "UniLife Challenges Hub", href: "/challenge" },
-  { label: "DEI Admin Portal", href: "/challenge/admin" },
+  { label: "UniLife Challenges", href: "/challenge" },
   { label: "For students", href: "/students" },
   { label: "Sponsorships & Grants", href: "/sponsorships" },
   { label: "For sellers", href: "/sellers" },

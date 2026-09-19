@@ -22,7 +22,7 @@ const FEATURES: NavItem[] = [
 ];
 
 const SOLUTIONS: NavItem[] = [
-  { href: "/challenge", label: "UniLife Challenges", desc: "OOU 2026/27 venture sprint, Creator Cup & grants.", icon: "🏆" },
+  { href: "/challenge", label: "UniLife Challenges", desc: "Explore campus competitions, hackathons & sprints.", icon: "🏆" },
   { href: "/students", label: "For Students", desc: "Connect, study, and earn rewards.", icon: "🎓" },
   { href: "/sponsorships", label: "Sponsorships & Grants", desc: "Verified student funds & scholarships.", icon: "💎" },
   { href: "/sellers", label: "For Sellers", desc: "Open a UniShop with zero fees.", icon: "💼" },
