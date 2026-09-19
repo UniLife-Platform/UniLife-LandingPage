@@ -441,6 +441,25 @@ export function saveStoredVentures(ventures: VentureSubmission[]): void {
   }
 }
 
+export function getStoredMatchmaking(): MatchmakingProfile[] {
+  if (typeof window === "undefined") return INITIAL_MATCHMAKING;
+  try {
+    const data = localStorage.getItem("oou_challenge_matchmaking");
+    return data ? JSON.parse(data) : INITIAL_MATCHMAKING;
+  } catch {
+    return INITIAL_MATCHMAKING;
+  }
+}
+
+export function saveStoredMatchmaking(matchmaking: MatchmakingProfile[]): void {
+  if (typeof window === "undefined") return;
+  try {
+    localStorage.setItem("oou_challenge_matchmaking", JSON.stringify(matchmaking));
+  } catch (e) {
+    console.error("Failed to save matchmaking profiles", e);
+  }
+}
+
 export function getStoredAnnouncements(): ChallengeAnnouncement[] {
   if (typeof window === "undefined") return INITIAL_ANNOUNCEMENTS;
   try {
