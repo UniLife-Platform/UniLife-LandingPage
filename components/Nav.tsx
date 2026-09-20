@@ -22,9 +22,7 @@ const FEATURES: NavItem[] = [
 ];
 
 const SOLUTIONS: NavItem[] = [
-  { href: "/challenge", label: "UniLife Challenges", desc: "Explore campus competitions, hackathons & sprints.", icon: "🏆" },
   { href: "/students", label: "For Students", desc: "Connect, study, and earn rewards.", icon: "🎓" },
-  { href: "/sponsorships", label: "Sponsorships & Grants", desc: "Verified student funds & scholarships.", icon: "💎" },
   { href: "/sellers", label: "For Sellers", desc: "Open a UniShop with zero fees.", icon: "💼" },
   { href: "/partners", label: "For School Bodies", desc: "Verified pages for unions and clubs.", icon: "🏛️" },
 ];
@@ -33,6 +31,11 @@ const JOIN_US: NavItem[] = [
   { href: "/join", label: "Campus Ambassadors", desc: "Lead the expansion at your school.", icon: "📢" },
   { href: "/join", label: "Department Partners", desc: "Digitize your faculty association.", icon: "🤝" },
   { href: "/join", label: "Core Team", desc: "Build the future of campus tech.", icon: "💻" },
+];
+
+const OTHERS: NavItem[] = [
+  { href: "/challenge", label: "Challenges & Sprints", desc: "Compete in live university innovation challenges.", icon: "⚡" },
+  { href: "/sponsorships", label: "Sponsorships & Grants", desc: "Brand partnerships & verified student funds.", icon: "💎" },
 ];
 
 // --- Animation Variants ---
@@ -67,7 +70,7 @@ function DesktopMegaMenu({ active }: { active?: string }) {
     closeTimer.current = setTimeout(() => setOpen(false), DROPDOWN_CLOSE_DELAY);
   };
 
-  const isActive = [FEATURES, SOLUTIONS, JOIN_US].flat().some((item) => {
+  const isActive = [FEATURES, SOLUTIONS, JOIN_US, OTHERS].flat().some((item) => {
     const itemPath = item.href.split("#")[0];
     return itemPath === active && itemPath !== "/";
   });
@@ -85,7 +88,7 @@ function DesktopMegaMenu({ active }: { active?: string }) {
       }}
     >
       <button
-        className={`relative flex items-center gap-1.5 text-[0.92rem] py-2 transition-colors duration-200 outline-none
+        className={`relative flex items-center gap-1.5 text-[0.92rem] py-2 transition-colors duration-200 outline-none cursor-pointer
           ${isActive ? "font-bold text-[#14151A]" : "font-medium text-[#14151A]"}
           after:absolute after:-bottom-1 after:left-0 after:h-[2.5px] after:w-full after:origin-left after:scale-x-0 after:bg-[#FFD23F] after:rounded-full after:transition-transform after:duration-300
           ${isActive ? "after:scale-x-100" : "group-hover:after:scale-x-100"}
@@ -118,29 +121,29 @@ function DesktopMegaMenu({ active }: { active?: string }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.98 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="absolute top-full left-1/2 -translate-x-1/2 pt-6 w-[880px]"
+            className="absolute top-full left-1/2 -translate-x-1/2 pt-6 w-[920px]"
           >
-            <div className="bg-white border border-[rgba(20,21,26,0.12)] rounded-[24px] shadow-[0_40px_80px_rgba(20,21,26,0.12)] p-8 flex gap-6">
+            <div className="bg-white border border-[rgba(20,21,26,0.12)] rounded-[24px] shadow-[0_40px_80px_rgba(20,21,26,0.12)] p-7 flex gap-5">
               
-              {/* Column 1: Product */}
+              {/* Column 1: Products */}
               <div className="flex-1">
-                <h4 className="font-mono text-[0.65rem] font-bold tracking-widest text-[#8a8a7f] uppercase mb-4 pl-3">Product</h4>
+                <h4 className="font-mono text-[0.65rem] font-bold tracking-widest text-[#8a8a7f] uppercase mb-3 pl-3">Products</h4>
                 <div className="flex flex-col gap-1">
                   {FEATURES.map((item, idx) => (
                     <Link
                       key={`${item.href}-${idx}`}
                       href={item.href}
                       onClick={() => setOpen(false)}
-                      className="flex items-start gap-4 p-3 hover:bg-[#f4f6fc] rounded-[14px] transition-colors group"
+                      className="flex items-start gap-3 p-2.5 hover:bg-[#f4f6fc] rounded-[14px] transition-colors group"
                     >
-                      <div className="text-xl bg-[#fdfbf7] border border-[rgba(20,21,26,0.05)] w-11 h-11 flex items-center justify-center rounded-full shadow-sm group-hover:scale-110 group-hover:-rotate-3 transition-transform shrink-0 duration-300">
+                      <div className="text-lg bg-[#fdfbf7] border border-[rgba(20,21,26,0.05)] w-10 h-10 flex items-center justify-center rounded-full shadow-xs group-hover:scale-110 group-hover:-rotate-3 transition-transform shrink-0 duration-300">
                         {item.icon}
                       </div>
                       <div className="pt-0.5">
-                        <div className="font-bold text-[#14151A] text-[0.92rem] mb-0.5 group-hover:text-[#4f7fff] transition-colors">
+                        <div className="font-bold text-[#14151A] text-[0.88rem] mb-0.5 group-hover:text-[#4f7fff] transition-colors">
                           {item.label}
                         </div>
-                        <div className="text-[0.78rem] text-[#8a8a7f] leading-snug">
+                        <div className="text-[0.75rem] text-[#8a8a7f] leading-snug">
                           {item.desc}
                         </div>
                       </div>
@@ -150,24 +153,24 @@ function DesktopMegaMenu({ active }: { active?: string }) {
               </div>
 
               {/* Column 2: Solutions */}
-              <div className="flex-1 border-l border-[rgba(20,21,26,0.06)] pl-6">
-                <h4 className="font-mono text-[0.65rem] font-bold tracking-widest text-[#8a8a7f] uppercase mb-4 pl-3">Solutions</h4>
+              <div className="flex-1 border-l border-[rgba(20,21,26,0.06)] pl-5">
+                <h4 className="font-mono text-[0.65rem] font-bold tracking-widest text-[#8a8a7f] uppercase mb-3 pl-3">Solutions</h4>
                 <div className="flex flex-col gap-1">
                   {SOLUTIONS.map((item, idx) => (
                     <Link
                       key={`${item.href}-${idx}`}
                       href={item.href}
                       onClick={() => setOpen(false)}
-                      className="flex items-start gap-4 p-3 hover:bg-[#f4f6fc] rounded-[14px] transition-colors group"
+                      className="flex items-start gap-3 p-2.5 hover:bg-[#f4f6fc] rounded-[14px] transition-colors group"
                     >
-                      <div className="text-xl bg-[#fdfbf7] border border-[rgba(20,21,26,0.05)] w-11 h-11 flex items-center justify-center rounded-full shadow-sm group-hover:scale-110 group-hover:-rotate-3 transition-transform shrink-0 duration-300">
+                      <div className="text-lg bg-[#fdfbf7] border border-[rgba(20,21,26,0.05)] w-10 h-10 flex items-center justify-center rounded-full shadow-xs group-hover:scale-110 group-hover:-rotate-3 transition-transform shrink-0 duration-300">
                         {item.icon}
                       </div>
                       <div className="pt-0.5">
-                        <div className="font-bold text-[#14151A] text-[0.92rem] mb-0.5 group-hover:text-[#4f7fff] transition-colors">
+                        <div className="font-bold text-[#14151A] text-[0.88rem] mb-0.5 group-hover:text-[#4f7fff] transition-colors">
                           {item.label}
                         </div>
-                        <div className="text-[0.78rem] text-[#8a8a7f] leading-snug">
+                        <div className="text-[0.75rem] text-[#8a8a7f] leading-snug">
                           {item.desc}
                         </div>
                       </div>
@@ -177,24 +180,51 @@ function DesktopMegaMenu({ active }: { active?: string }) {
               </div>
 
               {/* Column 3: Join Us */}
-              <div className="flex-1 border-l border-[rgba(20,21,26,0.06)] pl-6">
-                <h4 className="font-mono text-[0.65rem] font-bold tracking-widest text-[#8a8a7f] uppercase mb-4 pl-3">Join Us</h4>
+              <div className="flex-1 border-l border-[rgba(20,21,26,0.06)] pl-5">
+                <h4 className="font-mono text-[0.65rem] font-bold tracking-widest text-[#8a8a7f] uppercase mb-3 pl-3">Join Us</h4>
                 <div className="flex flex-col gap-1">
                   {JOIN_US.map((item, idx) => (
                     <Link
                       key={`${item.href}-${idx}`}
                       href={item.href}
                       onClick={() => setOpen(false)}
-                      className="flex items-start gap-4 p-3 hover:bg-[#f4f6fc] rounded-[14px] transition-colors group"
+                      className="flex items-start gap-3 p-2.5 hover:bg-[#f4f6fc] rounded-[14px] transition-colors group"
                     >
-                      <div className="text-xl bg-[#fdfbf7] border border-[rgba(20,21,26,0.05)] w-11 h-11 flex items-center justify-center rounded-full shadow-sm group-hover:scale-110 group-hover:-rotate-3 transition-transform shrink-0 duration-300">
+                      <div className="text-lg bg-[#fdfbf7] border border-[rgba(20,21,26,0.05)] w-10 h-10 flex items-center justify-center rounded-full shadow-xs group-hover:scale-110 group-hover:-rotate-3 transition-transform shrink-0 duration-300">
                         {item.icon}
                       </div>
                       <div className="pt-0.5">
-                        <div className="font-bold text-[#14151A] text-[0.92rem] mb-0.5 group-hover:text-[#4f7fff] transition-colors">
+                        <div className="font-bold text-[#14151A] text-[0.88rem] mb-0.5 group-hover:text-[#4f7fff] transition-colors">
                           {item.label}
                         </div>
-                        <div className="text-[0.78rem] text-[#8a8a7f] leading-snug">
+                        <div className="text-[0.75rem] text-[#8a8a7f] leading-snug">
+                          {item.desc}
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              {/* Column 4: Others (Challenges & Sponsorships) */}
+              <div className="flex-1 border-l border-[rgba(20,21,26,0.06)] pl-5">
+                <h4 className="font-mono text-[0.65rem] font-bold tracking-widest text-[#8a8a7f] uppercase mb-3 pl-3">Others</h4>
+                <div className="flex flex-col gap-1">
+                  {OTHERS.map((item, idx) => (
+                    <Link
+                      key={`${item.href}-${idx}`}
+                      href={item.href}
+                      onClick={() => setOpen(false)}
+                      className="flex items-start gap-3 p-2.5 hover:bg-[#f4f6fc] rounded-[14px] transition-colors group"
+                    >
+                      <div className="text-lg bg-[#fdfbf7] border border-[rgba(20,21,26,0.05)] w-10 h-10 flex items-center justify-center rounded-full shadow-xs group-hover:scale-110 group-hover:-rotate-3 transition-transform shrink-0 duration-300">
+                        {item.icon}
+                      </div>
+                      <div className="pt-0.5">
+                        <div className="font-bold text-[#14151A] text-[0.88rem] mb-0.5 group-hover:text-[#ff3d81] transition-colors">
+                          {item.label}
+                        </div>
+                        <div className="text-[0.75rem] text-[#8a8a7f] leading-snug">
                           {item.desc}
                         </div>
                       </div>
@@ -230,7 +260,7 @@ function MobileAccordion({
       <button
         onClick={onToggle}
         aria-expanded={isOpen}
-        className="flex items-center justify-between w-full py-3 text-[1.1rem] font-bold text-[#14151A] outline-none"
+        className="flex items-center justify-between w-full py-3 text-[1.05rem] font-bold text-[#14151A] outline-none cursor-pointer"
       >
         {title}
         <motion.svg
@@ -257,9 +287,9 @@ function MobileAccordion({
                   key={`${item.href}-${idx}`}
                   href={item.href}
                   onClick={closeNav}
-                  className="px-4 py-3 rounded-xl bg-[#f4f6fc] text-[0.95rem] font-medium text-[#46473f] flex items-center gap-3 transition-colors active:scale-[0.98]"
+                  className="px-4 py-2.5 rounded-xl bg-[#f4f6fc] text-[0.92rem] font-medium text-[#46473f] flex items-center gap-3 transition-colors active:scale-[0.98]"
                 >
-                  <span className="text-xl shrink-0">{item.icon}</span>
+                  <span className="text-lg shrink-0">{item.icon}</span>
                   {item.label}
                 </Link>
               ))}
@@ -290,7 +320,7 @@ function DesktopLink({ href, label, active }: { href: string; label: string; act
 // --- Main Nav Component ---
 export default function Nav({ active }: { active?: string }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [openSection, setOpenSection] = useState<"product" | "solutions" | "join" | null>(null);
+  const [openSection, setOpenSection] = useState<"product" | "solutions" | "join" | "others" | null>(null);
   const prefersReducedMotion = useReducedMotion();
 
   const closeNav = () => {
@@ -298,7 +328,7 @@ export default function Nav({ active }: { active?: string }) {
     setOpenSection(null);
   };
 
-  const toggleSection = (section: "product" | "solutions" | "join") => {
+  const toggleSection = (section: "product" | "solutions" | "join" | "others") => {
     setOpenSection((current) => (current === section ? null : section));
   };
 
@@ -367,7 +397,7 @@ export default function Nav({ active }: { active?: string }) {
 
           {/* ---- MOBILE TOGGLE ---- */}
           <button
-            className="lg:hidden relative w-10 h-10 border border-[rgba(20,21,26,0.15)] rounded-full shrink-0 bg-white/50 flex flex-col justify-center items-center overflow-hidden"
+            className="lg:hidden relative w-10 h-10 border border-[rgba(20,21,26,0.15)] rounded-full shrink-0 bg-white/50 flex flex-col justify-center items-center overflow-hidden cursor-pointer"
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-nav-drawer"
@@ -396,7 +426,7 @@ export default function Nav({ active }: { active?: string }) {
                 </motion.div>
                 
                 <MobileAccordion
-                  title="Product"
+                  title="Products"
                   items={FEATURES}
                   closeNav={closeNav}
                   isOpen={openSection === "product"}
@@ -415,6 +445,13 @@ export default function Nav({ active }: { active?: string }) {
                   closeNav={closeNav}
                   isOpen={openSection === "join"}
                   onToggle={() => toggleSection("join")}
+                />
+                <MobileAccordion
+                  title="Others"
+                  items={OTHERS}
+                  closeNav={closeNav}
+                  isOpen={openSection === "others"}
+                  onToggle={() => toggleSection("others")}
                 />
 
                 <motion.div variants={slideInItem}>
@@ -435,7 +472,7 @@ export default function Nav({ active }: { active?: string }) {
                 <Link href={LOGIN_URL} className="flex items-center justify-center w-full py-4 rounded-full font-bold bg-[#f4f6fc] text-[#14151A] active:scale-[0.98] transition-transform">
                   Sign In
                 </Link>
-                <Link href="/download"className="flex items-center justify-center w-full py-4 rounded-full font-bold bg-[#14151A] !text-white shadow-xl active:scale-[0.98] transition-transform">
+                <Link href="/download" className="flex items-center justify-center w-full py-4 rounded-full font-bold bg-[#14151A] !text-white shadow-xl active:scale-[0.98] transition-transform">
                   Download App
                 </Link>
               </motion.div>
