@@ -35,7 +35,7 @@ const JOIN_US: NavItem[] = [
 
 const OTHERS: NavItem[] = [
   { href: "/challenge", label: "Challenges & Sprints", desc: "Compete in live university innovation challenges.", icon: "⚡" },
-  { href: "/sponsorships", label: "Sponsorships & Grants", desc: "Brand partnerships & verified student funds.", icon: "💎" },
+  { href: "/scholarships", label: "Scholarships", desc: "Verified tuition grants, student funds & sponsorships.", icon: "🎓" },
 ];
 
 // --- Animation Variants ---

@@ -1,6 +1,6 @@
 {
   "name": "UniLife",
-  "description": "UniLife campus network, student marketplace, verified student sponsorships, and campus grants.",
+  "description": "UniLife (Nigeria) – verified student scholarships, campus innovation challenges, student marketplace, hostel accommodation, and university peer communities.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

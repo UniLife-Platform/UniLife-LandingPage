@@ -83,7 +83,7 @@ const FOLLOW_LINKS = [
 const PLATFORM_LINKS = [
   { label: "UniLife Challenges", href: "/challenge" },
   { label: "For students", href: "/students" },
-  { label: "Sponsorships & Grants", href: "/sponsorships" },
+  { label: "Scholarships & Grants", href: "/scholarships" },
   { label: "For sellers", href: "/sellers" },
   { label: "For partners", href: "/partners" },
   { label: "Pricing", href: "/pricing" },
@@ -96,11 +96,13 @@ const COMPANY_LINKS = [
   { label: "Join the team", href: "/team" },
   { label: "Contact", href: "/contact" },
   { label: "Download App", href: "/download" },
+  { label: "Admin Console", href: "/admin" },
 ];
 
 const LEGAL_LINKS = [
   { label: "Privacy Policy", href: "/policy" },
   { label: "Terms & Conditions", href: "/terms" },
+  { label: "Cookie Settings", href: "/cookies" },
   { label: "Community Guidelines", href: "/guidelines" },
   { label: "Child Safety Standards", href: "/child-safety" },
   { label: "Delete Account", href: "/delete-account" },
@@ -338,9 +340,17 @@ export default function Footer() {
             <span className="font-mono text-[0.7rem] tracking-widest uppercase text-[rgba(246,242,231,0.45)] text-center sm:text-left">
               © 2026 UniLife — Built by students, for students
             </span>
-            <span className="font-mono text-[0.7rem] tracking-widest uppercase text-[rgba(246,242,231,0.45)] bg-[rgba(246,242,231,0.06)] border border-[rgba(246,242,231,0.12)] px-3 py-1.5 rounded-full">
-              Open to students at any university
-            </span>
+            <div className="flex items-center gap-3">
+              <Link
+                href="/cookies"
+                className="font-mono text-[0.7rem] tracking-widest uppercase text-[rgba(246,242,231,0.6)] hover:text-[#FFD23F] transition-colors underline underline-offset-4"
+              >
+                Cookie Preferences
+              </Link>
+              <span className="font-mono text-[0.7rem] tracking-widest uppercase text-[rgba(246,242,231,0.45)] bg-[rgba(246,242,231,0.06)] border border-[rgba(246,242,231,0.12)] px-3 py-1.5 rounded-full">
+                Open to students at any university
+              </span>
+            </div>
           </div>
         </div>
       </div>
