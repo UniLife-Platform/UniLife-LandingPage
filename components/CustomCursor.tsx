@@ -1,154 +1,172 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion } from "motion/react";
+import { useEffect, useRef } from "react";
 
+/**
+ * High-performance, lightweight cursor follower.
+ * Optimized specifically to avoid:
+ * 1. React re-renders on mousemove (uses direct DOM transform via RAF)
+ * 2. DOM mutations on hovered elements (no forced classList transforms that cause dropdown lag)
+ * 3. Heavy mix-blend GPU compositing over backdrop-blur elements
+ * 4. Loss of native cursor responsiveness (native cursor remains active and instant)
+ */
 export default function CustomCursor() {
-  const [mousePosition, setMousePosition] = useState({ x: -100, y: -100 });
-  const [isHovering, setIsHovering] = useState(false);
-  const [isPressed, setIsPressed] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-  const [isFinePointer, setIsFinePointer] = useState(false);
+  const cursorDotRef = useRef<HTMLDivElement | null>(null);
+  const cursorRingRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    // Only activate cursor if the device has a fine pointer (mouse / trackpad)
-    const mediaQuery = window.matchMedia("(pointer: fine)");
-    const handleMediaChange = (e: MediaQueryListEvent | MediaQueryList) => {
-      setIsFinePointer(e.matches);
-    };
-
-    handleMediaChange(mediaQuery);
-    if (mediaQuery.addEventListener) {
-      mediaQuery.addEventListener("change", handleMediaChange);
+    // Only run on fine-pointer devices (desktop mouse / trackpad)
+    if (typeof window === "undefined" || !window.matchMedia("(pointer: fine)").matches) {
+      return;
     }
 
-    let currentHoveredElement: HTMLElement | null = null;
+    const dot = cursorDotRef.current;
+    const ring = cursorRingRef.current;
+    if (!dot || !ring) return;
+
+    let mouseX = -100;
+    let mouseY = -100;
+    let ringX = -100;
+    let ringY = -100;
+    let isHovering = false;
+    let isClicking = false;
+    let isVisible = false;
+    let rafId: number | null = null;
+    let isMoving = false;
+    let idleTimeout: NodeJS.Timeout | null = null;
+
+    const updatePosition = () => {
+      // Linear interpolation for silky-smooth follower ring
+      const ease = 0.22;
+      ringX += (mouseX - ringX) * ease;
+      ringY += (mouseY - ringY) * ease;
+
+      // Update dot position immediately (snappy)
+      dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+
+      // Update ring follower (smooth lagging trail)
+      const scale = isClicking ? 0.75 : isHovering ? 1.5 : 1;
+      ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%) scale(${scale})`;
+
+      // Continue loop while moving or closing distance
+      const distance = Math.hypot(mouseX - ringX, mouseY - ringY);
+      if (isMoving || distance > 0.5) {
+        rafId = requestAnimationFrame(updatePosition);
+      } else {
+        rafId = null;
+      }
+    };
+
+    const startAnimation = () => {
+      if (!rafId) {
+        rafId = requestAnimationFrame(updatePosition);
+      }
+    };
 
     const handleMouseMove = (e: MouseEvent) => {
-      setIsVisible(true);
-      setMousePosition({ x: e.clientX, y: e.clientY });
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      isMoving = true;
 
+      if (!isVisible) {
+        isVisible = true;
+        dot.style.opacity = "1";
+        ring.style.opacity = "1";
+      }
+
+      // Check if hovering an interactive element without querying deep trees
       const target = e.target as HTMLElement | null;
-      if (!target) return;
-
-      const interactiveEl = target.closest(
+      const interactive = !!target?.closest(
         "a, button, [role='button'], input, select, textarea, summary, [data-interactive='true']"
-      ) as HTMLElement | null;
+      );
 
-      if (interactiveEl) {
-        if (currentHoveredElement !== interactiveEl) {
-          if (currentHoveredElement) {
-            currentHoveredElement.classList.remove("cursor-hover-target");
-          }
-          currentHoveredElement = interactiveEl;
-          interactiveEl.classList.add("cursor-hover-target");
+      if (interactive !== isHovering) {
+        isHovering = interactive;
+        if (isHovering) {
+          ring.style.borderColor = "rgba(79, 127, 255, 0.85)";
+          ring.style.backgroundColor = "rgba(79, 127, 255, 0.08)";
+          dot.style.backgroundColor = "#4f7fff";
+          dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%) scale(1.4)`;
+        } else {
+          ring.style.borderColor = "rgba(20, 21, 26, 0.35)";
+          ring.style.backgroundColor = "transparent";
+          dot.style.backgroundColor = "#14151A";
         }
-        setIsHovering(true);
-      } else {
-        if (currentHoveredElement) {
-          currentHoveredElement.classList.remove("cursor-hover-target");
-          currentHoveredElement = null;
-        }
-        setIsHovering(false);
       }
+
+      startAnimation();
+
+      if (idleTimeout) clearTimeout(idleTimeout);
+      idleTimeout = setTimeout(() => {
+        isMoving = false;
+      }, 100);
     };
 
-    const handleMouseDown = () => setIsPressed(true);
-    const handleMouseUp = () => setIsPressed(false);
-
-    const handleMouseLeaveWindow = () => {
-      setIsVisible(false);
-      if (currentHoveredElement) {
-        currentHoveredElement.classList.remove("cursor-hover-target");
-        currentHoveredElement = null;
-      }
+    const handleMouseDown = () => {
+      isClicking = true;
+      ring.style.borderColor = "#ff3d81";
+      ring.style.backgroundColor = "rgba(255, 61, 129, 0.15)";
+      startAnimation();
     };
 
-    const handleMouseEnterWindow = () => {
-      setIsVisible(true);
+    const handleMouseUp = () => {
+      isClicking = false;
+      ring.style.borderColor = isHovering ? "rgba(79, 127, 255, 0.85)" : "rgba(20, 21, 26, 0.35)";
+      ring.style.backgroundColor = isHovering ? "rgba(79, 127, 255, 0.08)" : "transparent";
+      startAnimation();
+    };
+
+    const handleMouseLeave = () => {
+      isVisible = false;
+      dot.style.opacity = "0";
+      ring.style.opacity = "0";
+    };
+
+    const handleMouseEnter = () => {
+      isVisible = true;
+      dot.style.opacity = "1";
+      ring.style.opacity = "1";
     };
 
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
-    window.addEventListener("mousedown", handleMouseDown);
-    window.addEventListener("mouseup", handleMouseUp);
-    document.addEventListener("mouseleave", handleMouseLeaveWindow);
-    document.addEventListener("mouseenter", handleMouseEnterWindow);
+    window.addEventListener("mousedown", handleMouseDown, { passive: true });
+    window.addEventListener("mouseup", handleMouseUp, { passive: true });
+    document.addEventListener("mouseleave", handleMouseLeave);
+    document.addEventListener("mouseenter", handleMouseEnter);
 
     return () => {
-      if (mediaQuery.removeEventListener) {
-        mediaQuery.removeEventListener("change", handleMediaChange);
-      }
-      if (currentHoveredElement) {
-        currentHoveredElement.classList.remove("cursor-hover-target");
-      }
+      if (rafId) cancelAnimationFrame(rafId);
+      if (idleTimeout) clearTimeout(idleTimeout);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
-      document.removeEventListener("mouseleave", handleMouseLeaveWindow);
-      document.removeEventListener("mouseenter", handleMouseEnterWindow);
+      document.removeEventListener("mouseleave", handleMouseLeave);
+      document.removeEventListener("mouseenter", handleMouseEnter);
     };
   }, []);
 
-  if (!isFinePointer || !isVisible) {
-    return null;
-  }
-
-  // Outer inverse circular lens
-  const outerSize = isPressed ? 44 : isHovering ? 64 : 24;
-
   return (
     <>
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-            @media (pointer: fine) {
-              body, html {
-                cursor: none !important;
-              }
-              a, button, [role="button"], input, select, textarea, summary, label {
-                cursor: none !important;
-              }
-              /* Interactive element hover reaction */
-              .cursor-hover-target {
-                transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), filter 0.22s ease !important;
-                transform: translateY(-2px) scale(1.018) !important;
-                filter: brightness(1.06) !important;
-              }
-              .cursor-hover-target:active {
-                transform: translateY(0px) scale(0.985) !important;
-              }
-            }
-          `,
+      {/* Precision Center Dot */}
+      <div
+        ref={cursorDotRef}
+        aria-hidden="true"
+        className="fixed top-0 left-0 w-1.5 h-1.5 rounded-full bg-[#14151A] pointer-events-none z-[9999] opacity-0 transition-opacity duration-200"
+        style={{
+          willChange: "transform",
         }}
       />
 
-      {/* CUSTOM INVERSE CURSOR (mix-blend-difference white/black invert) */}
-      <motion.div
+      {/* Smooth Trailing Follower Ring */}
+      <div
+        ref={cursorRingRef}
         aria-hidden="true"
-        className="fixed top-0 left-0 rounded-full pointer-events-none z-[999999] mix-blend-difference bg-white flex items-center justify-center overflow-hidden shadow-[0_0_20px_rgba(255,255,255,0.4)]"
-        animate={{
-          x: mousePosition.x - outerSize / 2,
-          y: mousePosition.y - outerSize / 2,
-          width: outerSize,
-          height: outerSize,
+        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-[rgba(20,21,26,0.35)] pointer-events-none z-[9998] opacity-0 transition-[border-color,background-color,opacity] duration-200"
+        style={{
+          willChange: "transform",
+          boxShadow: "0 0 12px rgba(79, 127, 255, 0.12)",
         }}
-        transition={{
-          type: "spring",
-          stiffness: 400,
-          damping: 26,
-          mass: 0.45,
-        }}
-      >
-        {/* Inner center dot when hovering */}
-        <motion.div
-          animate={{
-            scale: isHovering ? 1 : 0,
-            opacity: isHovering ? 1 : 0,
-          }}
-          transition={{ duration: 0.18, ease: "easeOut" }}
-          className="w-2 h-2 rounded-full bg-black pointer-events-none"
-        />
-      </motion.div>
+      />
     </>
   );
 }
