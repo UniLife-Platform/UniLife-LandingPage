@@ -2,10 +2,9 @@
 
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
-export default function SellersPage() {
+export default function StudentsPage() {
   return (
     <>
       <div className="bg-[#F6F2E7] text-[#14151A] min-h-screen overflow-x-clip font-body antialiased">
@@ -375,7 +374,7 @@ export default function SellersPage() {
                 Message on WhatsApp →
               </a>
               <a
-                href="mailto:unilife.edu.org@gmail.com"
+                href="mailto:hello@unilife.com.ng"
                 className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-bold text-[0.95rem] bg-transparent !text-white border-2 border-[rgba(255,255,255,0.2)] hover:bg-[#F6F2E7] hover:!text-[#14151A] transition-all whitespace-nowrap"
               >
                 Email us

@@ -27,7 +27,7 @@ export default function ReferralFooter({ compact }: { compact?: boolean }) {
             <a className="btn btn-primary" href="https://wa.me/2348164670694">
               Message on WhatsApp →
             </a>
-            <a className="btn btn-ghost" href="mailto:unilife.edu.org@gmail.com">
+            <a className="btn btn-ghost" href="mailto:hello@unilife.com.ng">
               Email the founder
             </a>
           </div>
@@ -39,7 +39,7 @@ export default function ReferralFooter({ compact }: { compact?: boolean }) {
             <span className="ic"></span> WhatsApp — +234 816 467 0694
           </div>
           <div className="contact-line">
-            <span className="ic"></span> Email — unilife.edu.org@gmail.com
+            <span className="ic"></span> Email — hello@unilife.com.ng
           </div>
           <div className="contact-line">
             <span className="ic"></span> Website — unilife.com.ng

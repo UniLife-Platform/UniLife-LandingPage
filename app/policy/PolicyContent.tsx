@@ -197,6 +197,7 @@ export default function PolicyContent() {
           items={[
             <span key="access"><b>Access and portability:</b> you can access and download your personal data at any time through the app settings.</span>,
             <span key="correction"><b>Correction:</b> you can update or correct your profile information directly in the app.</span>,
+            <span key="cookies"><b>Cookie &amp; Tracking Preferences:</b> you can customize or withdraw consent for analytical, functional, and marketing cookies anytime via our <Link href="/cookies" className="text-[#14151A] underline decoration-[#FFD23F] decoration-2 underline-offset-2 font-semibold">Cookie Settings Center</Link>.</span>,
             <span key="deletion"><b>Deletion:</b> you can delete your account and personal information at any time via Settings &gt; Account &gt; Delete Account.</span>,
             <span key="optout"><b>Opt-out:</b> you can opt out of non-essential notifications and marketing communications in the app settings.</span>,
             <span key="restriction"><b>Data restriction:</b> you can request that we limit how we use your data by contacting us.</span>,
@@ -207,9 +208,9 @@ export default function PolicyContent() {
           To exercise these rights, contact us at{" "}
           <a
             className="text-[#14151A] underline decoration-[#FFD23F] decoration-2 underline-offset-2 font-semibold"
-            href="mailto:unilife.edu.org@gmail.com"
+            href="mailto:hello@unilife.com.ng"
           >
-            unilife.edu.org@gmail.com
+            hello@unilife.com.ng
           </a>{" "}
           or use the in-app settings.
         </p>

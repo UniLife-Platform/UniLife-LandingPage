@@ -3,8 +3,7 @@
 import React, { useState, MouseEvent } from "react";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import Head from "next/head";
-import { motion, AnimatePresence, useMotionValue, useMotionTemplate, Variants } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useMotionTemplate, type Variants } from "motion/react";
 
 const PLAYSTORE_URL = "https://play.google.com/store/apps/details?id=ng.com.unilife.app";
 const WHATSAPP_URL = "https://chat.whatsapp.com/I4DTryVfFCPDMqyceqxcQl";
@@ -76,10 +75,6 @@ export default function DownloadPage() {
 
   return (
     <>
-      <Head>
-        <title>Get UniLife | The Campus Ecosystem</title>
-      </Head>
-
       <style dangerouslySetInnerHTML={{ __html: `
         .scan-line { position: absolute; width: 100%; height: 2px; background: #34d399; box-shadow: 0 0 10px #34d399, 0 0 20px #34d399, 0 0 40px #34d399; top: 0; left: 0; animation: scan 2s infinite linear; z-index: 10; }
         @keyframes scan { 0% { top: -5%; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { top: 105%; opacity: 0; } }
@@ -310,7 +305,7 @@ export default function DownloadPage() {
                   <img alt="App Store" src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1276560000&h=7e7b68fad19738b5649a1bfb78ff46e9" className="h-[44px] rounded-lg opacity-30 grayscale mb-8 pointer-events-none" />
                   
                   <p className="text-[#a1a1aa] text-[0.95rem] leading-relaxed mb-6">
-                    Finalizing the iOS build. Drop your email and we'll ping you the second it hits the App Store.
+                    Finalizing the iOS build. Drop your email and we&apos;ll ping you the second it hits the App Store.
                   </p>
                 </div>
 
@@ -339,7 +334,7 @@ export default function DownloadPage() {
                       <motion.div key="success" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-[#34d399]/10 border border-[#34d399]/30 rounded-xl p-5 flex items-center gap-4 shadow-inner">
                         <div className="w-12 h-12 rounded-full bg-[#34d399] flex items-center justify-center text-[#14151A] shrink-0 font-bold text-xl shadow-[0_0_20px_rgba(52,211,153,0.4)]">✓</div>
                         <div>
-                          <p className="text-[#34d399] font-bold text-[0.95rem] mb-1">You're on the list ✌️</p>
+                          <p className="text-[#34d399] font-bold text-[0.95rem] mb-1">You&apos;re on the list ✌️</p>
                           <p className="text-[#a1a1aa] text-xs leading-tight">Alerting {waitlistEmail}.</p>
                         </div>
                       </motion.div>

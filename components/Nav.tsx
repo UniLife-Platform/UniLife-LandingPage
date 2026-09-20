@@ -3,11 +3,9 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 
 const LOGIN_URL = "https://app.unilife.com.ng";
-const APP_URL = "https://chat.whatsapp.com/I4DTryVfFCPDMqyceqxcQl";
-
 const DROPDOWN_CLOSE_DELAY = 120;
 
 type NavItem = {
@@ -35,30 +33,10 @@ const JOIN_US: NavItem[] = [
   { href: "/join", label: "Core Team", desc: "Build the future of campus tech.", icon: "💻" },
 ];
 
-// --- Social Icons ---
-function XIcon({ size = 18 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M18.9 2.9h3.1l-6.8 7.75L23.2 21.1h-6.27l-4.9-6.41-5.61 6.41H3.3l7.27-8.3L2.8 2.9h6.43l4.43 5.86 5.24-5.86Zm-1.1 16.35h1.72L7.31 4.65H5.46l12.34 14.6Z" />
-    </svg>
-  );
-}
-function InstagramIcon({ size = 18 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="2" y="2" width="20" height="20" rx="5" />
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-    </svg>
-  );
-}
-function WhatsAppIcon({ size = 18 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
-    </svg>
-  );
-}
+const OTHERS: NavItem[] = [
+  { href: "/challenge", label: "Challenges & Sprints", desc: "Compete in live university innovation challenges.", icon: "⚡" },
+  { href: "/scholarships", label: "Scholarships", desc: "Verified tuition grants, student funds & sponsorships.", icon: "🎓" },
+];
 
 // --- Animation Variants ---
 const staggerContainer = {
@@ -92,7 +70,7 @@ function DesktopMegaMenu({ active }: { active?: string }) {
     closeTimer.current = setTimeout(() => setOpen(false), DROPDOWN_CLOSE_DELAY);
   };
 
-  const isActive = [FEATURES, SOLUTIONS, JOIN_US].flat().some((item) => {
+  const isActive = [FEATURES, SOLUTIONS, JOIN_US, OTHERS].flat().some((item) => {
     const itemPath = item.href.split("#")[0];
     return itemPath === active && itemPath !== "/";
   });
@@ -110,7 +88,7 @@ function DesktopMegaMenu({ active }: { active?: string }) {
       }}
     >
       <button
-        className={`relative flex items-center gap-1.5 text-[0.92rem] py-2 transition-colors duration-200 outline-none
+        className={`relative flex items-center gap-1.5 text-[0.92rem] py-2 transition-colors duration-200 outline-none cursor-pointer
           ${isActive ? "font-bold text-[#14151A]" : "font-medium text-[#14151A]"}
           after:absolute after:-bottom-1 after:left-0 after:h-[2.5px] after:w-full after:origin-left after:scale-x-0 after:bg-[#FFD23F] after:rounded-full after:transition-transform after:duration-300
           ${isActive ? "after:scale-x-100" : "group-hover:after:scale-x-100"}
@@ -143,29 +121,29 @@ function DesktopMegaMenu({ active }: { active?: string }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.98 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="absolute top-full left-1/2 -translate-x-1/2 pt-6 w-[880px]"
+            className="absolute top-full left-1/2 -translate-x-1/2 pt-6 w-[min(1080px,94vw)]"
           >
-            <div className="bg-white border border-[rgba(20,21,26,0.12)] rounded-[24px] shadow-[0_40px_80px_rgba(20,21,26,0.12)] p-8 flex gap-6">
+            <div className="bg-white/98 backdrop-blur-2xl border border-[rgba(20,21,26,0.12)] rounded-[28px] shadow-[0_35px_90px_rgba(20,21,26,0.16)] p-8 sm:p-9 flex gap-6">
               
-              {/* Column 1: Product */}
+              {/* Column 1: Products */}
               <div className="flex-1">
-                <h4 className="font-mono text-[0.65rem] font-bold tracking-widest text-[#8a8a7f] uppercase mb-4 pl-3">Product</h4>
-                <div className="flex flex-col gap-1">
+                <h4 className="font-mono text-[0.68rem] font-bold tracking-widest text-[#8a8a7f] uppercase mb-3.5 pl-3">Products</h4>
+                <div className="flex flex-col gap-1.5">
                   {FEATURES.map((item, idx) => (
                     <Link
                       key={`${item.href}-${idx}`}
                       href={item.href}
                       onClick={() => setOpen(false)}
-                      className="flex items-start gap-4 p-3 hover:bg-[#f4f6fc] rounded-[14px] transition-colors group"
+                      className="flex items-start gap-3.5 p-3 hover:bg-[#f4f6fc] rounded-[16px] transition-all duration-200 group hover:translate-x-1 hover:shadow-xs"
                     >
-                      <div className="text-xl bg-[#fdfbf7] border border-[rgba(20,21,26,0.05)] w-11 h-11 flex items-center justify-center rounded-full shadow-sm group-hover:scale-110 group-hover:-rotate-3 transition-transform shrink-0 duration-300">
+                      <div className="text-xl bg-[#fdfbf7] border border-[rgba(20,21,26,0.06)] w-11 h-11 flex items-center justify-center rounded-2xl shadow-xs group-hover:scale-110 group-hover:-rotate-3 group-hover:border-[#4f7fff]/30 group-hover:bg-white transition-all shrink-0 duration-300">
                         {item.icon}
                       </div>
                       <div className="pt-0.5">
                         <div className="font-bold text-[#14151A] text-[0.92rem] mb-0.5 group-hover:text-[#4f7fff] transition-colors">
                           {item.label}
                         </div>
-                        <div className="text-[0.78rem] text-[#8a8a7f] leading-snug">
+                        <div className="text-[0.78rem] text-[#73757d] leading-snug group-hover:text-[#46473f] transition-colors">
                           {item.desc}
                         </div>
                       </div>
@@ -175,24 +153,24 @@ function DesktopMegaMenu({ active }: { active?: string }) {
               </div>
 
               {/* Column 2: Solutions */}
-              <div className="flex-1 border-l border-[rgba(20,21,26,0.06)] pl-6">
-                <h4 className="font-mono text-[0.65rem] font-bold tracking-widest text-[#8a8a7f] uppercase mb-4 pl-3">Solutions</h4>
-                <div className="flex flex-col gap-1">
+              <div className="flex-1 border-l border-[rgba(20,21,26,0.08)] pl-6">
+                <h4 className="font-mono text-[0.68rem] font-bold tracking-widest text-[#8a8a7f] uppercase mb-3.5 pl-3">Solutions</h4>
+                <div className="flex flex-col gap-1.5">
                   {SOLUTIONS.map((item, idx) => (
                     <Link
                       key={`${item.href}-${idx}`}
                       href={item.href}
                       onClick={() => setOpen(false)}
-                      className="flex items-start gap-4 p-3 hover:bg-[#f4f6fc] rounded-[14px] transition-colors group"
+                      className="flex items-start gap-3.5 p-3 hover:bg-[#f4f6fc] rounded-[16px] transition-all duration-200 group hover:translate-x-1 hover:shadow-xs"
                     >
-                      <div className="text-xl bg-[#fdfbf7] border border-[rgba(20,21,26,0.05)] w-11 h-11 flex items-center justify-center rounded-full shadow-sm group-hover:scale-110 group-hover:-rotate-3 transition-transform shrink-0 duration-300">
+                      <div className="text-xl bg-[#fdfbf7] border border-[rgba(20,21,26,0.06)] w-11 h-11 flex items-center justify-center rounded-2xl shadow-xs group-hover:scale-110 group-hover:-rotate-3 group-hover:border-[#4f7fff]/30 group-hover:bg-white transition-all shrink-0 duration-300">
                         {item.icon}
                       </div>
                       <div className="pt-0.5">
                         <div className="font-bold text-[#14151A] text-[0.92rem] mb-0.5 group-hover:text-[#4f7fff] transition-colors">
                           {item.label}
                         </div>
-                        <div className="text-[0.78rem] text-[#8a8a7f] leading-snug">
+                        <div className="text-[0.78rem] text-[#73757d] leading-snug group-hover:text-[#46473f] transition-colors">
                           {item.desc}
                         </div>
                       </div>
@@ -202,24 +180,51 @@ function DesktopMegaMenu({ active }: { active?: string }) {
               </div>
 
               {/* Column 3: Join Us */}
-              <div className="flex-1 border-l border-[rgba(20,21,26,0.06)] pl-6">
-                <h4 className="font-mono text-[0.65rem] font-bold tracking-widest text-[#8a8a7f] uppercase mb-4 pl-3">Join Us</h4>
-                <div className="flex flex-col gap-1">
+              <div className="flex-1 border-l border-[rgba(20,21,26,0.08)] pl-6">
+                <h4 className="font-mono text-[0.68rem] font-bold tracking-widest text-[#8a8a7f] uppercase mb-3.5 pl-3">Join Us</h4>
+                <div className="flex flex-col gap-1.5">
                   {JOIN_US.map((item, idx) => (
                     <Link
                       key={`${item.href}-${idx}`}
                       href={item.href}
                       onClick={() => setOpen(false)}
-                      className="flex items-start gap-4 p-3 hover:bg-[#f4f6fc] rounded-[14px] transition-colors group"
+                      className="flex items-start gap-3.5 p-3 hover:bg-[#f4f6fc] rounded-[16px] transition-all duration-200 group hover:translate-x-1 hover:shadow-xs"
                     >
-                      <div className="text-xl bg-[#fdfbf7] border border-[rgba(20,21,26,0.05)] w-11 h-11 flex items-center justify-center rounded-full shadow-sm group-hover:scale-110 group-hover:-rotate-3 transition-transform shrink-0 duration-300">
+                      <div className="text-xl bg-[#fdfbf7] border border-[rgba(20,21,26,0.06)] w-11 h-11 flex items-center justify-center rounded-2xl shadow-xs group-hover:scale-110 group-hover:-rotate-3 group-hover:border-[#4f7fff]/30 group-hover:bg-white transition-all shrink-0 duration-300">
                         {item.icon}
                       </div>
                       <div className="pt-0.5">
                         <div className="font-bold text-[#14151A] text-[0.92rem] mb-0.5 group-hover:text-[#4f7fff] transition-colors">
                           {item.label}
                         </div>
-                        <div className="text-[0.78rem] text-[#8a8a7f] leading-snug">
+                        <div className="text-[0.78rem] text-[#73757d] leading-snug group-hover:text-[#46473f] transition-colors">
+                          {item.desc}
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              {/* Column 4: Others (Challenges & Sponsorships) */}
+              <div className="flex-1 border-l border-[rgba(20,21,26,0.08)] pl-6">
+                <h4 className="font-mono text-[0.68rem] font-bold tracking-widest text-[#8a8a7f] uppercase mb-3.5 pl-3">Others</h4>
+                <div className="flex flex-col gap-1.5">
+                  {OTHERS.map((item, idx) => (
+                    <Link
+                      key={`${item.href}-${idx}`}
+                      href={item.href}
+                      onClick={() => setOpen(false)}
+                      className="flex items-start gap-3.5 p-3 hover:bg-[#f4f6fc] rounded-[16px] transition-all duration-200 group hover:translate-x-1 hover:shadow-xs"
+                    >
+                      <div className="text-xl bg-[#fdfbf7] border border-[rgba(20,21,26,0.06)] w-11 h-11 flex items-center justify-center rounded-2xl shadow-xs group-hover:scale-110 group-hover:-rotate-3 group-hover:border-[#ff3d81]/30 group-hover:bg-white transition-all shrink-0 duration-300">
+                        {item.icon}
+                      </div>
+                      <div className="pt-0.5">
+                        <div className="font-bold text-[#14151A] text-[0.92rem] mb-0.5 group-hover:text-[#ff3d81] transition-colors">
+                          {item.label}
+                        </div>
+                        <div className="text-[0.78rem] text-[#73757d] leading-snug group-hover:text-[#46473f] transition-colors">
                           {item.desc}
                         </div>
                       </div>
@@ -255,7 +260,7 @@ function MobileAccordion({
       <button
         onClick={onToggle}
         aria-expanded={isOpen}
-        className="flex items-center justify-between w-full py-3 text-[1.1rem] font-bold text-[#14151A] outline-none"
+        className="flex items-center justify-between w-full py-3 text-[1.05rem] font-bold text-[#14151A] outline-none cursor-pointer"
       >
         {title}
         <motion.svg
@@ -282,9 +287,9 @@ function MobileAccordion({
                   key={`${item.href}-${idx}`}
                   href={item.href}
                   onClick={closeNav}
-                  className="px-4 py-3 rounded-xl bg-[#f4f6fc] text-[0.95rem] font-medium text-[#46473f] flex items-center gap-3 transition-colors active:scale-[0.98]"
+                  className="px-4 py-2.5 rounded-xl bg-[#f4f6fc] text-[0.92rem] font-medium text-[#46473f] flex items-center gap-3 transition-colors active:scale-[0.98]"
                 >
-                  <span className="text-xl shrink-0">{item.icon}</span>
+                  <span className="text-lg shrink-0">{item.icon}</span>
                   {item.label}
                 </Link>
               ))}
@@ -296,10 +301,26 @@ function MobileAccordion({
   );
 }
 
+function DesktopLink({ href, label, active }: { href: string; label: string; active?: string }) {
+  const isActive = active === href;
+  return (
+    <Link
+      href={href}
+      className={`relative group text-[0.92rem] py-2 transition-colors duration-200 outline-none
+        ${isActive ? "font-bold text-[#14151A]" : "font-medium text-[#8a8a7f] hover:text-[#14151A]"}
+        after:absolute after:-bottom-1 after:left-0 after:h-[2.5px] after:w-full after:origin-left after:scale-x-0 after:bg-[#FFD23F] after:rounded-full after:transition-transform after:duration-300
+        ${isActive ? "after:scale-x-100" : "group-hover:after:scale-x-100"}
+      `}
+    >
+      {label}
+    </Link>
+  );
+}
+
 // --- Main Nav Component ---
 export default function Nav({ active }: { active?: string }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [openSection, setOpenSection] = useState<"product" | "solutions" | "join" | null>(null);
+  const [openSection, setOpenSection] = useState<"product" | "solutions" | "join" | "others" | null>(null);
   const prefersReducedMotion = useReducedMotion();
 
   const closeNav = () => {
@@ -307,24 +328,8 @@ export default function Nav({ active }: { active?: string }) {
     setOpenSection(null);
   };
 
-  const toggleSection = (section: "product" | "solutions" | "join") => {
+  const toggleSection = (section: "product" | "solutions" | "join" | "others") => {
     setOpenSection((current) => (current === section ? null : section));
-  };
-
-  const DesktopLink = ({ href, label }: { href: string, label: string }) => {
-    const isActive = active === href;
-    return (
-      <Link
-        href={href}
-        className={`relative group text-[0.92rem] py-2 transition-colors duration-200 outline-none
-          ${isActive ? "font-bold text-[#14151A]" : "font-medium text-[#8a8a7f] hover:text-[#14151A]"}
-          after:absolute after:-bottom-1 after:left-0 after:h-[2.5px] after:w-full after:origin-left after:scale-x-0 after:bg-[#FFD23F] after:rounded-full after:transition-transform after:duration-300
-          ${isActive ? "after:scale-x-100" : "group-hover:after:scale-x-100"}
-        `}
-      >
-        {label}
-      </Link>
-    );
   };
 
   return (
@@ -348,7 +353,7 @@ export default function Nav({ active }: { active?: string }) {
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="pointer-events-auto flex items-center justify-between px-6 py-2.5 bg-white/55 backdrop-blur-2xl backdrop-saturate-150 border border-white/40 ring-1 ring-[rgba(20,21,26,0.05)] rounded-full shadow-[0_16px_32px_-12px_rgba(20,21,26,0.14)]"
+          className="pointer-events-auto flex items-center justify-between px-6 py-2.5 bg-white/90 backdrop-blur-xl border border-black/10 rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.06)]"
         >
           {/* ---- BRAND ---- */}
           <Link href="/" className="flex items-center gap-2.5 flex-1 group">
@@ -365,12 +370,13 @@ export default function Nav({ active }: { active?: string }) {
           </Link>
 
           {/* ---- DESKTOP LINKS ---- */}
-          <div className="hidden lg:flex items-center gap-8 justify-center flex-1">
-            <DesktopLink href="/" label="Home" />
+          <div className="hidden lg:flex items-center gap-7 justify-center flex-1">
+            <DesktopLink href="/" label="Home" active={active} />
             <DesktopMegaMenu active={active} />
-            <DesktopLink href="/about" label="About" />
-            <DesktopLink href="/pricing" label="Pricing" />
-            <DesktopLink href="/contact" label="Contact" />
+            <DesktopLink href="/about" label="About" active={active} />
+            <DesktopLink href="/pricing" label="Pricing" active={active} />
+            <DesktopLink href="/faq" label="FAQ" active={active} />
+            <DesktopLink href="/contact" label="Contact" active={active} />
           </div>
 
           {/* ---- DESKTOP ACTIONS ---- */}
@@ -391,7 +397,7 @@ export default function Nav({ active }: { active?: string }) {
 
           {/* ---- MOBILE TOGGLE ---- */}
           <button
-            className="lg:hidden relative w-10 h-10 border border-[rgba(20,21,26,0.15)] rounded-full shrink-0 bg-white/50 flex flex-col justify-center items-center overflow-hidden"
+            className="lg:hidden relative w-10 h-10 border border-[rgba(20,21,26,0.15)] rounded-full shrink-0 bg-white/50 flex flex-col justify-center items-center overflow-hidden cursor-pointer"
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-nav-drawer"
@@ -420,7 +426,7 @@ export default function Nav({ active }: { active?: string }) {
                 </motion.div>
                 
                 <MobileAccordion
-                  title="Product"
+                  title="Products"
                   items={FEATURES}
                   closeNav={closeNav}
                   isOpen={openSection === "product"}
@@ -440,12 +446,22 @@ export default function Nav({ active }: { active?: string }) {
                   isOpen={openSection === "join"}
                   onToggle={() => toggleSection("join")}
                 />
+                <MobileAccordion
+                  title="Others"
+                  items={OTHERS}
+                  closeNav={closeNav}
+                  isOpen={openSection === "others"}
+                  onToggle={() => toggleSection("others")}
+                />
 
                 <motion.div variants={slideInItem}>
                   <Link href="/about" onClick={closeNav} className="block py-3 mt-2 text-[1.1rem] font-bold text-[#14151A] border-t border-[rgba(20,21,26,0.06)] active:text-[#4f7fff]">About</Link>
                 </motion.div>
                 <motion.div variants={slideInItem}>
                   <Link href="/pricing" onClick={closeNav} className="block py-3 text-[1.1rem] font-bold text-[#14151A] active:text-[#4f7fff]">Pricing</Link>
+                </motion.div>
+                <motion.div variants={slideInItem}>
+                  <Link href="/faq" onClick={closeNav} className="block py-3 text-[1.1rem] font-bold text-[#14151A] active:text-[#4f7fff]">FAQ & Answers</Link>
                 </motion.div>
                 <motion.div variants={slideInItem}>
                   <Link href="/contact" onClick={closeNav} className="block py-3 text-[1.1rem] font-bold text-[#14151A] active:text-[#4f7fff]">Contact</Link>
@@ -456,7 +472,7 @@ export default function Nav({ active }: { active?: string }) {
                 <Link href={LOGIN_URL} className="flex items-center justify-center w-full py-4 rounded-full font-bold bg-[#f4f6fc] text-[#14151A] active:scale-[0.98] transition-transform">
                   Sign In
                 </Link>
-                <Link href="/download"className="flex items-center justify-center w-full py-4 rounded-full font-bold bg-[#14151A] !text-white shadow-xl active:scale-[0.98] transition-transform">
+                <Link href="/download" className="flex items-center justify-center w-full py-4 rounded-full font-bold bg-[#14151A] !text-white shadow-xl active:scale-[0.98] transition-transform">
                   Download App
                 </Link>
               </motion.div>

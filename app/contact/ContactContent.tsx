@@ -3,10 +3,97 @@
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
+import { MessageCircle, ArrowUpRight } from "lucide-react";
 
 const WHATSAPP_URL = "https://wa.me/2348164670694";
-const EMAIL_URL = "mailto:unilife.edu.org@gmail.com";
+const EMAIL_URL = "mailto:hello@unilife.com.ng";
+
+function InstagramIcon({ size = 22 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect x="2" y="2" width="20" height="20" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function TikTokIcon({ size = 22 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M16.6 5.82c-.87-.96-1.34-2.19-1.34-3.47h-3.19v13.44c0 1.6-1.3 2.9-2.9 2.9a2.9 2.9 0 0 1-2.9-2.9 2.9 2.9 0 0 1 2.9-2.9c.31 0 .61.05.89.14V9.86a6.18 6.18 0 0 0-.89-.06 6.14 6.14 0 0 0-6.14 6.14A6.14 6.14 0 0 0 9.17 22a6.14 6.14 0 0 0 6.14-6.14V9.01a8.4 8.4 0 0 0 4.91 1.58V7.4a5.2 5.2 0 0 1-3.62-1.58z" />
+    </svg>
+  );
+}
+
+function XIcon({ size = 20 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M18.9 2.9h3.1l-6.8 7.75L23.2 21.1h-6.27l-4.9-6.41-5.61 6.41H3.3l7.27-8.3L2.8 2.9h6.43l4.43 5.86 5.24-5.86Zm-1.1 16.35h1.72L7.31 4.65H5.46l12.34 14.6Z" />
+    </svg>
+  );
+}
+
+const SOCIAL_COMMUNITIES = [
+  {
+    platform: "Instagram",
+    handle: "@unilife_connect",
+    description: "Daily campus highlights, student spot-checks, behind-the-scenes & giveaway drops.",
+    href: "https://www.instagram.com/unilife_connect",
+    icon: InstagramIcon,
+    badge: "Official IG",
+    tagline: "Visual updates & campus stories",
+    accentColor: "#E1306C",
+    bgHover: "hover:border-[#E1306C]/40 hover:shadow-[0_16px_36px_rgba(225,48,108,0.12)]",
+    buttonBg: "group-hover:bg-[#E1306C] group-hover:text-white",
+  },
+  {
+    platform: "TikTok",
+    handle: "@unilifeconnect",
+    description: "Campus street interviews, university banter, student hustle breakdowns & viral moments.",
+    href: "https://www.tiktok.com/@unilifeconnect?_r=1&_t=ZS-992NpLGLfAC",
+    icon: TikTokIcon,
+    badge: "Viral Content",
+    tagline: "Short clips & student lives",
+    accentColor: "#000000",
+    bgHover: "hover:border-black/50 hover:shadow-[0_16px_36px_rgba(0,0,0,0.12)]",
+    buttonBg: "group-hover:bg-black group-hover:text-white",
+  },
+  {
+    platform: "X (formerly Twitter)",
+    handle: "@unilife_connect",
+    description: "Live announcements, university policy discussions, feature release notes & student spaces.",
+    href: "https://x.com/unilife_connect",
+    icon: XIcon,
+    badge: "Discussions",
+    tagline: "Real-time news & Spaces",
+    accentColor: "#14151A",
+    bgHover: "hover:border-[#14151A]/50 hover:shadow-[0_16px_36px_rgba(20,21,26,0.12)]",
+    buttonBg: "group-hover:bg-[#14151A] group-hover:text-white",
+  },
+  {
+    platform: "WhatsApp Channel",
+    handle: "Join the Channel",
+    description: "Instant drop alerts for scholarships, campus challenge deadlines, and verified university news.",
+    href: "https://chat.whatsapp.com/I4DTryVfFCPDMqyceqxcQl",
+    icon: MessageCircle,
+    badge: "Instant Alerts",
+    tagline: "Broadcast alerts & urgent updates",
+    accentColor: "#25D366",
+    bgHover: "hover:border-[#25D366]/40 hover:shadow-[0_16px_36px_rgba(37,211,102,0.12)]",
+    buttonBg: "group-hover:bg-[#25D366] group-hover:text-white",
+  },
+];
 
 const CHANNELS = [
   {
@@ -23,7 +110,7 @@ const CHANNELS = [
   {
     emoji: "✉️",
     title: "Email",
-    detail: "unilife.edu.org@gmail.com",
+    detail: "hello@unilife.com.ng",
     sub: "Best for partnerships, press, and anything that needs a paper trail.",
     href: EMAIL_URL,
     accent: "#4f7fff",
@@ -190,6 +277,100 @@ export default function ContactContent() {
             </motion.a>
           ))}
         </div>
+      </section>
+
+      {/* ---- BOLD SOCIALS & COMMUNITY SHOWCASE ---- */}
+      <section className="py-16 px-6 md:px-16 max-w-[1160px] mx-auto">
+        <motion.div
+          className="bg-white border-2 border-[#14151A] rounded-[32px] p-8 md:p-14 shadow-[8px_8px_0_#14151A]"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.5 }}
+        >
+          {/* Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b-2 border-[#14151A]/10 mb-10">
+            <div className="max-w-[620px]">
+              <span className="inline-block font-mono text-xs tracking-widest text-[#14151A] bg-[#FFD23F] border border-[#14151A]/20 px-3.5 py-1 rounded-full mb-3 uppercase font-bold">
+                Follow us on socials
+              </span>
+              <h2 className="font-display text-3xl md:text-5xl uppercase tracking-tight text-[#14151A] leading-tight">
+                Connect With Campus Everywhere.
+              </h2>
+              <p className="text-[#46473f] text-sm md:text-base mt-2 leading-relaxed">
+                We share campus highlights, drop real-time updates, spotlight student entrepreneurs, and host regular live community Spaces. Tap to follow us across our official handles.
+              </p>
+            </div>
+
+            <div className="shrink-0 flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#10b981] animate-pulse"></span>
+              <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#14151A]">
+                All Official Accounts Verified
+              </span>
+            </div>
+          </div>
+
+          {/* Socials Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {SOCIAL_COMMUNITIES.map((item, idx) => {
+              const IconComp = item.icon;
+              return (
+                <motion.a
+                  key={item.platform}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`bg-[#FAF9F5] border-2 border-[#14151A] rounded-2xl p-6 flex flex-col justify-between transition-all duration-200 group hover:-translate-y-1 ${item.bgHover}`}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.35, delay: idx * 0.08 }}
+                >
+                  <div>
+                    {/* Top Row: Icon + Badge */}
+                    <div className="flex items-center justify-between mb-4">
+                      <div
+                        className="w-11 h-11 rounded-xl flex items-center justify-center border-2 border-[#14151A] shadow-[2px_2px_0_#14151A] transition-transform group-hover:scale-105"
+                        style={{
+                          backgroundColor: item.platform === "WhatsApp Channel" ? "#25D366" : item.platform === "Instagram" ? "#E1306C" : "#14151A",
+                          color: "#FFFFFF",
+                        }}
+                      >
+                        <IconComp size={20} />
+                      </div>
+                      <span className="font-mono text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-white border border-[#14151A]/15 text-[#14151A]">
+                        {item.badge}
+                      </span>
+                    </div>
+
+                    {/* Platform & Handle */}
+                    <h3 className="font-display text-xl uppercase text-[#14151A] mb-1 group-hover:text-[#4f7fff] transition-colors">
+                      {item.platform}
+                    </h3>
+                    <p className="font-mono text-xs font-bold text-[#8a8a7f] mb-3">
+                      {item.handle}
+                    </p>
+
+                    {/* Description */}
+                    <p className="text-xs text-[#52534a] leading-relaxed mb-6">
+                      {item.description}
+                    </p>
+                  </div>
+
+                  {/* Action Strip */}
+                  <div className="pt-3 border-t border-[#14151A]/10 flex items-center justify-between">
+                    <span className="font-mono text-xs font-bold text-[#14151A] uppercase tracking-wider group-hover:underline underline-offset-4">
+                      Follow page
+                    </span>
+                    <div className="w-7 h-7 rounded-full bg-[#14151A] text-white flex items-center justify-center transition-all group-hover:bg-[#FFD23F] group-hover:text-[#14151A] shadow-xs">
+                      <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
+                    </div>
+                  </div>
+                </motion.a>
+              );
+            })}
+          </div>
+        </motion.div>
       </section>
 
       {/* ---- WHO ARE YOU ---- */}

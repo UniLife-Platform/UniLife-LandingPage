@@ -188,9 +188,9 @@ export default function TermsContent() {
           Questions about these Terms? Reach out any time at{" "}
           <a
             className="text-[#14151A] underline decoration-[#FFD23F] decoration-2 underline-offset-2 font-semibold"
-            href="mailto:unilife.edu.org@gmail.com"
+            href="mailto:hello@unilife.com.ng"
           >
-            unilife.edu.org@gmail.com
+            hello@unilife.com.ng
           </a>{" "}
           or visit our{" "}
           <Link

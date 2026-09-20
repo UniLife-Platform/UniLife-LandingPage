@@ -31,7 +31,7 @@ export default function DeleteAccountContent() {
         </p>
         <List
           items={[
-            <span>Send an email to <a href="mailto:support@unilife.com.ng" className="text-[#14151A] underline decoration-[#FFD23F] decoration-2 underline-offset-2 font-semibold">support@unilife.com.ng</a>.</span>,
+            <span key="email-req">Send an email to <a href="mailto:support@unilife.com.ng" className="text-[#14151A] underline decoration-[#FFD23F] decoration-2 underline-offset-2 font-semibold">support@unilife.com.ng</a>.</span>,
             "You MUST send the email from the exact address registered to your UniLife account.",
             "Use the subject line: Account Deletion Request.",
           ]}
@@ -49,7 +49,7 @@ export default function DeleteAccountContent() {
           ]}
         />
         <p className="mt-4">
-          <em>Note: Messages you have sent to other users may remain visible in their inboxes, but your account name and avatar will be replaced with a generic "Deleted User" state.</em>
+          <em>Note: Messages you have sent to other users may remain visible in their inboxes, but your account name and avatar will be replaced with a generic &quot;Deleted User&quot; state.</em>
         </p>
       </Section>
 

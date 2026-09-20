@@ -2,16 +2,12 @@
 
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import Head from "next/head";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 export default function Home() {
   return (
     <>
-      <Head>
-        <title>UniLife — Your campus, finally here.</title>
-      </Head>
 
       <style dangerouslySetInnerHTML={{ __html: `
         .hero-visuals { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; min-height: 540px; }
@@ -499,6 +495,35 @@ export default function Home() {
                 Compete against other departments. Level up your profile (1 level per 500 SP) and earn exclusive titles and gold badges for being a top contributor.
               </p>
             </motion.div>
+          </div>
+        </section>
+
+        {/* ---- VERIFIED SPONSORSHIPS TEASER ---- */}
+        <section className="py-12 px-6 md:px-16 max-w-[1160px] mx-auto">
+          <div className="bg-white border-2 border-[#14151A] rounded-[32px] p-8 md:p-12 shadow-[6px_6px_0px_#14151A] relative overflow-hidden">
+            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+              <div className="max-w-2xl">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 text-xs font-mono font-bold tracking-wide uppercase mb-3">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  Verified Corporate Grants & Scholarships
+                </div>
+                <h2 className="font-display text-3xl md:text-4xl uppercase text-[#14151A] tracking-tight mb-2">
+                  Fund your degree. Zero scam links.
+                </h2>
+                <p className="text-[#46473f] text-base leading-relaxed">
+                  Browse ₦35M+ in verified undergraduate scholarships from MTN Foundation, Shell NNPC, Google, and NLNG—plus direct event co-sponsorships for campus faculty dinners and hackathons.
+                </p>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto shrink-0">
+                <Link
+                  href="/sponsorships"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full font-bold text-[0.95rem] bg-[#14151A] !text-white hover:bg-[#ff3d81] transition-colors shadow-[3px_3px_0px_rgba(0,0,0,0.3)] whitespace-nowrap text-center"
+                >
+                  Browse Verified Funds →
+                </Link>
+              </div>
+            </div>
           </div>
         </section>
 

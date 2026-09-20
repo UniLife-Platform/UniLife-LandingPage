@@ -4,10 +4,10 @@ import { useState } from "react";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 const WHATSAPP_URL = "https://wa.me/2348164670694";
-const EMAIL_URL = "mailto:unilife.edu.org@gmail.com";
+const EMAIL_URL = "mailto:hello@unilife.com.ng";
 
 type BenefitItem = { code: string; title: string; points: string[] };
 

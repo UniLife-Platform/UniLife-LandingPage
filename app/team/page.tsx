@@ -2,10 +2,10 @@
 
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 const WHATSAPP_URL = "https://wa.me/2348164670694";
-const EMAIL_URL = "mailto:unilife.edu.org@gmail.com";
+const EMAIL_URL = "mailto:hello@unilife.com.ng";
 
 type Role = { title: string; desc: string };
 type Department = {

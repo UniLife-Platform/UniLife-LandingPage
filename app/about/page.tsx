@@ -3,9 +3,9 @@
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
-const APP_URL = "https://www.harrisonking.com.ng/apps/unilife";
+const APP_URL = "https://play.google.com/store/apps/details?id=ng.com.unilife.app";
 
 export default function AboutPage() {
   return (

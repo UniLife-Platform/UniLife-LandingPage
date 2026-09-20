@@ -22,7 +22,7 @@ export default function GuidelinesContent() {
         <h3 className="font-bold text-[0.95rem] text-[#14151A] mb-2">Why this exists</h3>
         <p className="text-[#46473f] text-[0.98rem] leading-relaxed">
           UniLife is a verified space — every account belongs to a real,
-          enrolled student. That's what makes it safe to buy from a
+          enrolled student. That&apos;s what makes it safe to buy from a
           classmate, share your notes, or post honestly. These Community
           Guidelines explain what we expect from every member so that trust
           holds up. They work alongside our{" "}
@@ -131,7 +131,7 @@ export default function GuidelinesContent() {
 
       <Section number="07" title="Changes to these guidelines">
         <p>
-          We'll update these guidelines as the community grows and new
+          We&apos;ll update these guidelines as the community grows and new
           situations come up. Material changes will be reflected in the
           &quot;Last Updated&quot; date above and announced in the app.
         </p>
@@ -140,13 +140,13 @@ export default function GuidelinesContent() {
       <Section number="08" title="Questions">
         <p>
           Not sure if something crosses a line? Ask us before you post it —
-          we'd rather help you get it right than clean up after the fact.
+          we&apos;d rather help you get it right than clean up after the fact.
           Reach us at{" "}
           <a
             className="text-[#14151A] underline decoration-[#FFD23F] decoration-2 underline-offset-2 font-semibold"
-            href="mailto:unilife.edu.org@gmail.com"
+            href="mailto:hello@unilife.com.ng"
           >
-            unilife.edu.org@gmail.com
+            hello@unilife.com.ng
           </a>{" "}
           or via our{" "}
           <Link href="/contact" className="text-[#14151A] underline decoration-[#FFD23F] decoration-2 underline-offset-2 font-semibold">
