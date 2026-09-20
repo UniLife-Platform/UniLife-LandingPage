@@ -128,12 +128,14 @@ export default function ChallengeDetailPage({ params }: PageProps) {
 
             {/* Quick Stats Sidebar Card */}
             <div className="lg:col-span-4 bg-white border-2 border-[#14151A] rounded-[28px] p-6 shadow-[8px_8px_0_#14151A]">
-              <div className="flex items-center justify-between pb-4 mb-4 border-b border-[rgba(20,21,26,0.1)]">
-                <span className="font-mono text-xs uppercase font-bold text-[#8a8a7f]">Total Seed Pool</span>
-                <span className="font-mono text-base font-bold text-[#10b981] bg-[#10b981]/10 px-3 py-0.5 rounded-full">
-                  {challenge.prizePool}
-                </span>
-              </div>
+              {challenge.prizePool && (
+                <div className="flex items-center justify-between pb-4 mb-4 border-b border-[rgba(20,21,26,0.1)]">
+                  <span className="font-mono text-xs uppercase font-bold text-[#8a8a7f]">Total Seed Pool</span>
+                  <span className="font-mono text-base font-bold text-[#10b981] bg-[#10b981]/10 px-3 py-0.5 rounded-full">
+                    {challenge.prizePool}
+                  </span>
+                </div>
+              )}
 
               <div className="space-y-4 text-xs font-mono mb-6">
                 <div className="flex items-center justify-between py-2 border-b border-[rgba(20,21,26,0.06)]">
@@ -282,33 +284,6 @@ export default function ChallengeDetailPage({ params }: PageProps) {
                     <div className="pt-3 mt-3 border-t border-white/10 font-mono text-[10px] text-[#FFD23F]">
                       Step 0{idx + 1}
                     </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Prizes Breakdown (If Available) */}
-          {challenge.prizes && challenge.prizes.length > 0 && (
-            <div className="bg-white border-2 border-[#14151A] rounded-[32px] p-8 md:p-12 shadow-[8px_8px_0_#14151A]">
-              <span className="font-mono text-xs uppercase tracking-widest text-[#10b981] font-bold block mb-2">
-                Seed Capital & Grants
-              </span>
-              <h2 className="font-display text-2xl md:text-3xl uppercase text-[#14151A] mb-6">
-                Prizes & Acceleration Awards
-              </h2>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {challenge.prizes.map((prize, idx) => (
-                  <div
-                    key={idx}
-                    className="p-6 rounded-[24px] bg-[#FAF7F0] border-2 border-[#14151A] shadow-[4px_4px_0_#14151A]"
-                  >
-                    <span className="font-mono text-xs font-bold uppercase text-[#8a8a7f] block mb-1">
-                      {prize.rank}
-                    </span>
-                    <div className="font-display text-3xl text-[#14151A] mb-3">{prize.reward}</div>
-                    <p className="text-xs text-[#46473f] leading-relaxed">{prize.perks}</p>
                   </div>
                 ))}
               </div>

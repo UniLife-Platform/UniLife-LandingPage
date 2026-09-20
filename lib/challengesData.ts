@@ -12,7 +12,7 @@ export interface ChallengeItem {
   badge: string;
   badgeAccent: string;
   badgeBg: string;
-  prizePool: string;
+  prizePool?: string;
   deadline: string;
   participantsCount: string;
   heroImage: string;
@@ -34,11 +34,6 @@ export interface ChallengeItem {
     timeline: string;
     desc: string;
   }[];
-  prizes?: {
-    rank: string;
-    reward: string;
-    perks: string;
-  }[];
 }
 
 export const ALL_CHALLENGES: ChallengeItem[] = [
@@ -56,7 +51,6 @@ export const ALL_CHALLENGES: ChallengeItem[] = [
     badge: "Flagship Sprint • 2026/2027",
     badgeAccent: "#10b981",
     badgeBg: "rgba(16,185,129,0.12)",
-    prizePool: "₦5,000,000",
     deadline: "October 30, 2026",
     participantsCount: "640+ students registered",
     heroImage: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1200&auto=format&fit=crop",
@@ -92,17 +86,6 @@ export const ALL_CHALLENGES: ChallengeItem[] = [
         desc: "Emergency student blood matching networks for Sagamu Teaching Hospital and nighttime dispensary locators.",
         details: "Rapid responder dispatch and cold-chain vaccine tracking for university hostels and surrounding rural health centers."
       }
-    ],
-    schedule: [
-      { phase: "Phase 1: Concept & Team Submission", timeline: "Sep 01 - Oct 30, 2026", desc: "Submit your team via Tally with problem statement, target beneficiaries, and campus track." },
-      { phase: "Phase 2: Fabrication & Lab Prototyping", timeline: "Nov 01 - Nov 20, 2026", desc: "Access to university engineering workshops and Ayetoro research plots." },
-      { phase: "Phase 3: Campus Market Validation", timeline: "Nov 21 - Dec 10, 2026", desc: "Testing real student pilot orders and peer escrow transactions on UniLife." },
-      { phase: "Phase 4: Senate Grand Pitch & Awards", timeline: "Dec 18, 2026", desc: "Live presentation in Ago-Iwoye before Directorate judges and seed disbursement." }
-    ],
-    prizes: [
-      { rank: "1st Place (Grand Prize)", reward: "₦2,500,000", perks: "Full Directorate incubation, legal trademark support, and direct investor pitch" },
-      { rank: "2nd Place", reward: "₦1,500,000", perks: "University fabrication access and 6 months mentor coaching" },
-      { rank: "3rd Place", reward: "₦1,000,000", perks: "Seed capital for inventory rollout on UniLife Marketplace" }
     ]
   },
   {
@@ -139,11 +122,6 @@ export const ALL_CHALLENGES: ChallengeItem[] = [
       { phase: "Submissions Window", timeline: "Oct 01 - Nov 15, 2026", desc: "Upload high-definition clips and portfolio links via the form." },
       { phase: "Community Screening", timeline: "Nov 16 - Nov 25, 2026", desc: "Streamed on UniLife media channels with student voting." },
       { phase: "Creator Gala & Awards", timeline: "Dec 05, 2026", desc: "Distribution of camera rigs, audio kits, and production grants." }
-    ],
-    prizes: [
-      { rank: "Best Short Doc", reward: "₦750,000 + Sony Alpha Rig", perks: "Official broadcast on UniLife YouTube channel" },
-      { rank: "Best Campus Podcast", reward: "₦450,000 + Rode PodMic Studio Kit", perks: "1-year podcast hosting & syndication sponsorship" },
-      { rank: "Photojournalism Winner", reward: "₦300,000 + Lens Kit", perks: "Featured in annual UniLife Print Anthology" }
     ]
   },
   {
@@ -175,11 +153,6 @@ export const ALL_CHALLENGES: ChallengeItem[] = [
       { icon: "🛍️", title: "Thrift & Campus Fashion", desc: "Vintage styling, sneaker curation, and tailored custom student apparel." },
       { icon: "🍲", title: "Hostel Food & Culinary Prep", desc: "Healthy meal plans, late-night snack deliveries, and pastry boxes." },
       { icon: "🔧", title: "Gadget Repair & Tech Services", desc: "Screen fixes, laptop firmware flashing, and dorm-to-dorm hardware repairs." }
-    ],
-    prizes: [
-      { rank: "Top Volume Merchant", reward: "₦500,000 Zero-Interest Credit", perks: "Permanent top-of-catalog placement on UniShop" },
-      { rank: "Top Rated Customer Trust", reward: "₦300,000 Grant", perks: "Free packaging and logistics sponsorship" },
-      { rank: "Rising Star Shop", reward: "₦200,000 Grant", perks: "POS toolkit & social banner spotlight" }
     ]
   },
   {
@@ -211,10 +184,6 @@ export const ALL_CHALLENGES: ChallengeItem[] = [
       { icon: "☀️", title: "Solar Study Kiosks", desc: "Daytime solar charge banks with integrated night study LED arrays." },
       { icon: "🔋", title: "E-Waste Lithium Packs", desc: "Testing and rebuilding discarded laptop 18650 cells into reliable backup packs." },
       { icon: "⚡", title: "Hostel Power Sharing", desc: "Peer-to-peer micro metering to share inverter capacity safely." }
-    ],
-    prizes: [
-      { rank: "Grand Hardware Winner", reward: "₦1,500,000 Lab Grant", perks: "Components budget + university fabrication sponsorship" },
-      { rank: "Runner-Up", reward: "₦1,000,000", perks: "6-month accelerator mentorship with energy firm" }
     ]
   },
   {

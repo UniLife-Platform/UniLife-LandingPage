@@ -129,8 +129,8 @@ export default function ChallengesDirectoryPage() {
                 Spearheaded by Dr. Ogunkoya, Director of DEI at Olabisi Onabanjo University.
               </p>
               <div className="flex items-center justify-between font-mono text-xs pt-2 border-t border-[rgba(20,21,26,0.08)]">
-                <span className="text-[#8a8a7f]">Seed Capital:</span>
-                <span className="font-bold text-[#14151A] text-sm">₦5,000,000</span>
+                <span className="text-[#8a8a7f]">Organizer:</span>
+                <span className="font-bold text-[#14151A] text-xs">DEI • Dr. Ogunkoya</span>
               </div>
               <Link
                 href="/challenge/oou-venture-2026"
@@ -292,13 +292,15 @@ export default function ChallengesDirectoryPage() {
 
                     {/* Key Attributes */}
                     <div className="space-y-2 pt-3 border-t border-[rgba(20,21,26,0.08)] font-mono text-xs">
-                      <div className="flex items-center justify-between text-[#8a8a7f]">
-                        <span className="flex items-center gap-1.5">
-                          <Award className="w-3.5 h-3.5 text-[#14151A]" />
-                          Prize Pool:
-                        </span>
-                        <strong className="text-[#10b981] font-bold">{challenge.prizePool}</strong>
-                      </div>
+                      {challenge.prizePool && (
+                        <div className="flex items-center justify-between text-[#8a8a7f]">
+                          <span className="flex items-center gap-1.5">
+                            <Award className="w-3.5 h-3.5 text-[#14151A]" />
+                            Prize Pool:
+                          </span>
+                          <strong className="text-[#10b981] font-bold">{challenge.prizePool}</strong>
+                        </div>
+                      )}
 
                       <div className="flex items-center justify-between text-[#8a8a7f]">
                         <span className="flex items-center gap-1.5">
