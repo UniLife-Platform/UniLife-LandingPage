@@ -351,10 +351,10 @@ export default function SponsorshipPageContent() {
                     href={opp.applicationUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full font-bold text-xs bg-[#14151A] text-white hover:bg-[#ff3d81] transition-colors"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl font-bold text-xs bg-[#14151A] text-white hover:bg-[#ff3d81] hover:text-white transition-all shadow-sm hover:shadow-md cursor-pointer shrink-0"
                   >
-                    <span>Apply</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
+                    <span className="text-white font-bold">Apply</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 text-white" />
                   </a>
                 </div>
               </div>

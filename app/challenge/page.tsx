@@ -134,10 +134,10 @@ export default function ChallengesDirectoryPage() {
               </div>
               <Link
                 href="/challenge/oou-venture-2026"
-                className="mt-3.5 w-full py-2 rounded-full bg-[#14151A] text-[#F6F2E7] font-bold text-xs flex items-center justify-center gap-1.5 hover:bg-[#ff3d81] transition-colors"
+                className="mt-3.5 w-full py-2.5 px-4 rounded-xl bg-[#14151A] text-white font-bold text-xs flex items-center justify-center gap-1.5 hover:bg-[#ff3d81] hover:text-white transition-all shadow-sm hover:shadow-md cursor-pointer"
               >
-                <span>View Full OOU Page</span>
-                <ChevronRight className="w-3.5 h-3.5" />
+                <span className="text-white font-bold">View Full OOU Page</span>
+                <ChevronRight className="w-3.5 h-3.5 text-white" />
               </Link>
             </motion.div>
           </div>

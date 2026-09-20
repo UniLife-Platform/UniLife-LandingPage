@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 
 const WHATSAPP_URL = "https://wa.me/2348164670694";
-const EMAIL_URL = "mailto:hello@unilife.com.ng";
+const SUPPORT_EMAIL_URL = "mailto:support@unilife.com.ng,hello@unilife.com.ng";
 
 interface FAQItem {
   id: string;
@@ -177,11 +177,30 @@ export default function FAQPage() {
     if (!formState.name.trim() || !formState.message.trim()) return;
 
     setIsSubmitting(true);
-    // Simulate swift submission and open WhatsApp / email fallback
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setFormSubmitted(true);
-    }, 700);
+
+    const subject = `[UniLife FAQ Inquiry] ${formState.name.trim()}`;
+    const bodyText = `Hello UniLife Support,\n\nMy name: ${formState.name.trim()}\nEmail: ${formState.email.trim()}\nPhone / WhatsApp: ${formState.phone.trim() || "N/A"}\n\nQuestion / Message:\n${formState.message.trim()}\n\n--\nSent from UniLife FAQ Page`;
+
+    // Construct Gmail Web Compose URL (direct to Gmail browser)
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=support@unilife.com.ng,hello@unilife.com.ng&su=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(bodyText)}`;
+
+    // Standard mailto protocol
+    const mailtoUrl = `mailto:support@unilife.com.ng,hello@unilife.com.ng?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(bodyText)}`;
+
+    if (typeof window !== "undefined") {
+      // Try opening Gmail directly in a new tab; fallback to mailto
+      const opened = window.open(gmailUrl, "_blank");
+      if (!opened || opened.closed || typeof opened.closed === "undefined") {
+        window.location.href = mailtoUrl;
+      }
+    }
+
+    setFormSubmitted(true);
+    setIsSubmitting(false);
   };
 
   // Filter sections based on search query
@@ -205,7 +224,7 @@ export default function FAQPage() {
       <Nav active="/faq" />
 
       {/* ---- HERO HEADER ---- */}
-      <header className="pt-14 sm:pt-20 pb-8 px-4 sm:px-6 md:px-12 max-w-[1240px] mx-auto">
+      <header className="pt-14 sm:pt-20 pb-8 px-4 sm:px-8 md:px-14 max-w-[1440px] mx-auto">
         <div className="text-left max-w-4xl">
           <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-[#14151A] mb-3">
             Frequently Asked Questions
@@ -214,20 +233,20 @@ export default function FAQPage() {
             Find answers to the most common questions about student onboarding, marketplace verification, past questions AI, status points, and campus leadership. If you can&apos;t find what you&apos;re looking for, our student support team is always happy to help.
           </p>
 
-          {/* Search bar */}
-          <div className="mt-6 relative max-w-xl">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8a8a7f]" />
+          {/* Search bar with interactive focus & hover states */}
+          <div className="mt-6 relative max-w-2xl group">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8a8a7f] group-focus-within:text-[#4f7fff] transition-colors" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search questions (e.g. fees, scam, SP, AI, delivery, past questions)..."
-              className="w-full pl-11 pr-12 py-3 bg-white border border-[#E2E1DA] rounded-xl text-sm placeholder:text-[#8a8a7f] text-[#14151A] focus:outline-none focus:border-[#14151A] focus:ring-1 focus:ring-[#14151A] transition-all shadow-xs"
+              className="w-full pl-11 pr-14 py-3.5 bg-white border border-[#E2E1DA] hover:border-[#14151A]/40 rounded-2xl text-sm placeholder:text-[#8a8a7f] text-[#14151A] focus:outline-none focus:border-[#4f7fff] focus:ring-4 focus:ring-[#4f7fff]/10 transition-all shadow-xs hover:shadow-sm"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery("")}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-mono font-semibold text-[#8a8a7f] hover:text-[#14151A] uppercase bg-[#F3F2EB] px-2 py-0.5 rounded"
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-mono font-semibold text-[#8a8a7f] hover:text-[#14151A] hover:bg-[#EAE8DD] uppercase bg-[#F3F2EB] px-2.5 py-1 rounded-lg transition-colors cursor-pointer"
               >
                 Clear
               </button>
@@ -236,25 +255,25 @@ export default function FAQPage() {
         </div>
       </header>
 
-      {/* ---- MAIN 2-COLUMN LAYOUT (Like Reference Image) ---- */}
-      <div className="px-4 sm:px-6 md:px-12 max-w-[1240px] mx-auto pb-20 pt-4">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      {/* ---- MAIN 2-COLUMN LAYOUT ---- */}
+      <div className="px-4 sm:px-8 md:px-14 max-w-[1440px] mx-auto pb-24 pt-4">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           
           {/* LEFT COLUMN: FAQ Category Cards with Accordions (8 cols on desktop) */}
-          <main className="lg:col-span-8 space-y-6">
+          <main className="lg:col-span-8 space-y-7">
             {filteredSections.length === 0 ? (
-              <div className="bg-white border border-[#E5E4DC] rounded-2xl p-10 text-center shadow-xs">
-                <AlertCircle className="w-10 h-10 text-[#8a8a7f] mx-auto mb-3" />
+              <div className="bg-white border border-[#E5E4DC] rounded-3xl p-10 sm:p-14 text-center shadow-xs">
+                <AlertCircle className="w-12 h-12 text-[#8a8a7f] mx-auto mb-3" />
                 <h3 className="text-xl font-bold text-[#14151A] mb-1">
                   No matching questions found
                 </h3>
                 <p className="text-sm text-[#60626a] max-w-md mx-auto mb-6">
                   We couldn&apos;t find an answer matching &ldquo;{searchQuery}&rdquo;. You can submit your question directly in the form on the right or chat with our team on WhatsApp.
                 </p>
-                <div className="flex justify-center gap-3">
+                <div className="flex flex-wrap justify-center gap-3">
                   <button
                     onClick={() => setSearchQuery("")}
-                    className="px-4 py-2 bg-[#14151A] text-white rounded-lg text-xs font-semibold hover:bg-black transition-colors"
+                    className="px-5 py-2.5 bg-[#14151A] text-white rounded-xl text-xs font-semibold hover:bg-black transition-all hover:scale-102"
                   >
                     Clear Search
                   </button>
@@ -262,8 +281,9 @@ export default function FAQPage() {
                     href={WHATSAPP_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-2 bg-[#25D366] text-black font-semibold rounded-lg text-xs hover:bg-[#20ba5a] transition-colors"
+                    className="px-5 py-2.5 bg-[#25D366] text-black font-semibold rounded-xl text-xs hover:bg-[#20ba5a] transition-all hover:scale-102 flex items-center gap-2"
                   >
+                    <MessageCircle className="w-3.5 h-3.5" />
                     Ask on WhatsApp →
                   </a>
                 </div>
@@ -272,19 +292,19 @@ export default function FAQPage() {
               filteredSections.map((section) => (
                 <section
                   key={section.id}
-                  className="bg-white border border-[#E5E4DC] rounded-2xl p-6 sm:p-8 shadow-[0_2px_8px_rgba(20,21,26,0.03)]"
+                  className="bg-white border border-[#E5E4DC] hover:border-[#14151A]/25 rounded-3xl p-7 sm:p-9 shadow-[0_2px_12px_rgba(20,21,26,0.03)] hover:shadow-[0_12px_32px_rgba(20,21,26,0.06)] transition-all duration-300"
                 >
                   {/* Category Header */}
-                  <div className="mb-6">
-                    <h2 className="text-xl font-bold text-[#14151A] tracking-tight">
+                  <div className="mb-6 pb-4 border-b border-[#F0EFE8]">
+                    <h2 className="text-xl sm:text-2xl font-bold text-[#14151A] tracking-tight">
                       {section.title}
                     </h2>
-                    <p className="text-xs text-[#8a8a7f] mt-1 font-normal">
+                    <p className="text-xs sm:text-sm text-[#8a8a7f] mt-1 font-normal">
                       {section.description}
                     </p>
                   </div>
 
-                  {/* Accordion List */}
+                  {/* Accordion List with hover row highlights */}
                   <div className="divide-y divide-[#EFEFE8]">
                     {section.items.map((item) => {
                       const isOpen = !!openItems[item.id];
@@ -292,17 +312,21 @@ export default function FAQPage() {
                         <div key={item.id} className="py-4 first:pt-1 last:pb-1">
                           <button
                             onClick={() => toggleItem(item.id)}
-                            className="w-full flex items-center justify-between text-left gap-4 group focus:outline-none"
+                            className="w-full flex items-center justify-between text-left gap-4 group focus:outline-none p-2 -mx-2 rounded-xl hover:bg-[#f6f8fe] transition-all duration-200 cursor-pointer"
                             aria-expanded={isOpen}
                           >
-                            <span className="text-[0.95rem] font-semibold text-[#14151A] group-hover:text-[#4f7fff] transition-colors pr-2">
+                            <span className="text-[0.96rem] sm:text-[1rem] font-semibold text-[#14151A] group-hover:text-[#4f7fff] transition-colors pr-2">
                               {item.q}
                             </span>
-                            <span className="shrink-0 w-6 h-6 flex items-center justify-center text-[#8a8a7f] group-hover:text-[#14151A] transition-colors">
+                            <span className={`shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-200 ${
+                              isOpen
+                                ? "bg-[#14151A] text-white"
+                                : "bg-[#F3F2EB] text-[#8a8a7f] group-hover:bg-[#4f7fff]/15 group-hover:text-[#4f7fff]"
+                            }`}>
                               {isOpen ? (
-                                <Minus className="w-4 h-4 stroke-[2.2]" />
+                                <Minus className="w-3.5 h-3.5 stroke-[2.4]" />
                               ) : (
-                                <Plus className="w-4 h-4 stroke-[2.2]" />
+                                <Plus className="w-3.5 h-3.5 stroke-[2.4]" />
                               )}
                             </span>
                           </button>
@@ -316,7 +340,7 @@ export default function FAQPage() {
                                 transition={{ duration: 0.22, ease: "easeOut" }}
                                 className="overflow-hidden"
                               >
-                                <div className="pt-3 pb-1 text-[0.9rem] leading-relaxed text-[#50525a]">
+                                <div className="pt-3 pb-2 pl-2 text-[0.92rem] leading-relaxed text-[#50525a]">
                                   {item.a}
                                 </div>
                               </motion.div>
@@ -333,14 +357,14 @@ export default function FAQPage() {
 
           {/* RIGHT COLUMN: "Didn't find your answer?" Contact Card (4 cols on desktop) */}
           <aside className="lg:col-span-4 sticky top-24">
-            <div className="bg-white border border-[#E5E4DC] rounded-2xl p-6 sm:p-7 shadow-[0_2px_12px_rgba(20,21,26,0.04)]">
+            <div className="bg-white border border-[#E5E4DC] hover:border-[#14151A]/25 rounded-3xl p-7 sm:p-8 shadow-[0_4px_20px_rgba(20,21,26,0.05)] hover:shadow-[0_16px_36px_rgba(20,21,26,0.08)] transition-all duration-300">
               
               {/* Card Header */}
               <h3 className="text-xl font-bold text-[#14151A] tracking-tight">
                 Didn&apos;t find your answer?
               </h3>
               <p className="text-xs text-[#8a8a7f] mt-1 mb-4">
-                Our support team is ready to help.
+                Our campus support team responds via <strong className="text-[#14151A] font-semibold">support@unilife.com.ng</strong> & <strong className="text-[#14151A] font-semibold">hello@unilife.com.ng</strong>.
               </p>
 
               {/* Support Avatars */}
@@ -348,17 +372,17 @@ export default function FAQPage() {
                 <img
                   src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=120&auto=format&fit=crop"
                   alt="Support rep"
-                  className="w-9 h-9 rounded-full border-2 border-white object-cover"
+                  className="w-9 h-9 rounded-full border-2 border-white object-cover shadow-xs"
                 />
                 <img
                   src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=120&auto=format&fit=crop"
                   alt="Support rep"
-                  className="w-9 h-9 rounded-full border-2 border-white object-cover"
+                  className="w-9 h-9 rounded-full border-2 border-white object-cover shadow-xs"
                 />
                 <img
                   src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=120&auto=format&fit=crop"
                   alt="Support rep"
-                  className="w-9 h-9 rounded-full border-2 border-white object-cover"
+                  className="w-9 h-9 rounded-full border-2 border-white object-cover shadow-xs"
                 />
                 <span className="ml-4 font-mono text-[11px] text-[#10b981] font-semibold flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-[#10b981] animate-pulse"></span>
@@ -368,22 +392,25 @@ export default function FAQPage() {
 
               {/* Form or Success State */}
               {formSubmitted ? (
-                <div className="bg-[#FAF9F5] border border-[#E2E1DA] rounded-xl p-5 text-center">
-                  <div className="w-10 h-10 bg-[#10b981]/15 text-[#10b981] rounded-full flex items-center justify-center mx-auto mb-3">
+                <div className="bg-[#FAF9F5] border border-[#E2E1DA] rounded-2xl p-6 text-center">
+                  <div className="w-11 h-11 bg-[#10b981]/15 text-[#10b981] rounded-full flex items-center justify-center mx-auto mb-3 shadow-xs">
                     <Check className="w-5 h-5 stroke-[2.5]" />
                   </div>
                   <h4 className="text-sm font-bold text-[#14151A] mb-1">
-                    Message Sent!
+                    Message Sent to Support!
                   </h4>
-                  <p className="text-xs text-[#60626a] mb-4">
-                    Thanks {formState.name}! A student representative will review your inquiry and reply to {formState.email || "your contact"} shortly.
+                  <p className="text-xs text-[#60626a] mb-2 leading-relaxed">
+                    Opening your email client to send to <span className="font-semibold text-[#14151A]">support@unilife.com.ng</span> &amp; <span className="font-semibold text-[#14151A]">hello@unilife.com.ng</span>.
+                  </p>
+                  <p className="text-[11px] text-[#8a8a7f] mb-5">
+                    If your email window didn&apos;t pop up, you can also email us directly below.
                   </p>
                   <button
                     onClick={() => {
                       setFormSubmitted(false);
                       setFormState({ name: "", email: "", phone: "", message: "" });
                     }}
-                    className="text-xs font-semibold text-[#14151A] underline underline-offset-2"
+                    className="text-xs font-semibold text-[#14151A] underline underline-offset-2 hover:text-[#4f7fff] transition-colors cursor-pointer"
                   >
                     Send another question
                   </button>
@@ -397,7 +424,7 @@ export default function FAQPage() {
                       placeholder="Name"
                       value={formState.name}
                       onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                      className="w-full px-3.5 py-2.5 bg-[#FAF9F6] border border-[#E2E1DA] rounded-lg text-xs placeholder:text-[#9c9c94] text-[#14151A] focus:outline-none focus:bg-white focus:border-[#14151A] transition-colors"
+                      className="w-full px-4 py-2.5 bg-[#FAF9F6] border border-[#E2E1DA] hover:border-[#14151A]/30 focus:border-[#4f7fff] focus:ring-3 focus:ring-[#4f7fff]/10 rounded-xl text-xs placeholder:text-[#9c9c94] text-[#14151A] focus:outline-none focus:bg-white transition-all"
                     />
                   </div>
 
@@ -408,7 +435,7 @@ export default function FAQPage() {
                       placeholder="Email"
                       value={formState.email}
                       onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                      className="w-full px-3.5 py-2.5 bg-[#FAF9F6] border border-[#E2E1DA] rounded-lg text-xs placeholder:text-[#9c9c94] text-[#14151A] focus:outline-none focus:bg-white focus:border-[#14151A] transition-colors"
+                      className="w-full px-4 py-2.5 bg-[#FAF9F6] border border-[#E2E1DA] hover:border-[#14151A]/30 focus:border-[#4f7fff] focus:ring-3 focus:ring-[#4f7fff]/10 rounded-xl text-xs placeholder:text-[#9c9c94] text-[#14151A] focus:outline-none focus:bg-white transition-all"
                     />
                   </div>
 
@@ -418,7 +445,7 @@ export default function FAQPage() {
                       placeholder="Phone number (WhatsApp optional)"
                       value={formState.phone}
                       onChange={(e) => setFormState({ ...formState, phone: e.target.value })}
-                      className="w-full px-3.5 py-2.5 bg-[#FAF9F6] border border-[#E2E1DA] rounded-lg text-xs placeholder:text-[#9c9c94] text-[#14151A] focus:outline-none focus:bg-white focus:border-[#14151A] transition-colors"
+                      className="w-full px-4 py-2.5 bg-[#FAF9F6] border border-[#E2E1DA] hover:border-[#14151A]/30 focus:border-[#4f7fff] focus:ring-3 focus:ring-[#4f7fff]/10 rounded-xl text-xs placeholder:text-[#9c9c94] text-[#14151A] focus:outline-none focus:bg-white transition-all"
                     />
                   </div>
 
@@ -429,22 +456,17 @@ export default function FAQPage() {
                       placeholder="Message"
                       value={formState.message}
                       onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                      className="w-full px-3.5 py-2.5 bg-[#FAF9F6] border border-[#E2E1DA] rounded-lg text-xs placeholder:text-[#9c9c94] text-[#14151A] focus:outline-none focus:bg-white focus:border-[#14151A] transition-colors resize-none"
+                      className="w-full px-4 py-2.5 bg-[#FAF9F6] border border-[#E2E1DA] hover:border-[#14151A]/30 focus:border-[#4f7fff] focus:ring-3 focus:ring-[#4f7fff]/10 rounded-xl text-xs placeholder:text-[#9c9c94] text-[#14151A] focus:outline-none focus:bg-white transition-all resize-none"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-2.5 px-4 bg-[#14151A] hover:bg-black text-white text-xs font-semibold rounded-lg transition-colors flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
+                    className="w-full py-3 px-4 bg-[#14151A] hover:bg-black text-white text-xs font-semibold rounded-xl transition-all duration-200 hover:shadow-md hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
                   >
-                    {isSubmitting ? (
-                      <span>Sending...</span>
-                    ) : (
-                      <>
-                        <span>Send message</span>
-                      </>
-                    )}
+                    <Mail className="w-3.5 h-3.5 text-[#FFD23F]" />
+                    <span>Send via Gmail / Email →</span>
                   </button>
                 </form>
               )}
@@ -459,22 +481,22 @@ export default function FAQPage() {
                     href={WHATSAPP_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-between px-3 py-2 rounded-lg bg-[#FAF9F6] hover:bg-[#F3F2EB] border border-[#E5E4DC] text-xs font-medium text-[#14151A] transition-colors"
+                    className="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-[#FAF9F6] hover:bg-[#F3F2EB] hover:border-[#25D366]/40 border border-[#E5E4DC] text-xs font-medium text-[#14151A] transition-all group"
                   >
                     <span className="flex items-center gap-2">
-                      <MessageCircle className="w-3.5 h-3.5 text-[#25D366]" />
+                      <MessageCircle className="w-3.5 h-3.5 text-[#25D366] group-hover:scale-110 transition-transform" />
                       WhatsApp Helpline
                     </span>
                     <span className="text-[10px] text-[#8a8a7f]">~5 mins</span>
                   </a>
 
                   <a
-                    href={EMAIL_URL}
-                    className="flex items-center justify-between px-3 py-2 rounded-lg bg-[#FAF9F6] hover:bg-[#F3F2EB] border border-[#E5E4DC] text-xs font-medium text-[#14151A] transition-colors"
+                    href={SUPPORT_EMAIL_URL}
+                    className="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-[#FAF9F6] hover:bg-[#F3F2EB] hover:border-[#4f7fff]/40 border border-[#E5E4DC] text-xs font-medium text-[#14151A] transition-all group"
                   >
                     <span className="flex items-center gap-2">
-                      <Mail className="w-3.5 h-3.5 text-[#4f7fff]" />
-                      hello@unilife.com.ng
+                      <Mail className="w-3.5 h-3.5 text-[#4f7fff] group-hover:scale-110 transition-transform" />
+                      support@unilife.com.ng
                     </span>
                     <span className="text-[10px] text-[#8a8a7f]">Email</span>
                   </a>
@@ -488,8 +510,8 @@ export default function FAQPage() {
       </div>
 
       {/* ---- BOTTOM VALUE BANNER (Matching the 4 feature items at the bottom of the reference screenshot) ---- */}
-      <section className="border-t border-[#E5E4DC] bg-white py-10 px-4 sm:px-6 md:px-12">
-        <div className="max-w-[1240px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+      <section className="border-t border-[#E5E4DC] bg-white py-12 px-4 sm:px-8 md:px-14">
+        <div className="max-w-[1440px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           
           <div className="flex items-start gap-3.5">
             <div className="shrink-0 w-8 h-8 rounded-full bg-[#FAF9F5] border border-[#E5E4DC] flex items-center justify-center text-[#14151A] mt-0.5">

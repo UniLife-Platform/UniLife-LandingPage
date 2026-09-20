@@ -121,29 +121,29 @@ function DesktopMegaMenu({ active }: { active?: string }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.98 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="absolute top-full left-1/2 -translate-x-1/2 pt-6 w-[920px]"
+            className="absolute top-full left-1/2 -translate-x-1/2 pt-6 w-[min(1080px,94vw)]"
           >
-            <div className="bg-white border border-[rgba(20,21,26,0.12)] rounded-[24px] shadow-[0_40px_80px_rgba(20,21,26,0.12)] p-7 flex gap-5">
+            <div className="bg-white/98 backdrop-blur-2xl border border-[rgba(20,21,26,0.12)] rounded-[28px] shadow-[0_35px_90px_rgba(20,21,26,0.16)] p-8 sm:p-9 flex gap-6">
               
               {/* Column 1: Products */}
               <div className="flex-1">
-                <h4 className="font-mono text-[0.65rem] font-bold tracking-widest text-[#8a8a7f] uppercase mb-3 pl-3">Products</h4>
-                <div className="flex flex-col gap-1">
+                <h4 className="font-mono text-[0.68rem] font-bold tracking-widest text-[#8a8a7f] uppercase mb-3.5 pl-3">Products</h4>
+                <div className="flex flex-col gap-1.5">
                   {FEATURES.map((item, idx) => (
                     <Link
                       key={`${item.href}-${idx}`}
                       href={item.href}
                       onClick={() => setOpen(false)}
-                      className="flex items-start gap-3 p-2.5 hover:bg-[#f4f6fc] rounded-[14px] transition-colors group"
+                      className="flex items-start gap-3.5 p-3 hover:bg-[#f4f6fc] rounded-[16px] transition-all duration-200 group hover:translate-x-1 hover:shadow-xs"
                     >
-                      <div className="text-lg bg-[#fdfbf7] border border-[rgba(20,21,26,0.05)] w-10 h-10 flex items-center justify-center rounded-full shadow-xs group-hover:scale-110 group-hover:-rotate-3 transition-transform shrink-0 duration-300">
+                      <div className="text-xl bg-[#fdfbf7] border border-[rgba(20,21,26,0.06)] w-11 h-11 flex items-center justify-center rounded-2xl shadow-xs group-hover:scale-110 group-hover:-rotate-3 group-hover:border-[#4f7fff]/30 group-hover:bg-white transition-all shrink-0 duration-300">
                         {item.icon}
                       </div>
                       <div className="pt-0.5">
-                        <div className="font-bold text-[#14151A] text-[0.88rem] mb-0.5 group-hover:text-[#4f7fff] transition-colors">
+                        <div className="font-bold text-[#14151A] text-[0.92rem] mb-0.5 group-hover:text-[#4f7fff] transition-colors">
                           {item.label}
                         </div>
-                        <div className="text-[0.75rem] text-[#8a8a7f] leading-snug">
+                        <div className="text-[0.78rem] text-[#73757d] leading-snug group-hover:text-[#46473f] transition-colors">
                           {item.desc}
                         </div>
                       </div>
@@ -153,24 +153,24 @@ function DesktopMegaMenu({ active }: { active?: string }) {
               </div>
 
               {/* Column 2: Solutions */}
-              <div className="flex-1 border-l border-[rgba(20,21,26,0.06)] pl-5">
-                <h4 className="font-mono text-[0.65rem] font-bold tracking-widest text-[#8a8a7f] uppercase mb-3 pl-3">Solutions</h4>
-                <div className="flex flex-col gap-1">
+              <div className="flex-1 border-l border-[rgba(20,21,26,0.08)] pl-6">
+                <h4 className="font-mono text-[0.68rem] font-bold tracking-widest text-[#8a8a7f] uppercase mb-3.5 pl-3">Solutions</h4>
+                <div className="flex flex-col gap-1.5">
                   {SOLUTIONS.map((item, idx) => (
                     <Link
                       key={`${item.href}-${idx}`}
                       href={item.href}
                       onClick={() => setOpen(false)}
-                      className="flex items-start gap-3 p-2.5 hover:bg-[#f4f6fc] rounded-[14px] transition-colors group"
+                      className="flex items-start gap-3.5 p-3 hover:bg-[#f4f6fc] rounded-[16px] transition-all duration-200 group hover:translate-x-1 hover:shadow-xs"
                     >
-                      <div className="text-lg bg-[#fdfbf7] border border-[rgba(20,21,26,0.05)] w-10 h-10 flex items-center justify-center rounded-full shadow-xs group-hover:scale-110 group-hover:-rotate-3 transition-transform shrink-0 duration-300">
+                      <div className="text-xl bg-[#fdfbf7] border border-[rgba(20,21,26,0.06)] w-11 h-11 flex items-center justify-center rounded-2xl shadow-xs group-hover:scale-110 group-hover:-rotate-3 group-hover:border-[#4f7fff]/30 group-hover:bg-white transition-all shrink-0 duration-300">
                         {item.icon}
                       </div>
                       <div className="pt-0.5">
-                        <div className="font-bold text-[#14151A] text-[0.88rem] mb-0.5 group-hover:text-[#4f7fff] transition-colors">
+                        <div className="font-bold text-[#14151A] text-[0.92rem] mb-0.5 group-hover:text-[#4f7fff] transition-colors">
                           {item.label}
                         </div>
-                        <div className="text-[0.75rem] text-[#8a8a7f] leading-snug">
+                        <div className="text-[0.78rem] text-[#73757d] leading-snug group-hover:text-[#46473f] transition-colors">
                           {item.desc}
                         </div>
                       </div>
@@ -180,24 +180,24 @@ function DesktopMegaMenu({ active }: { active?: string }) {
               </div>
 
               {/* Column 3: Join Us */}
-              <div className="flex-1 border-l border-[rgba(20,21,26,0.06)] pl-5">
-                <h4 className="font-mono text-[0.65rem] font-bold tracking-widest text-[#8a8a7f] uppercase mb-3 pl-3">Join Us</h4>
-                <div className="flex flex-col gap-1">
+              <div className="flex-1 border-l border-[rgba(20,21,26,0.08)] pl-6">
+                <h4 className="font-mono text-[0.68rem] font-bold tracking-widest text-[#8a8a7f] uppercase mb-3.5 pl-3">Join Us</h4>
+                <div className="flex flex-col gap-1.5">
                   {JOIN_US.map((item, idx) => (
                     <Link
                       key={`${item.href}-${idx}`}
                       href={item.href}
                       onClick={() => setOpen(false)}
-                      className="flex items-start gap-3 p-2.5 hover:bg-[#f4f6fc] rounded-[14px] transition-colors group"
+                      className="flex items-start gap-3.5 p-3 hover:bg-[#f4f6fc] rounded-[16px] transition-all duration-200 group hover:translate-x-1 hover:shadow-xs"
                     >
-                      <div className="text-lg bg-[#fdfbf7] border border-[rgba(20,21,26,0.05)] w-10 h-10 flex items-center justify-center rounded-full shadow-xs group-hover:scale-110 group-hover:-rotate-3 transition-transform shrink-0 duration-300">
+                      <div className="text-xl bg-[#fdfbf7] border border-[rgba(20,21,26,0.06)] w-11 h-11 flex items-center justify-center rounded-2xl shadow-xs group-hover:scale-110 group-hover:-rotate-3 group-hover:border-[#4f7fff]/30 group-hover:bg-white transition-all shrink-0 duration-300">
                         {item.icon}
                       </div>
                       <div className="pt-0.5">
-                        <div className="font-bold text-[#14151A] text-[0.88rem] mb-0.5 group-hover:text-[#4f7fff] transition-colors">
+                        <div className="font-bold text-[#14151A] text-[0.92rem] mb-0.5 group-hover:text-[#4f7fff] transition-colors">
                           {item.label}
                         </div>
-                        <div className="text-[0.75rem] text-[#8a8a7f] leading-snug">
+                        <div className="text-[0.78rem] text-[#73757d] leading-snug group-hover:text-[#46473f] transition-colors">
                           {item.desc}
                         </div>
                       </div>
@@ -207,24 +207,24 @@ function DesktopMegaMenu({ active }: { active?: string }) {
               </div>
 
               {/* Column 4: Others (Challenges & Sponsorships) */}
-              <div className="flex-1 border-l border-[rgba(20,21,26,0.06)] pl-5">
-                <h4 className="font-mono text-[0.65rem] font-bold tracking-widest text-[#8a8a7f] uppercase mb-3 pl-3">Others</h4>
-                <div className="flex flex-col gap-1">
+              <div className="flex-1 border-l border-[rgba(20,21,26,0.08)] pl-6">
+                <h4 className="font-mono text-[0.68rem] font-bold tracking-widest text-[#8a8a7f] uppercase mb-3.5 pl-3">Others</h4>
+                <div className="flex flex-col gap-1.5">
                   {OTHERS.map((item, idx) => (
                     <Link
                       key={`${item.href}-${idx}`}
                       href={item.href}
                       onClick={() => setOpen(false)}
-                      className="flex items-start gap-3 p-2.5 hover:bg-[#f4f6fc] rounded-[14px] transition-colors group"
+                      className="flex items-start gap-3.5 p-3 hover:bg-[#f4f6fc] rounded-[16px] transition-all duration-200 group hover:translate-x-1 hover:shadow-xs"
                     >
-                      <div className="text-lg bg-[#fdfbf7] border border-[rgba(20,21,26,0.05)] w-10 h-10 flex items-center justify-center rounded-full shadow-xs group-hover:scale-110 group-hover:-rotate-3 transition-transform shrink-0 duration-300">
+                      <div className="text-xl bg-[#fdfbf7] border border-[rgba(20,21,26,0.06)] w-11 h-11 flex items-center justify-center rounded-2xl shadow-xs group-hover:scale-110 group-hover:-rotate-3 group-hover:border-[#ff3d81]/30 group-hover:bg-white transition-all shrink-0 duration-300">
                         {item.icon}
                       </div>
                       <div className="pt-0.5">
-                        <div className="font-bold text-[#14151A] text-[0.88rem] mb-0.5 group-hover:text-[#ff3d81] transition-colors">
+                        <div className="font-bold text-[#14151A] text-[0.92rem] mb-0.5 group-hover:text-[#ff3d81] transition-colors">
                           {item.label}
                         </div>
-                        <div className="text-[0.75rem] text-[#8a8a7f] leading-snug">
+                        <div className="text-[0.78rem] text-[#73757d] leading-snug group-hover:text-[#46473f] transition-colors">
                           {item.desc}
                         </div>
                       </div>
