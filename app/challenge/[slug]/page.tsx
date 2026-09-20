@@ -106,23 +106,37 @@ export default function ChallengeDetailPage({ params }: PageProps) {
 
               {/* Action Buttons */}
               <div className="flex flex-wrap items-center gap-4">
-                <button
-                  onClick={() => setIsFormOpen(true)}
-                  className="px-8 py-4 rounded-full font-bold text-sm md:text-base bg-[#14151A] text-[#F6F2E7] border-2 border-[#14151A] shadow-[4px_4px_0_#ff3d81] hover:scale-105 transition-all flex items-center gap-2.5 cursor-pointer"
-                >
-                  <span>Apply via Form</span>
-                  <ArrowUpRight className="w-5 h-5 text-[#FFD23F]" />
-                </button>
+                {challenge.formType === "google_form" || challenge.formType === "external" ? (
+                  <a
+                    href={challenge.formUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-8 py-4 rounded-full font-bold text-sm md:text-base bg-[#14151A] text-white border-2 border-[#14151A] shadow-[4px_4px_0_#ff3d81] hover:scale-105 transition-all flex items-center gap-2.5 cursor-pointer"
+                  >
+                    <span>{challenge.externalLinkText}</span>
+                    <ExternalLink className="w-5 h-5 text-[#FFD23F]" />
+                  </a>
+                ) : (
+                  <>
+                    <button
+                      onClick={() => setIsFormOpen(true)}
+                      className="px-8 py-4 rounded-full font-bold text-sm md:text-base bg-[#14151A] text-white border-2 border-[#14151A] shadow-[4px_4px_0_#ff3d81] hover:scale-105 transition-all flex items-center gap-2.5 cursor-pointer"
+                    >
+                      <span>Apply via Form</span>
+                      <ArrowUpRight className="w-5 h-5 text-[#FFD23F]" />
+                    </button>
 
-                <a
-                  href={challenge.formUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 py-3.5 rounded-full font-bold text-xs md:text-sm bg-white text-[#14151A] border-2 border-[#14151A] hover:bg-[#14151A] hover:text-white transition-all flex items-center gap-2"
-                >
-                  <span>{challenge.externalLinkText}</span>
-                  <ExternalLink className="w-4 h-4" />
-                </a>
+                    <a
+                      href={challenge.formUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-6 py-3.5 rounded-full font-bold text-xs md:text-sm bg-white text-[#14151A] border-2 border-[#14151A] hover:bg-[#14151A] hover:text-white transition-all flex items-center gap-2"
+                    >
+                      <span>{challenge.externalLinkText}</span>
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  </>
+                )}
               </div>
             </div>
 
@@ -206,6 +220,20 @@ export default function ChallengeDetailPage({ params }: PageProps) {
               {challenge.description}
             </p>
 
+            {challenge.highlights && challenge.highlights.length > 0 && (
+              <div className="mb-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                {challenge.highlights.map((highlight, hIdx) => (
+                  <div
+                    key={hIdx}
+                    className="p-4 rounded-xl bg-[#FAF7F0] border border-[#14151A]/10 font-mono text-xs text-[#14151A] flex items-start gap-2"
+                  >
+                    <span className="text-[#10b981] font-bold">✓</span>
+                    <span>{highlight}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+
             <div className="p-5 rounded-2xl bg-[#FAF7F0] border border-[rgba(20,21,26,0.1)]">
               <strong className="text-xs font-mono uppercase text-[#14151A] tracking-wider block mb-1">
                 Who is Eligible to Enter:
@@ -245,13 +273,27 @@ export default function ChallengeDetailPage({ params }: PageProps) {
                   </div>
 
                   <div className="pt-4 mt-2">
-                    <button
-                      onClick={() => setIsFormOpen(true)}
-                      className="text-xs font-mono font-bold text-[#14151A] hover:text-[#ff3d81] flex items-center gap-1 cursor-pointer"
-                    >
-                      <span>Submit for this Track</span>
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                    </button>
+                    {challenge.formType === "google_form" || challenge.formType === "external" ? (
+                      <a
+                        href={challenge.formUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs font-mono font-bold text-[#14151A] hover:text-[#ff3d81] flex items-center gap-1 cursor-pointer"
+                      >
+                        <span>
+                          {challenge.id === "alumni-mentorship-board" ? "Fill Google Form" : "Submit for this Track"}
+                        </span>
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                      </a>
+                    ) : (
+                      <button
+                        onClick={() => setIsFormOpen(true)}
+                        className="text-xs font-mono font-bold text-[#14151A] hover:text-[#ff3d81] flex items-center gap-1 cursor-pointer"
+                      >
+                        <span>Submit for this Track</span>
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                      </button>
+                    )}
                   </div>
                 </div>
               ))}

@@ -20,12 +20,8 @@ import { ALL_CHALLENGES } from "@/lib/challengesData";
 
 const CATEGORIES = [
   "All",
-  "Entrepreneurship",
-  "Tech & Hackathon",
-  "Creative & Media",
-  "Commerce",
-  "Research & Grants",
-  "Social Impact",
+  "Entrepreneurship & Innovation",
+  "Alumni & Mentorship",
 ] as const;
 
 export default function ChallengesDirectoryPage() {
@@ -105,7 +101,7 @@ export default function ChallengesDirectoryPage() {
               </h1>
 
               <p className="text-[#46473f] text-base md:text-lg leading-relaxed max-w-[660px]">
-                Discover verified entrepreneurship programs, hackathons, creative showcases, and research grants across Nigerian universities. Apply directly through official Tally or Google Forms, and view individual challenge pages for criteria, timelines, and prize pools.
+                Discover active university challenges and initiatives: the student OOU Entrepreneurship &amp; Innovation Challenge, and the Industry Advisory Board call inviting distinguished alumni to mentor candidates. Apply directly through official Tally or Google Forms.
               </p>
             </motion.div>
 
@@ -242,7 +238,7 @@ export default function ChallengesDirectoryPage() {
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[1080px] mx-auto">
               {filteredChallenges.map((challenge, idx) => (
                 <motion.div
                   key={challenge.id}
@@ -330,18 +326,32 @@ export default function ChallengesDirectoryPage() {
                       <ChevronRight className="w-3.5 h-3.5" />
                     </Link>
 
-                    <button
-                      onClick={() =>
-                        setActiveFormModal({
-                          title: challenge.title,
-                          url: challenge.formUrl,
-                        })
-                      }
-                      className="px-3.5 py-1.5 rounded-full bg-[#14151A] text-[#F6F2E7] font-bold text-xs hover:bg-[#ff3d81] transition-colors flex items-center gap-1 cursor-pointer shadow-[2px_2px_0_#FFD23F]"
-                    >
-                      <span>Apply</span>
-                      <ArrowUpRight className="w-3.5 h-3.5 text-[#FFD23F]" />
-                    </button>
+                    {challenge.formType === "google_form" || challenge.formType === "external" ? (
+                      <a
+                        href={challenge.formUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-4 py-1.5 rounded-full bg-[#14151A] text-white font-bold text-xs hover:bg-[#ff3d81] hover:text-white transition-all flex items-center gap-1 cursor-pointer shadow-[2px_2px_0_#FFD23F]"
+                      >
+                        <span className="text-white font-bold">
+                          {challenge.id === "alumni-mentorship-board" ? "Fill Form" : "Apply"}
+                        </span>
+                        <ArrowUpRight className="w-3.5 h-3.5 text-[#FFD23F]" />
+                      </a>
+                    ) : (
+                      <button
+                        onClick={() =>
+                          setActiveFormModal({
+                            title: challenge.title,
+                            url: challenge.formUrl,
+                          })
+                        }
+                        className="px-4 py-1.5 rounded-full bg-[#14151A] text-white font-bold text-xs hover:bg-[#ff3d81] hover:text-white transition-all flex items-center gap-1 cursor-pointer shadow-[2px_2px_0_#FFD23F]"
+                      >
+                        <span className="text-white font-bold">Apply</span>
+                        <ArrowUpRight className="w-3.5 h-3.5 text-[#FFD23F]" />
+                      </button>
+                    )}
                   </div>
                 </motion.div>
               ))}
