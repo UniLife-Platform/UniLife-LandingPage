@@ -94,7 +94,7 @@ const PLATFORM_LINKS: FooterLinkItem[] = [
   { label: "For Campus Sellers", href: "/sellers" },
   { label: "School Partners", href: "/partners" },
   { label: "Partnerships & Alliances", href: "/alliances" },
-  { label: "Request Your Campus", href: "https://tally.so/r/EkpgAl", badge: "Vote", badgeColor: "bg-[#10b981] text-white" },
+  { label: "Request Your Campus", href: "/request", badge: "Vote", badgeColor: "bg-[#10b981] text-white" },
 ];
 
 const ECOSYSTEM_LINKS: FooterLinkItem[] = [

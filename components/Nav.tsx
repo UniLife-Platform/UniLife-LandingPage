@@ -36,7 +36,7 @@ const JOIN_US: NavItem[] = [
 const OTHERS: NavItem[] = [
   { href: "/challenge", label: "Challenges & Sprints", desc: "Compete in live university innovation challenges.", icon: "⚡" },
   { href: "/scholarships", label: "Scholarships", desc: "Verified tuition grants, student funds & sponsorships.", icon: "🎓" },
-  { href: "https://tally.so/r/EkpgAl", label: "Request Your Campus", desc: "Vote to bring UniLife to your university.", icon: "🚀" },
+  { href: "/request", label: "Request Your Campus", desc: "Vote to bring UniLife to your university.", icon: "🚀" },
 ];
 
 // --- Animation Variants ---
@@ -78,7 +78,7 @@ function DesktopMegaMenu({ active, isDark }: { active?: string; isDark?: boolean
 
   return (
     <div
-      className="relative group"
+      className="group"
       onMouseEnter={() => {
         clearCloseTimer();
         setOpen(true);
@@ -130,7 +130,8 @@ function DesktopMegaMenu({ active, isDark }: { active?: string; isDark?: boolean
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.98 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="absolute top-full left-1/2 -translate-x-1/2 pt-6 w-[min(1080px,94vw)]"
+            onMouseEnter={clearCloseTimer}
+            className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-[min(1080px,calc(100vw-3rem))] z-[70] pointer-events-auto"
           >
             <div
               className={`rounded-[28px] p-8 sm:p-9 flex gap-6 ${
@@ -463,7 +464,7 @@ export default function Nav({
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className={`pointer-events-auto flex items-center justify-between px-6 py-2.5 rounded-full transition-colors duration-300 ${
+          className={`relative pointer-events-auto flex items-center justify-between px-6 py-2.5 rounded-full transition-colors duration-300 ${
             isDark
               ? "bg-[#181920]/95 backdrop-blur-xl border border-white/15 shadow-[0_8px_30px_rgba(0,0,0,0.5)] text-[#F6F2E7]"
               : "bg-white/95 backdrop-blur-xl border border-black/10 rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.06)] text-[#14151A]"

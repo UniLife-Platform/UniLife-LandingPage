@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, MouseEvent } from "react";
+import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { motion, AnimatePresence, useMotionValue, useMotionTemplate, type Variants } from "motion/react";
@@ -308,15 +309,13 @@ export default function DownloadPage() {
               </div>
 
               <div className="relative z-10 pt-4">
-                <a
-                  href="https://tally.so/r/EkpgAl"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/request"
                   className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm uppercase tracking-wider bg-[#FFD23F] text-[#14151A] hover:bg-[#ffe066] hover:-translate-y-0.5 transition-all shadow-[0_10px_25px_rgba(255,210,63,0.2)]"
                 >
                   <span>Request Your Campus</span>
                   <span>→</span>
-                </a>
+                </Link>
               </div>
             </motion.div>
 
