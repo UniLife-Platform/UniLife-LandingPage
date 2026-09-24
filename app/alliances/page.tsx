@@ -3,25 +3,20 @@
 import React from "react";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import Link from "next/link";
 import Image from "next/image";
 import { motion } from "motion/react";
 import {
   Megaphone,
   Network,
   ArrowUpRight,
-  Mail,
-  Sparkles,
   TrendingUp,
   Cpu,
   ShieldCheck,
   CheckCircle2,
-  ExternalLink,
 } from "lucide-react";
 
-const SPONSORSHIP_TALLY_URL = "https://tally.so/r/m6gM4O";
-const INTEGRATION_MAILTO_URL =
-  "mailto:partners@unilife.com.ng?subject=Strategic%20Integration%20Proposal%20-%20UniLife&body=Hello%20UniLife%20Team%2C%0A%0AWe%20are%20interested%20in%20proposing%20a%20strategic%20technical%20or%20service%20integration%20with%20UniLife.%0A%0AOrganization%20%2F%20Brand%20Name%3A%20%0AIntegration%20Type%20(Fintech%2C%20Logistics%2C%20EdTech%2C%20Food%20Delivery%2C%20Other)%3A%20%0AProposed%20Value%20for%20Students%3A%20%0AContact%20Person%20%26%20Role%3A%20%0A";
+const SPONSORSHIP_TALLY_URL = "https://tally.so/r/LZlKzO";
+const PARTNERSHIP_TALLY_URL = "https://tally.so/r/gD2qjd";
 
 const TRUSTED_PARTNERS = [
   {
@@ -73,7 +68,7 @@ const stagger = {
 export default function AlliancesPage() {
   return (
     <div className="bg-[#14151A] text-[#F6F2E7] min-h-screen overflow-x-clip font-body antialiased selection:bg-[#FFD23F] selection:text-[#14151A]">
-      <Nav active="/alliances" />
+      <Nav active="/alliances" theme="dark" />
 
       <main className="relative z-10 pt-28 sm:pt-32 pb-24 md:pb-32 px-6 md:px-16 max-w-[1160px] mx-auto">
         {/* Subtle Ambient Background Lighting */}
@@ -81,20 +76,6 @@ export default function AlliancesPage() {
           aria-hidden="true"
           className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[380px] bg-gradient-to-b from-[#4f7fff]/12 via-[#ff3d81]/8 to-transparent rounded-full blur-[120px] -z-10"
         />
-
-        {/* Breadcrumb / Kicker */}
-        <div className="flex items-center justify-center gap-2 mb-6">
-          <Link
-            href="/"
-            className="font-mono text-xs font-bold uppercase tracking-wider text-[#8a8a7f] hover:text-[#F6F2E7] transition-colors"
-          >
-            Home
-          </Link>
-          <span className="text-white/20 font-mono text-xs">/</span>
-          <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#FFD23F] bg-[#FFD23F]/10 border border-[#FFD23F]/25 px-3 py-1 rounded-full">
-            Partnership &amp; Sponsorship Hub
-          </span>
-        </div>
 
         {/* 1. HERO SECTION */}
         <section className="text-center max-w-[900px] mx-auto mb-16 md:mb-24">
@@ -158,25 +139,25 @@ export default function AlliancesPage() {
 
                 {/* Description */}
                 <p className="text-[rgba(246,242,231,0.7)] text-[0.98rem] leading-relaxed mb-8">
-                  Amplify your brand, underwrite our platform operations, or secure premium digital real estate (like map branding and gamification ads) across the campus ecosystem. Ideal for brands with marketing or CSR budgets.
+                  Direct brand amplification, programmatic banner placements, and campus event co-sponsorships across 10,000+ verified undergraduate accounts. Perfect for FMCGs, fintech apps, telecom, and consumer tech.
                 </p>
 
                 {/* Deliverables / Scope Checklist */}
                 <div className="space-y-3 mb-10 pt-4 border-t border-white/5">
                   <span className="block font-mono text-[11px] uppercase tracking-wider text-[#8a8a7f]">
-                    Sponsorship Highlights:
+                    Scope Highlights:
                   </span>
                   <div className="flex items-start gap-2.5 text-xs text-[rgba(246,242,231,0.85)]">
                     <CheckCircle2 className="w-4 h-4 text-[#FFD23F] shrink-0 mt-0.5" />
-                    <span>Campus Map &amp; Real-Estate Digital Placement</span>
+                    <span>Prime Real Estate on Live Campus Interactive Map</span>
                   </div>
                   <div className="flex items-start gap-2.5 text-xs text-[rgba(246,242,231,0.85)]">
                     <CheckCircle2 className="w-4 h-4 text-[#FFD23F] shrink-0 mt-0.5" />
-                    <span>Tuition Grants, Bursaries &amp; Hackathon Naming Rights</span>
+                    <span>Exclusive Title Sponsorship of OOU Tech Sprints &amp; Hackathons</span>
                   </div>
                   <div className="flex items-start gap-2.5 text-xs text-[rgba(246,242,231,0.85)]">
                     <CheckCircle2 className="w-4 h-4 text-[#FFD23F] shrink-0 mt-0.5" />
-                    <span>Gamified SP Reward Drops &amp; Interactive Student Banners</span>
+                    <span>Gamified SP Reward Missions &amp; Leaderboard Banners</span>
                   </div>
                 </div>
               </div>
@@ -247,55 +228,89 @@ export default function AlliancesPage() {
               {/* Action Button */}
               <div className="pt-2">
                 <a
-                  href={INTEGRATION_MAILTO_URL}
+                  href={PARTNERSHIP_TALLY_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-full inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full font-bold text-sm uppercase tracking-wider bg-[#4f7fff] text-white border-2 border-[#4f7fff] shadow-[4px_4px_0_#14151A] hover:bg-[#3d6fe8] hover:scale-[1.02] hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#14151A] active:translate-y-0 active:shadow-[2px_2px_0_#14151A] transition-all cursor-pointer"
                 >
-                  <Mail className="w-4 h-4 stroke-[2.5]" />
                   <span>Propose an Integration</span>
+                  <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
                 </a>
               </div>
             </div>
           </motion.div>
         </section>
 
-        {/* 3. TRUST STRIP / SOCIAL PROOF (BOTTOM SECTION) */}
-        <section className="pt-12 border-t border-[rgba(246,242,231,0.1)] text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.5 }}
-          >
-            <h3 className="font-mono text-xs uppercase tracking-widest text-[#8a8a7f] mb-8 font-semibold">
-              Trusted by forward-thinking campus leaders and brands.
-            </h3>
+        {/* 3. TRUST STRIP / SOCIAL PROOF */}
+        <section className="pt-6 border-t border-[rgba(246,242,231,0.08)]">
+          <div className="text-center mb-8">
+            <span className="font-mono text-xs uppercase tracking-widest text-[#8a8a7f]">
+              Ecosystem Partners &amp; Institutional Alliances
+            </span>
+          </div>
 
-            {/* Subtle, grayscale flex row of placeholder logos fading slightly into the dark background */}
-            <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-12 md:gap-16">
-              {TRUSTED_PARTNERS.map((partner) => (
-                <div
-                  key={partner.name}
-                  className="grayscale opacity-40 hover:opacity-80 transition-opacity duration-300 flex items-center justify-center"
-                >
-                  <Image
-                    src={partner.src}
-                    alt={partner.label}
-                    width={partner.width}
-                    height={partner.height}
-                    className="max-h-11 w-auto object-contain filter contrast-125"
-                  />
-                </div>
-              ))}
-
-              {/* 5th Partner Badge Emblem */}
-              <div className="grayscale opacity-40 hover:opacity-80 transition-opacity duration-300 flex items-center gap-2.5 px-4 py-2 rounded-xl border border-white/10 bg-white/[0.02]">
-                <ShieldCheck className="w-5 h-5 text-white/70" />
-                <span className="font-display text-xs uppercase tracking-wider text-white/80">
-                  OOU Student Union (SUG)
-                </span>
+          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-14 opacity-75 hover:opacity-100 transition-opacity">
+            {TRUSTED_PARTNERS.map((partner) => (
+              <div
+                key={partner.name}
+                className="grayscale contrast-125 opacity-70 hover:opacity-100 hover:grayscale-0 transition-all duration-300 flex items-center justify-center p-2 rounded-xl bg-white/[0.03] border border-white/5"
+                title={partner.label}
+              >
+                <Image
+                  src={partner.src}
+                  alt={partner.name}
+                  width={partner.width}
+                  height={partner.height}
+                  className="h-9 w-auto object-contain"
+                />
               </div>
+            ))}
+            <div
+              className="grayscale contrast-125 opacity-70 hover:opacity-100 hover:grayscale-0 transition-all duration-300 flex items-center gap-2 px-4 py-2 rounded-xl bg-white/[0.03] border border-white/5 font-display text-sm tracking-wider uppercase text-[#F6F2E7]"
+              title="OOU Student Union Government"
+            >
+              <span>🏛️ OOU SUG Official</span>
             </div>
-          </motion.div>
+          </div>
+        </section>
+
+        {/* 4. VALUE PROPOSITION STRIP */}
+        <section className="mt-20 md:mt-28 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="rounded-2xl p-6 bg-white/[0.02] border border-white/5">
+            <div className="w-10 h-10 rounded-xl bg-[#FFD23F]/10 border border-[#FFD23F]/20 text-[#FFD23F] flex items-center justify-center mb-4">
+              <TrendingUp className="w-5 h-5" />
+            </div>
+            <h3 className="font-display text-lg uppercase text-[#F6F2E7] mb-2">
+              High Density Engagement
+            </h3>
+            <p className="text-xs text-[rgba(246,242,231,0.65)] leading-relaxed">
+              Target students precisely during active campus hours when daily academic and transactional volume peak.
+            </p>
+          </div>
+
+          <div className="rounded-2xl p-6 bg-white/[0.02] border border-white/5">
+            <div className="w-10 h-10 rounded-xl bg-[#4f7fff]/10 border border-[#4f7fff]/20 text-[#4f7fff] flex items-center justify-center mb-4">
+              <Cpu className="w-5 h-5" />
+            </div>
+            <h3 className="font-display text-lg uppercase text-[#F6F2E7] mb-2">
+              Developer-First APIs
+            </h3>
+            <p className="text-xs text-[rgba(246,242,231,0.65)] leading-relaxed">
+              Fast, well-documented webhook and authentication endpoints built to plug directly into existing infrastructure.
+            </p>
+          </div>
+
+          <div className="rounded-2xl p-6 bg-white/[0.02] border border-white/5">
+            <div className="w-10 h-10 rounded-xl bg-[#ff3d81]/10 border border-[#ff3d81]/20 text-[#ff3d81] flex items-center justify-center mb-4">
+              <ShieldCheck className="w-5 h-5" />
+            </div>
+            <h3 className="font-display text-lg uppercase text-[#F6F2E7] mb-2">
+              Verified Undergraduate Base
+            </h3>
+            <p className="text-xs text-[rgba(246,242,231,0.65)] leading-relaxed">
+              Zero bot traffic or ghost metrics. Every active user profile is authenticated against student identification.
+            </p>
+          </div>
         </section>
       </main>
 
