@@ -93,6 +93,7 @@ const PLATFORM_LINKS: FooterLinkItem[] = [
   { label: "For Students", href: "/students" },
   { label: "For Campus Sellers", href: "/sellers" },
   { label: "School Partners", href: "/partners" },
+  { label: "Partnerships & Alliances", href: "/alliances" },
 ];
 
 const ECOSYSTEM_LINKS: FooterLinkItem[] = [
