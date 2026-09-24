@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, MouseEvent } from "react";
+import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { motion, AnimatePresence, useMotionValue, useMotionTemplate, type Variants } from "motion/react";
@@ -144,11 +145,9 @@ export default function DownloadPage() {
           <motion.div animate={{ y: [0, -50, 0], x: [0, 50, 0] }} transition={{ repeat: Infinity, duration: 20, ease: "easeInOut" }} className="absolute -bottom-[20%] left-[20%] w-[60vw] h-[60vw] max-w-[900px] max-h-[900px] bg-[#34d399] opacity-[0.04] blur-[130px] rounded-full mix-blend-screen" />
         </div>
 
-        <div className="relative z-50">
-          <Nav active="/download" />
-        </div>
+        <Nav active="/download" theme="dark" />
 
-        <main className="flex-grow flex flex-col items-center pt-16 md:pt-24 pb-24 px-6 relative z-10">
+        <main className="flex-grow flex flex-col items-center pt-12 sm:pt-16 md:pt-20 pb-24 px-6 relative z-10">
           
           {/* ELITE HERO SECTION */}
           <div className="w-full max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-16 items-center mb-28 md:mb-32">
@@ -268,21 +267,55 @@ export default function DownloadPage() {
               </SpotlightCard>
             </motion.div>
 
-            {/* SECONDARY VISUAL CARD */}
+            {/* CAMPUS EXPANSION / REQUEST CARD */}
             <motion.div 
-              className="hidden lg:block bg-[#09090b] rounded-[32px] overflow-hidden relative shadow-2xl h-full border border-white/5 group"
+              className="bg-[#09090b] rounded-[32px] overflow-hidden relative shadow-2xl h-full border border-white/10 group flex flex-col justify-between p-8 sm:p-10"
               initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.7, delay: 0.15 }}
             >
-              <motion.img 
-                src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=600&auto=format&fit=crop" 
-                alt="Students" 
-                className="w-full h-full object-cover opacity-50 mix-blend-luminosity group-hover:mix-blend-normal group-hover:opacity-70 transition-all duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#030305] via-[#030305]/40 to-transparent pointer-events-none"></div>
-              <div className="absolute bottom-8 left-8 right-8">
-                <div className="font-mono text-[0.65rem] bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 py-2 rounded-full inline-block font-bold uppercase tracking-[0.1em] shadow-2xl">
-                  Real Campus Network
+              <div className="absolute inset-0 z-0 pointer-events-none">
+                <img 
+                  src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=800&auto=format&fit=crop" 
+                  alt="Students" 
+                  className="w-full h-full object-cover opacity-20 mix-blend-luminosity group-hover:scale-105 transition-all duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-[#09090b]/85 to-transparent"></div>
+              </div>
+
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-6">
+                  <span className="font-mono text-[0.65rem] bg-[#FFD23F]/10 border border-[#FFD23F]/30 text-[#FFD23F] px-3.5 py-1.5 rounded-full font-bold uppercase tracking-[0.15em]">
+                    Campus Expansion
+                  </span>
+                  <span className="font-mono text-xs text-[#a1a1aa] flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    Vote Open
+                  </span>
                 </div>
+
+                <h3 className="font-display text-2xl sm:text-3xl uppercase text-white mb-3 leading-tight">
+                  Not at OOU yet?
+                </h3>
+                <p className="text-[#a1a1aa] text-[0.92rem] leading-relaxed mb-6">
+                  Help us prioritize our next campus launch. Cast your vote and rally your coursemates to bring UniLife to your university.
+                </p>
+
+                <div className="flex flex-wrap gap-2 mb-8">
+                  {["UNILAG", "UI", "OAU", "LASU", "FUTA", "UNIBEN"].map((uni) => (
+                    <span key={uni} className="font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-white/70">
+                      {uni}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="relative z-10 pt-4">
+                <Link
+                  href="/request"
+                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm uppercase tracking-wider bg-[#FFD23F] text-[#14151A] hover:bg-[#ffe066] hover:-translate-y-0.5 transition-all shadow-[0_10px_25px_rgba(255,210,63,0.2)]"
+                >
+                  <span>Request Your Campus</span>
+                  <span>→</span>
+                </Link>
               </div>
             </motion.div>
 

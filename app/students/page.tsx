@@ -8,7 +8,7 @@ export default function StudentsPage() {
   return (
     <>
       <div className="bg-[#F6F2E7] text-[#14151A] min-h-screen overflow-x-clip font-body antialiased">
-        <Nav active="/sellers" />
+        <Nav active="/students" />
 
         {/* ---- PAGE HEAD & HERO ---- */}
         <section className="pt-24 pb-16 px-6 md:px-16 max-w-[1160px] mx-auto">
