@@ -89,7 +89,7 @@ function DesktopMegaMenu({ active, isDark }: { active?: string; isDark?: boolean
       }}
     >
       <button
-        className={`relative flex items-center gap-1.5 text-[0.92rem] py-2 transition-colors duration-200 outline-none cursor-pointer
+        className={`relative flex items-center gap-1.5 text-[0.92rem] py-2 transition-colors duration-200 outline-none cursor-pointer whitespace-nowrap
           ${
             isActive
               ? isDark
@@ -398,7 +398,7 @@ function DesktopLink({
   return (
     <Link
       href={href}
-      className={`relative group text-[0.92rem] py-2 transition-colors duration-200 outline-none
+      className={`relative group text-[0.92rem] py-2 transition-colors duration-200 outline-none whitespace-nowrap
         ${
           isActive
             ? isDark
@@ -459,19 +459,19 @@ export default function Nav({
         )}
       </AnimatePresence>
 
-      <div className="sticky top-6 z-[60] px-6 md:px-16 max-w-[1660px] mx-auto pointer-events-none">
+      <div className="sticky top-6 z-[60] px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 max-w-[1660px] mx-auto pointer-events-none">
         <motion.nav
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className={`relative pointer-events-auto flex items-center justify-between px-6 py-2.5 rounded-full transition-colors duration-300 ${
+          className={`relative pointer-events-auto flex items-center justify-between px-5 sm:px-6 py-2.5 rounded-full transition-colors duration-300 gap-3 md:gap-4 ${
             isDark
               ? "bg-[#181920]/95 backdrop-blur-xl border border-white/15 shadow-[0_8px_30px_rgba(0,0,0,0.5)] text-[#F6F2E7]"
               : "bg-white/95 backdrop-blur-xl border border-black/10 rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.06)] text-[#14151A]"
           }`}
         >
           {/* ---- BRAND ---- */}
-          <Link href="/" className="flex items-center gap-2.5 flex-1 group">
+          <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
             <motion.span
               whileHover={prefersReducedMotion ? undefined : { rotate: -6, scale: 1.08 }}
               transition={{ type: "spring", stiffness: 400, damping: 12 }}
@@ -479,7 +479,7 @@ export default function Nav({
             >
               <Image className="w-[32px] h-[32px] rounded-lg object-cover shadow-[0_4px_14px_rgba(79,127,255,0.2)] border border-[rgba(20,21,26,0.05)]" src="/icon.png" alt="UniLife logo" width={32} height={32} priority />
             </motion.span>
-            <span className={`font-display text-[1.15rem] tracking-[0.5px] transition-opacity group-hover:opacity-80 ${
+            <span className={`font-display text-[1.15rem] tracking-[0.5px] transition-opacity group-hover:opacity-80 whitespace-nowrap ${
               isDark ? "text-[#F6F2E7]" : "text-[#14151A]"
             }`}>
               UNI<b className="text-[#4f7fff] font-normal">LIFE</b>
@@ -487,7 +487,7 @@ export default function Nav({
           </Link>
 
           {/* ---- DESKTOP LINKS ---- */}
-          <div className="hidden lg:flex items-center gap-7 justify-center flex-1">
+          <div className="hidden lg:flex items-center gap-4 xl:gap-7 justify-center flex-1 px-2">
             <DesktopLink href="/" label="Home" active={active} isDark={isDark} />
             <DesktopMegaMenu active={active} isDark={isDark} />
             <DesktopLink href="/about" label="About" active={active} isDark={isDark} />
@@ -497,10 +497,10 @@ export default function Nav({
           </div>
 
           {/* ---- DESKTOP ACTIONS ---- */}
-          <div className="hidden lg:flex items-center justify-end gap-6 flex-1">
+          <div className="hidden lg:flex items-center justify-end gap-3.5 xl:gap-5 shrink-0">
             <Link
               href={LOGIN_URL}
-              className={`font-body font-bold text-[0.92rem] transition-colors relative after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 ${
+              className={`font-body font-bold text-[0.92rem] whitespace-nowrap transition-colors relative after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 ${
                 isDark
                   ? "text-[#F6F2E7] hover:text-[#FFD23F] after:bg-[#FFD23F]"
                   : "text-[#14151A] hover:text-[#4f7fff] after:bg-[#4f7fff]"
@@ -509,7 +509,7 @@ export default function Nav({
               Sign In
             </Link>
             <motion.a
-              className={`inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full font-bold text-[0.88rem] border-2 shadow-[4px_4px_0_#ff3d81] transition-all ${
+              className={`inline-flex items-center justify-center gap-2 px-4.5 xl:px-6 py-2.5 rounded-full font-bold text-[0.88rem] border-2 shadow-[4px_4px_0_#ff3d81] transition-all whitespace-nowrap shrink-0 ${
                 isDark
                   ? "bg-[#FFD23F] text-[#14151A]! border-[#FFD23F]"
                   : "bg-[#14151A] text-[#F6F2E7]! border-[#14151A]"
