@@ -458,7 +458,7 @@ export default function Nav({
         )}
       </AnimatePresence>
 
-      <div className="fixed top-6 left-0 right-0 z-[60] px-6 md:px-16 max-w-[1660px] mx-auto pointer-events-none">
+      <div className="sticky top-6 z-[60] px-6 md:px-16 max-w-[1660px] mx-auto pointer-events-none">
         <motion.nav
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}

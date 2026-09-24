@@ -146,7 +146,7 @@ export default function DownloadPage() {
 
         <Nav active="/download" theme="dark" />
 
-        <main className="flex-grow flex flex-col items-center pt-28 sm:pt-36 pb-24 px-6 relative z-10">
+        <main className="flex-grow flex flex-col items-center pt-12 sm:pt-16 md:pt-20 pb-24 px-6 relative z-10">
           
           {/* ELITE HERO SECTION */}
           <div className="w-full max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-16 items-center mb-28 md:mb-32">
