@@ -1,169 +1,42 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import {
   Vote,
-  MapPin,
-  TrendingUp,
   Users,
   Share2,
   CheckCircle2,
   ArrowUpRight,
   Award,
-  Search,
-  Building2,
-  ExternalLink,
   Check,
   Zap,
+  MessageCircle,
+  Copy,
+  ExternalLink,
 } from "lucide-react";
 
 const TALLY_REQUEST_URL = "https://tally.so/r/EkpgAl";
 
-interface CampusEntry {
-  id: string;
-  name: string;
-  shortName: string;
-  state: string;
-  votes: number;
-  target: number;
-  status: "surging" | "review" | "queue" | "active";
-  statusText: string;
-  badgeColor: string;
-}
-
-const INITIAL_CAMPUSES: CampusEntry[] = [
-  {
-    id: "unilag",
-    name: "University of Lagos",
-    shortName: "UNILAG",
-    state: "Akoka, Lagos State",
-    votes: 472,
-    target: 500,
-    status: "surging",
-    statusText: "94% · Launching Soon",
-    badgeColor: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
-  },
-  {
-    id: "ui",
-    name: "University of Ibadan",
-    shortName: "UI",
-    state: "Ibadan, Oyo State",
-    votes: 394,
-    target: 500,
-    status: "surging",
-    statusText: "78% · Phase 2 Queue",
-    badgeColor: "bg-[#FFD23F]/15 text-[#FFD23F] border-[#FFD23F]/30",
-  },
-  {
-    id: "oau",
-    name: "Obafemi Awolowo University",
-    shortName: "OAU",
-    state: "Ile-Ife, Osun State",
-    votes: 341,
-    target: 500,
-    status: "review",
-    statusText: "68% · Gathering Signatures",
-    badgeColor: "bg-[#4f7fff]/15 text-[#4f7fff] border-[#4f7fff]/30",
-  },
-  {
-    id: "lasu",
-    name: "Lagos State University",
-    shortName: "LASU",
-    state: "Ojo, Lagos State",
-    votes: 298,
-    target: 500,
-    status: "review",
-    statusText: "59% · Gathering Signatures",
-    badgeColor: "bg-[#4f7fff]/15 text-[#4f7fff] border-[#4f7fff]/30",
-  },
-  {
-    id: "futa",
-    name: "Federal University of Technology, Akure",
-    shortName: "FUTA",
-    state: "Akure, Ondo State",
-    votes: 226,
-    target: 500,
-    status: "queue",
-    statusText: "45% · Petition Active",
-    badgeColor: "bg-white/10 text-white/80 border-white/20",
-  },
-  {
-    id: "uniben",
-    name: "University of Benin",
-    shortName: "UNIBEN",
-    state: "Benin City, Edo State",
-    votes: 198,
-    target: 500,
-    status: "queue",
-    statusText: "39% · Petition Active",
-    badgeColor: "bg-white/10 text-white/80 border-white/20",
-  },
-  {
-    id: "unilorin",
-    name: "University of Ilorin",
-    shortName: "UNILORIN",
-    state: "Ilorin, Kwara State",
-    votes: 165,
-    target: 500,
-    status: "queue",
-    statusText: "33% · Petition Active",
-    badgeColor: "bg-white/10 text-white/80 border-white/20",
-  },
-  {
-    id: "covenant",
-    name: "Covenant University",
-    shortName: "CU",
-    state: "Ota, Ogun State",
-    votes: 142,
-    target: 500,
-    status: "queue",
-    statusText: "28% · Petition Active",
-    badgeColor: "bg-white/10 text-white/80 border-white/20",
-  },
-  {
-    id: "delsu",
-    name: "Delta State University",
-    shortName: "DELSU",
-    state: "Abraka, Delta State",
-    votes: 118,
-    target: 500,
-    status: "queue",
-    statusText: "23% · Petition Active",
-    badgeColor: "bg-white/10 text-white/80 border-white/20",
-  },
-  {
-    id: "futo",
-    name: "Federal University of Technology, Owerri",
-    shortName: "FUTO",
-    state: "Owerri, Imo State",
-    votes: 104,
-    target: 500,
-    status: "queue",
-    statusText: "20% · Petition Active",
-    badgeColor: "bg-white/10 text-white/80 border-white/20",
-  },
-];
-
 const FAQS = [
   {
-    q: "How many votes does my campus need to get UniLife?",
-    a: "Once a university logs 500 verified student petitions, our expansion team initiates ground mapping, begins student ambassador interviews, and prepares local merchant onboarding for your campus.",
+    q: "How does requesting UniLife for my campus work?",
+    a: "Submit a request for your university using the official form. Our expansion team monitors student demand volume by campus, faculty, and state to prioritize which institutions receive our dedicated local launch teams next.",
   },
   {
     q: "Are polytechnics, colleges of education, and private universities eligible?",
     a: "Yes! Any accredited tertiary institution across Nigeria is eligible. The roadmap is 100% student demand-driven regardless of federal, state, or private status.",
   },
   {
-    q: "What perks do students get by voting early?",
-    a: "All students who vote receive the exclusive 'Genesis Early Believer' profile badge, 500 bonus SP points on launch day, and 6 months of 0% seller commission on all campus marketplace transactions.",
+    q: "What perks do students get by requesting early?",
+    a: "All students who request their campus early receive the exclusive 'Founding Member' profile badge, 500 bonus SP points on launch day, and 6 months of 0% seller commission on all campus marketplace transactions.",
   },
   {
     q: "How can I fast-track my school's rollout?",
-    a: "Share this page to your departmental WhatsApp groups, student union forums, and faculty associations. Higher student density accelerates our deployment timeline.",
+    a: "Share this page to your departmental WhatsApp groups, student union forums, and faculty associations. Higher student density accelerates our deployment timeline and local merchant onboarding.",
   },
   {
     q: "How do I become the Campus Lead or Ambassador for my school?",
@@ -172,20 +45,8 @@ const FAQS = [
 ];
 
 export default function RequestCampusPage() {
-  const [searchQuery, setSearchQuery] = useState("");
   const [copiedLink, setCopiedLink] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
-
-  const filteredCampuses = useMemo(() => {
-    if (!searchQuery.trim()) return INITIAL_CAMPUSES;
-    const q = searchQuery.toLowerCase();
-    return INITIAL_CAMPUSES.filter(
-      (c) =>
-        c.name.toLowerCase().includes(q) ||
-        c.shortName.toLowerCase().includes(q) ||
-        c.state.toLowerCase().includes(q)
-    );
-  }, [searchQuery]);
 
   const handleCopyLink = () => {
     if (typeof window !== "undefined") {
@@ -195,11 +56,18 @@ export default function RequestCampusPage() {
     }
   };
 
-  const getWhatsAppShareUrl = (campusName: string = "our campus") => {
+  const getWhatsAppShareUrl = () => {
     const text = encodeURIComponent(
-      `🔥 Guys, let's bring UniLife to ${campusName}! Vote now so we can get campus escrow marketplace, verified past questions, hostel discovery & campus delivery: https://unilife.com.ng/request`
+      "🔥 Guys, let's bring UniLife to our campus! Vote now so we can get campus escrow marketplace, verified past questions, hostel discovery & campus delivery: https://unilife.com.ng/request"
     );
     return `https://wa.me/?text=${text}`;
+  };
+
+  const getTwitterShareUrl = () => {
+    const text = encodeURIComponent(
+      "We need @UniLifeNG on our campus! Students, let's vote to bring peer escrow trading, verified past questions & student food delivery to our school: https://unilife.com.ng/request"
+    );
+    return `https://twitter.com/intent/tweet?text=${text}`;
   };
 
   return (
@@ -232,7 +100,7 @@ export default function RequestCampusPage() {
           </h1>
 
           <p className="text-[rgba(246,242,231,0.75)] text-lg md:text-xl leading-relaxed max-w-[760px] mx-auto font-normal mb-10">
-            We are currently live and scaling across OOU. Want seamless peer-to-peer campus deliveries, escrow student marketplace, verified past questions, and event ticketing at your institution next? Vote your campus onto our launch queue.
+            We are currently live and scaling across OOU. Want seamless peer-to-peer campus deliveries, escrow student marketplace, verified past questions, and event ticketing at your institution next? Request your campus and rally your coursemates.
           </p>
 
           {/* Quick CTA Actions */}
@@ -244,7 +112,7 @@ export default function RequestCampusPage() {
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full font-bold text-sm uppercase tracking-wider bg-[#FFD23F] text-[#14151A] border-2 border-[#FFD23F] shadow-[4px_4px_0_#ff3d81] hover:scale-[1.03] hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#ff3d81] active:translate-y-0 active:shadow-[2px_2px_0_#ff3d81] transition-all cursor-pointer"
             >
               <Vote className="w-4 h-4 stroke-[2.5]" />
-              <span>Vote for Your Campus</span>
+              <span>Request Your Campus</span>
               <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
             </a>
 
@@ -278,18 +146,18 @@ export default function RequestCampusPage() {
             </div>
             <div>
               <div className="font-display text-3xl md:text-4xl text-emerald-400 mb-1">
-                500
+                Fast-Track
               </div>
               <div className="font-mono text-xs uppercase tracking-wider text-[#a1a1aa]">
-                Votes to Trigger Launch
+                Demand-Driven Rollout
               </div>
             </div>
             <div>
               <div className="font-display text-3xl md:text-4xl text-[#4f7fff] mb-1">
-                12+
+                All 36
               </div>
               <div className="font-mono text-xs uppercase tracking-wider text-[#a1a1aa]">
-                Campuses Petitioning
+                States &amp; FCT Eligible
               </div>
             </div>
             <div>
@@ -303,156 +171,101 @@ export default function RequestCampusPage() {
           </div>
         </section>
 
-        {/* 2. INTERACTIVE LIVE CAMPUS EXPANSION LEADERBOARD */}
-        <section id="leaderboard" className="mb-24 md:mb-32">
-          <div className="rounded-[32px] p-6 sm:p-10 md:p-12 bg-gradient-to-b from-[#1c1d25] to-[#15161D] border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 pb-8 border-b border-white/10">
-              <div>
-                <div className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-widest text-[#FFD23F] mb-2">
-                  <TrendingUp className="w-3.5 h-3.5" />
-                  Live Petition Tracker
-                </div>
-                <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl uppercase text-[#F6F2E7]">
-                  Campus Expansion Leaderboard
-                </h2>
-                <p className="text-sm text-[#a1a1aa] mt-1 max-w-xl">
-                  Universities that reach 500 signatures unlock priority campus onboarding, student ambassador appointments, and local vendor mapping.
-                </p>
-              </div>
+        {/* 2. RALLY YOUR COURSEMATES (VIRAL SHARE HUB) */}
+        <section className="mb-24 md:mb-32">
+          <div className="rounded-[32px] p-8 sm:p-12 md:p-14 bg-gradient-to-b from-[#1c1d25] to-[#15161D] border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -top-24 -right-24 w-80 h-80 rounded-full bg-emerald-500/10 blur-[100px]"
+            />
 
-              {/* Search Bar */}
-              <div className="w-full md:w-80 relative">
-                <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40" />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search university or city..."
-                  className="w-full pl-10 pr-4 py-3 rounded-xl bg-white/5 border border-white/15 text-sm text-[#F6F2E7] placeholder:text-white/30 focus:outline-none focus:border-[#FFD23F] transition-colors font-body"
-                />
+            <div className="max-w-3xl mb-10">
+              <div className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-widest text-[#FFD23F] mb-3">
+                <Share2 className="w-3.5 h-3.5" />
+                Amplify Your Campus Demand
               </div>
+              <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl uppercase text-[#F6F2E7] mb-3">
+                Rally Your Coursemates &amp; Department
+              </h2>
+              <p className="text-sm sm:text-base text-[#a1a1aa] leading-relaxed">
+                The faster student requests come in from your institution, faculty, and hostels, the higher your campus ranks on our expansion roadmap. One share in your departmental WhatsApp group can bring UniLife to your university.
+              </p>
             </div>
 
-            {/* List */}
-            <div className="space-y-4">
-              {filteredCampuses.map((campus, idx) => {
-                const percentage = Math.min(100, Math.round((campus.votes / campus.target) * 100));
-                return (
-                  <div
-                    key={campus.id}
-                    className="p-5 sm:p-6 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-white/20 hover:bg-white/[0.05] transition-all duration-300 flex flex-col lg:flex-row lg:items-center justify-between gap-5 group"
-                  >
-                    {/* Rank & School Details */}
-                    <div className="flex items-start sm:items-center gap-4 min-w-[280px]">
-                      <div className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center font-mono text-sm font-bold text-white/70 group-hover:text-[#FFD23F] group-hover:border-[#FFD23F]/30 transition-colors shrink-0">
-                        #{idx + 1}
-                      </div>
-                      <div>
-                        <div className="flex items-center gap-2.5 flex-wrap">
-                          <span className="font-display text-lg uppercase tracking-wide text-[#F6F2E7]">
-                            {campus.shortName}
-                          </span>
-                          <span className="text-xs text-white/40">·</span>
-                          <span className="text-xs text-[#a1a1aa] flex items-center gap-1">
-                            <MapPin className="w-3 h-3 text-white/40" />
-                            {campus.state}
-                          </span>
-                        </div>
-                        <div className="text-xs text-white/60 font-medium">
-                          {campus.name}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Progress Bar & Signature Count */}
-                    <div className="flex-1 max-w-md">
-                      <div className="flex items-center justify-between text-xs font-mono mb-2">
-                        <span className="text-white/70">
-                          <b className="text-white font-bold">{campus.votes}</b> / {campus.target} votes
-                        </span>
-                        <span className={`px-2 py-0.5 rounded-full border text-[10px] font-bold uppercase tracking-wider ${campus.badgeColor}`}>
-                          {campus.statusText}
-                        </span>
-                      </div>
-                      <div className="w-full h-2.5 rounded-full bg-white/10 overflow-hidden">
-                        <motion.div
-                          initial={{ width: 0 }}
-                          whileInView={{ width: `${percentage}%` }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.8, ease: "easeOut" }}
-                          className={`h-full rounded-full ${
-                            percentage >= 90
-                              ? "bg-gradient-to-r from-emerald-500 to-emerald-400"
-                              : percentage >= 60
-                              ? "bg-gradient-to-r from-[#FFD23F] to-amber-400"
-                              : "bg-gradient-to-r from-[#4f7fff] to-cyan-400"
-                          }`}
-                        />
-                      </div>
-                    </div>
-
-                    {/* Action Buttons */}
-                    <div className="flex items-center gap-2.5 self-end lg:self-center shrink-0">
-                      <a
-                        href={getWhatsAppShareUrl(campus.shortName)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-3.5 py-2 rounded-xl text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/25 hover:bg-emerald-500/20 transition-colors flex items-center gap-1.5"
-                        title="Share on WhatsApp"
-                      >
-                        <Share2 className="w-3.5 h-3.5" />
-                        <span className="hidden sm:inline">Rally</span>
-                      </a>
-
-                      <a
-                        href={TALLY_REQUEST_URL}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-[#FFD23F] text-[#14151A] hover:bg-[#ffe066] transition-all flex items-center gap-1 shadow-sm"
-                      >
-                        <span>Vote</span>
-                        <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
-                      </a>
-                    </div>
+            {/* Share Action Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+              {/* WhatsApp */}
+              <a
+                href={getWhatsAppShareUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3.5 p-4 sm:p-5 rounded-2xl bg-emerald-500/10 border border-emerald-500/25 hover:bg-emerald-500/20 hover:border-emerald-500/40 transition-all group"
+              >
+                <div className="w-11 h-11 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <MessageCircle className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="font-bold text-sm text-[#F6F2E7] group-hover:text-emerald-300 transition-colors">
+                    Share on WhatsApp
                   </div>
-                );
-              })}
-
-              {filteredCampuses.length === 0 && (
-                <div className="text-center py-12 px-4 rounded-2xl bg-white/[0.02] border border-dashed border-white/10">
-                  <Building2 className="w-10 h-10 text-white/30 mx-auto mb-3" />
-                  <h3 className="font-display text-lg uppercase text-white mb-1">
-                    University Not Listed?
-                  </h3>
-                  <p className="text-xs text-[#a1a1aa] mb-4 max-w-md mx-auto">
-                    Be the very first student from your institution to submit a petition and put your campus on the national radar!
-                  </p>
-                  <a
-                    href={TALLY_REQUEST_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#FFD23F] text-[#14151A]"
-                  >
-                    <span>Submit New Campus Petition</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </a>
+                  <div className="text-xs text-[#a1a1aa] mt-0.5">
+                    Course &amp; hostel groups
+                  </div>
                 </div>
-              )}
+              </a>
+
+              {/* Twitter / X */}
+              <a
+                href={getTwitterShareUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3.5 p-4 sm:p-5 rounded-2xl bg-[#4f7fff]/10 border border-[#4f7fff]/25 hover:bg-[#4f7fff]/20 hover:border-[#4f7fff]/40 transition-all group"
+              >
+                <div className="w-11 h-11 rounded-xl bg-[#4f7fff]/20 text-[#4f7fff] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <Share2 className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="font-bold text-sm text-[#F6F2E7] group-hover:text-blue-300 transition-colors">
+                    Post on X (Twitter)
+                  </div>
+                  <div className="text-xs text-[#a1a1aa] mt-0.5">
+                    Tag campus community
+                  </div>
+                </div>
+              </a>
+
+              {/* Copy Direct Link */}
+              <button
+                onClick={handleCopyLink}
+                className="flex items-center gap-3.5 p-4 sm:p-5 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all text-left cursor-pointer group"
+              >
+                <div className="w-11 h-11 rounded-xl bg-white/10 text-white flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  {copiedLink ? <Check className="w-5 h-5 text-emerald-400" /> : <Copy className="w-5 h-5" />}
+                </div>
+                <div>
+                  <div className="font-bold text-sm text-[#F6F2E7]">
+                    {copiedLink ? "Link Copied!" : "Copy Request Link"}
+                  </div>
+                  <div className="text-xs text-[#a1a1aa] mt-0.5">
+                    {copiedLink ? "Ready to paste anywhere" : "Paste in your bio or chat"}
+                  </div>
+                </div>
+              </button>
             </div>
 
-            {/* Bottom Form Banner */}
-            <div className="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+            {/* Direct Form Fallback */}
+            <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
               <span className="text-xs text-[#a1a1aa]">
-                Every student vote is cryptographically verified to prevent spam and duplicates.
+                Looking to submit your university directly? It takes under 60 seconds on Tally.
               </span>
               <a
                 href={TALLY_REQUEST_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs font-mono font-bold uppercase tracking-widest text-[#FFD23F] hover:underline flex items-center gap-1.5"
+                className="text-xs font-mono font-bold uppercase tracking-widest text-[#FFD23F] hover:underline flex items-center gap-1.5 shrink-0"
               >
-                <span>Direct Tally Submission Form</span>
-                <ExternalLink className="w-3 h-3" />
+                <span>Open Request Form</span>
+                <ExternalLink className="w-3.5 h-3.5" />
               </a>
             </div>
           </div>
@@ -482,10 +295,10 @@ export default function RequestCampusPage() {
                 <Users className="w-6 h-6" />
               </div>
               <h3 className="font-display text-xl uppercase text-[#F6F2E7] mb-2.5">
-                500 Verified Petitions
+                Student Requests Logged
               </h3>
               <p className="text-xs sm:text-sm text-[#a1a1aa] leading-relaxed">
-                Students rally their coursemates and cast votes via Tally. Crossing 500 signatures formally locks your university into the deployment queue.
+                Students rally their coursemates and submit requests via Tally. High student density puts your university directly in our next deployment window.
               </p>
             </div>
 
@@ -514,7 +327,7 @@ export default function RequestCampusPage() {
                 <Zap className="w-6 h-6" />
               </div>
               <h3 className="font-display text-xl uppercase text-[#F6F2E7] mb-2.5">
-                Genesis Campus Drop
+                Official Campus Drop
               </h3>
               <p className="text-xs sm:text-sm text-[#a1a1aa] leading-relaxed">
                 UniLife unlocks geofenced past questions, hostel discovery maps, peer escrow commerce, and food vendor delivery rails for all active departments.
@@ -523,7 +336,7 @@ export default function RequestCampusPage() {
           </div>
         </section>
 
-        {/* 4. GENESIS EARLY BELIEVER PERKS */}
+        {/* 4. FOUNDING MEMBER PERKS */}
         <section className="mb-24 md:mb-32 rounded-[32px] p-8 sm:p-12 bg-gradient-to-r from-[#1c1d25] via-[#1a1926] to-[#15161D] border border-white/15 relative overflow-hidden">
           <div
             aria-hidden="true"
@@ -535,10 +348,10 @@ export default function RequestCampusPage() {
               Founding Voter Benefits
             </span>
             <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl uppercase text-[#F6F2E7] mt-4 mb-4">
-              The &quot;Genesis Believer&quot; Club
+              The Founding Member Club
             </h2>
             <p className="text-sm sm:text-base text-[rgba(246,242,231,0.7)] leading-relaxed mb-8">
-              Students who petition early don&apos;t just bring UniLife to their campus—they get permanent VIP status locked to their verified matric profile when the app goes live.
+              Students who request early don&apos;t just bring UniLife to their campus—they get permanent VIP status locked to their verified matric profile when the app goes live.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
@@ -558,10 +371,10 @@ export default function RequestCampusPage() {
                 <CheckCircle2 className="w-5 h-5 text-[#FFD23F] shrink-0 mt-0.5" />
                 <div>
                   <div className="font-bold text-sm text-[#F6F2E7]">
-                    Exclusive Profile Badge
+                    Permanent Founding Member Badge
                   </div>
                   <div className="text-xs text-[#a1a1aa] mt-0.5">
-                    Permanent Genesis Believer badge displayed next to your verified student name.
+                    Exclusive Founding Member badge displayed next to your verified student name.
                   </div>
                 </div>
               </div>
@@ -598,7 +411,7 @@ export default function RequestCampusPage() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-xs uppercase tracking-wider bg-[#FFD23F] text-[#14151A] hover:bg-[#ffe066] transition-all shadow-[4px_4px_0_#ff3d81]"
               >
-                <span>Claim Genesis Perks &amp; Vote</span>
+                <span>Claim Founding Member Perks &amp; Request</span>
                 <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
               </a>
 
@@ -668,7 +481,7 @@ export default function RequestCampusPage() {
             Ready to bring UniLife to your university?
           </h2>
           <p className="text-sm sm:text-base text-[rgba(246,242,231,0.7)] max-w-lg mx-auto mb-8">
-            It takes less than 60 seconds to vote. Rally your coursemates and make your campus the next official launch hub.
+            It takes less than 60 seconds to submit. Rally your coursemates and make your campus the next official launch hub.
           </p>
 
           <a
@@ -678,7 +491,7 @@ export default function RequestCampusPage() {
             className="inline-flex items-center gap-2.5 px-9 py-4 rounded-full font-bold text-sm uppercase tracking-wider bg-[#FFD23F] text-[#14151A] border-2 border-[#FFD23F] shadow-[4px_4px_0_#ff3d81] hover:scale-[1.03] hover:-translate-y-0.5 hover:shadow-[6px_6px_0_#ff3d81] active:translate-y-0 active:shadow-[2px_2px_0_#ff3d81] transition-all cursor-pointer"
           >
             <Vote className="w-4 h-4 stroke-[2.5]" />
-            <span>Cast Your Campus Vote</span>
+            <span>Request Your Campus</span>
             <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
           </a>
         </section>
