@@ -36,6 +36,7 @@ const JOIN_US: NavItem[] = [
 const OTHERS: NavItem[] = [
   { href: "/challenge", label: "Challenges & Sprints", desc: "Compete in live university innovation challenges.", icon: "⚡" },
   { href: "/scholarships", label: "Scholarships", desc: "Verified tuition grants, student funds & sponsorships.", icon: "🎓" },
+  { href: "https://tally.so/r/EkpgAl", label: "Request Your Campus", desc: "Vote to bring UniLife to your university.", icon: "🚀" },
 ];
 
 // --- Animation Variants ---
@@ -262,36 +263,41 @@ function DesktopMegaMenu({ active, isDark }: { active?: string; isDark?: boolean
                   Others
                 </h4>
                 <div className="flex flex-col gap-1.5">
-                  {OTHERS.map((item, idx) => (
-                    <Link
-                      key={`${item.href}-${idx}`}
-                      href={item.href}
-                      onClick={() => setOpen(false)}
-                      className={`flex items-start gap-3.5 p-3 rounded-[16px] transition-all duration-200 group hover:translate-x-1 hover:shadow-xs ${
-                        isDark ? "hover:bg-white/5" : "hover:bg-[#f4f6fc]"
-                      }`}
-                    >
-                      <div className={`text-xl w-11 h-11 flex items-center justify-center rounded-2xl shadow-xs group-hover:scale-110 group-hover:-rotate-3 transition-all shrink-0 duration-300 ${
-                        isDark
-                          ? "bg-white/5 border border-white/10 group-hover:border-[#ff3d81]/50 group-hover:bg-white/10"
-                          : "bg-[#fdfbf7] border border-[rgba(20,21,26,0.06)] group-hover:border-[#ff3d81]/30 group-hover:bg-white"
-                      }`}>
-                        {item.icon}
-                      </div>
-                      <div className="pt-0.5">
-                        <div className={`font-bold text-[0.92rem] mb-0.5 transition-colors ${
-                          isDark ? "text-[#F6F2E7] group-hover:text-[#ff3d81]" : "text-[#14151A] group-hover:text-[#ff3d81]"
+                  {OTHERS.map((item, idx) => {
+                    const isExternal = item.href.startsWith("http");
+                    return (
+                      <Link
+                        key={`${item.href}-${idx}`}
+                        href={item.href}
+                        target={isExternal ? "_blank" : undefined}
+                        rel={isExternal ? "noopener noreferrer" : undefined}
+                        onClick={() => setOpen(false)}
+                        className={`flex items-start gap-3.5 p-3 rounded-[16px] transition-all duration-200 group hover:translate-x-1 hover:shadow-xs ${
+                          isDark ? "hover:bg-white/5" : "hover:bg-[#f4f6fc]"
+                        }`}
+                      >
+                        <div className={`text-xl w-11 h-11 flex items-center justify-center rounded-2xl shadow-xs group-hover:scale-110 group-hover:-rotate-3 transition-all shrink-0 duration-300 ${
+                          isDark
+                            ? "bg-white/5 border border-white/10 group-hover:border-[#ff3d81]/50 group-hover:bg-white/10"
+                            : "bg-[#fdfbf7] border border-[rgba(20,21,26,0.06)] group-hover:border-[#ff3d81]/30 group-hover:bg-white"
                         }`}>
-                          {item.label}
+                          {item.icon}
                         </div>
-                        <div className={`text-[0.78rem] leading-snug transition-colors ${
-                          isDark ? "text-white/60 group-hover:text-white/80" : "text-[#73757d] group-hover:text-[#46473f]"
-                        }`}>
-                          {item.desc}
+                        <div className="pt-0.5">
+                          <div className={`font-bold text-[0.92rem] mb-0.5 transition-colors ${
+                            isDark ? "text-[#F6F2E7] group-hover:text-[#ff3d81]" : "text-[#14151A] group-hover:text-[#ff3d81]"
+                          }`}>
+                            {item.label}
+                          </div>
+                          <div className={`text-[0.78rem] leading-snug transition-colors ${
+                            isDark ? "text-white/60 group-hover:text-white/80" : "text-[#73757d] group-hover:text-[#46473f]"
+                          }`}>
+                            {item.desc}
+                          </div>
                         </div>
-                      </div>
-                    </Link>
-                  ))}
+                      </Link>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -348,21 +354,26 @@ function MobileAccordion({
             className="overflow-hidden"
           >
             <div className="flex flex-col gap-1.5 py-3 pl-4 border-l-[3px] border-[#FFD23F]/30 ml-2 mb-2">
-              {items.map((item, idx) => (
-                <Link
-                  key={`${item.href}-${idx}`}
-                  href={item.href}
-                  onClick={closeNav}
-                  className={`px-4 py-2.5 rounded-xl text-[0.92rem] font-medium flex items-center gap-3 transition-colors active:scale-[0.98] ${
-                    isDark
-                      ? "bg-white/5 text-[#F6F2E7] hover:bg-white/10"
-                      : "bg-[#f4f6fc] text-[#46473f] hover:bg-[#e9edf8]"
-                  }`}
-                >
-                  <span className="text-lg shrink-0">{item.icon}</span>
-                  {item.label}
-                </Link>
-              ))}
+              {items.map((item, idx) => {
+                const isExternal = item.href.startsWith("http");
+                return (
+                  <Link
+                    key={`${item.href}-${idx}`}
+                    href={item.href}
+                    target={isExternal ? "_blank" : undefined}
+                    rel={isExternal ? "noopener noreferrer" : undefined}
+                    onClick={closeNav}
+                    className={`px-4 py-2.5 rounded-xl text-[0.92rem] font-medium flex items-center gap-3 transition-colors active:scale-[0.98] ${
+                      isDark
+                        ? "bg-white/5 text-[#F6F2E7] hover:bg-white/10"
+                        : "bg-[#f4f6fc] text-[#46473f] hover:bg-[#e9edf8]"
+                    }`}
+                  >
+                    <span className="text-lg shrink-0">{item.icon}</span>
+                    {item.label}
+                  </Link>
+                );
+              })}
             </div>
           </motion.div>
         )}
@@ -417,8 +428,8 @@ export default function Nav({
   const [openSection, setOpenSection] = useState<"product" | "solutions" | "join" | "others" | null>(null);
   const prefersReducedMotion = useReducedMotion();
 
-  // Automatic dark mode detection on dark pages (such as /alliances) or explicit theme
-  const isDark = theme === "dark" || active === "/alliances";
+  // Automatic dark mode detection on dark pages (such as /alliances and /download) or explicit theme
+  const isDark = theme === "dark" || active === "/alliances" || active === "/download";
 
   const closeNav = () => {
     setMobileMenuOpen(false);
@@ -447,7 +458,7 @@ export default function Nav({
         )}
       </AnimatePresence>
 
-      <div className="sticky top-6 z-[60] px-6 md:px-16 max-w-[1660px] mx-auto pointer-events-none">
+      <div className="fixed top-6 left-0 right-0 z-[60] px-6 md:px-16 max-w-[1660px] mx-auto pointer-events-none">
         <motion.nav
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}

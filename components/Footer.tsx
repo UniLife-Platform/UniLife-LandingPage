@@ -94,6 +94,7 @@ const PLATFORM_LINKS: FooterLinkItem[] = [
   { label: "For Campus Sellers", href: "/sellers" },
   { label: "School Partners", href: "/partners" },
   { label: "Partnerships & Alliances", href: "/alliances" },
+  { label: "Request Your Campus", href: "https://tally.so/r/EkpgAl", badge: "Vote", badgeColor: "bg-[#10b981] text-white" },
 ];
 
 const ECOSYSTEM_LINKS: FooterLinkItem[] = [
@@ -134,10 +135,13 @@ const stagger = {
 };
 
 function FooterLink({ href, label, badge, badgeColor }: FooterLinkItem) {
+  const isExternal = href.startsWith("http");
   return (
     <motion.li variants={fadeUp}>
       <Link
         href={href}
+        target={isExternal ? "_blank" : undefined}
+        rel={isExternal ? "noopener noreferrer" : undefined}
         className="group inline-flex items-center gap-1.5 text-[0.91rem] text-[rgba(246,242,231,0.72)] hover:text-[#FFD23F] transition-colors duration-200"
       >
         <span className="inline-block w-0 group-hover:w-2 overflow-hidden transition-all duration-200 ease-out text-[#FFD23F]">
