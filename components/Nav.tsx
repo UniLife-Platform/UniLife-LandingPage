@@ -87,6 +87,7 @@ const JOIN_US: NavItem[] = [
 ];
 
 const OTHERS: NavItem[] = [
+  { href: "/alliances", label: "Campus Alliances", desc: "Institutional partnerships, student unions & sponsors.", icon: "🤝" },
   { href: "/challenge", label: "Challenges & Sprints", desc: "Compete in live university innovation challenges.", icon: "⚡" },
   { href: "/scholarships", label: "Scholarships", desc: "Verified tuition grants, student funds & sponsorships.", icon: "🎓" },
   { href: "/request", label: "Request Your Campus", desc: "Vote to bring UniLife to your university.", icon: "🚀" },
@@ -541,10 +542,11 @@ export default function Nav({
           </Link>
 
           {/* ---- DESKTOP LINKS ---- */}
-          <div className="hidden lg:flex items-center gap-4 xl:gap-7 justify-center flex-1 px-2">
+          <div className="hidden lg:flex items-center gap-3.5 xl:gap-6 justify-center flex-1 px-2">
             <DesktopLink href="/" label="Home" active={active} isDark={isDark} />
             <DesktopMegaMenu active={active} isDark={isDark} />
             <DesktopLink href="/about" label="About" active={active} isDark={isDark} />
+            <DesktopLink href="/alliances" label="Alliances" active={active} isDark={isDark} />
             <DesktopLink href="/pricing" label="Pricing" active={active} isDark={isDark} />
             <DesktopLink href="/faq" label="FAQ" active={active} isDark={isDark} />
             <DesktopLink href="/contact" label="Contact" active={active} isDark={isDark} />
@@ -565,7 +567,11 @@ export default function Nav({
             </Link>
             <motion.a
               className={`inline-flex items-center justify-center gap-2 px-4.5 xl:px-6 py-2.5 rounded-full font-bold text-[0.88rem] border-2 shadow-[4px_4px_0_#ff3d81] transition-all whitespace-nowrap shrink-0 ${
-                isDark
+                active === "/download"
+                  ? isDark
+                    ? "bg-[#FFD23F] text-[#14151A]! border-[#FFD23F] ring-2 ring-[#FFD23F]/40"
+                    : "bg-[#14151A] text-[#F6F2E7]! border-[#14151A] ring-2 ring-[#14151A]/20"
+                  : isDark
                   ? "bg-[#FFD23F] text-[#14151A]! border-[#FFD23F]"
                   : "bg-[#14151A] text-[#F6F2E7]! border-[#14151A]"
               }`}
@@ -680,6 +686,17 @@ export default function Nav({
                     }`}
                   >
                     About
+                  </Link>
+                </motion.div>
+                <motion.div variants={slideInItem}>
+                  <Link
+                    href="/alliances"
+                    onClick={closeNav}
+                    className={`block py-3 text-[1.1rem] font-bold ${
+                      isDark ? "text-[#F6F2E7] active:text-[#FFD23F]" : "text-[#14151A] active:text-[#4f7fff]"
+                    }`}
+                  >
+                    Alliances
                   </Link>
                 </motion.div>
                 <motion.div variants={slideInItem}>

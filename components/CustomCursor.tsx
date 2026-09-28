@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef, useSyncExternalStore } from "react";
-import { motion, useMotionValue, useSpring } from "motion/react";
+import { motion, useMotionValue } from "motion/react";
 
 function subscribePointer(callback: () => void) {
   if (typeof window === "undefined") return () => {};
@@ -43,14 +43,9 @@ export default function CustomCursor() {
   const [isPressed, setIsPressed] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
-  // Raw mouse coordinates
-  const rawX = useMotionValue(-100);
-  const rawY = useMotionValue(-100);
-
-  // High-response spring for smooth tracking without dragging lag
-  const springConfig = { stiffness: 500, damping: 30, mass: 0.3 };
-  const cursorX = useSpring(rawX, springConfig);
-  const cursorY = useSpring(rawY, springConfig);
+  // Raw mouse coordinates directly bound to pointer without dragging spring latency
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
 
   const lastTargetRef = useRef<EventTarget | null>(null);
 
@@ -58,9 +53,9 @@ export default function CustomCursor() {
     if (!isFinePointer) return;
 
     const handleMouseMove = (e: MouseEvent) => {
-      // Update motion values directly without triggering React re-renders
-      rawX.set(e.clientX);
-      rawY.set(e.clientY);
+      // Direct 1:1 hardware mouse tracking without physics delay
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
 
       if (!isVisible) {
         setIsVisible(true);
@@ -106,7 +101,7 @@ export default function CustomCursor() {
       document.removeEventListener("mouseleave", handleMouseLeaveWindow);
       document.removeEventListener("mouseenter", handleMouseEnterWindow);
     };
-  }, [isFinePointer, isVisible, rawX, rawY]);
+  }, [isFinePointer, isVisible, cursorX, cursorY]);
 
   if (!isFinePointer || !isVisible) {
     return null;
