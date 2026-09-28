@@ -114,8 +114,20 @@ html.dark .bg-\[\#F6F2E7\] {
   background-color: #0B0C10 !important;
 }
 
+html.dark .bg-\[\#FAF9F5\] {
+  background-color: #0B0C10 !important;
+}
+
 html.dark .bg-white:not([data-keep-light]) {
   background-color: #15161F !important;
+}
+
+html.dark .bg-white\/95 {
+  background-color: rgba(21, 22, 31, 0.95) !important;
+}
+
+html.dark .bg-white\/90 {
+  background-color: rgba(21, 22, 31, 0.9) !important;
 }
 
 html.dark .bg-\[\#fdfbf7\] {

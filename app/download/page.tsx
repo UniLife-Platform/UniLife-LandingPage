@@ -22,7 +22,7 @@ const SpotlightCard = ({ children, className = "", color = "rgba(52, 211, 153, 0
 
   return (
     <div 
-      className={`relative group rounded-[32px] bg-[#09090b] shadow-2xl ${className}`} 
+      className={`relative group rounded-[32px] bg-white dark:bg-[#09090b] text-[#14151A] dark:text-[#F6F2E7] border border-black/10 dark:border-white/10 shadow-xl dark:shadow-2xl ${className}`} 
       onMouseMove={handleMouseMove}
     >
       {/* Animated Border Gradient Tracker */}
@@ -33,7 +33,7 @@ const SpotlightCard = ({ children, className = "", color = "rgba(52, 211, 153, 0
         }}
       />
       {/* Inner Content Wrapper */}
-      <div className="absolute inset-[1px] rounded-[31px] bg-[#09090b]/90 backdrop-blur-3xl z-10"></div>
+      <div className="absolute inset-[1px] rounded-[31px] bg-white/95 dark:bg-[#09090b]/90 backdrop-blur-3xl z-10"></div>
       
       {/* Inner Fill Tracker */}
       <motion.div
@@ -135,46 +135,46 @@ export default function DownloadPage() {
         )}
       </AnimatePresence>
 
-      <div className="bg-[#030305] text-[#F6F2E7] min-h-screen flex flex-col font-body antialiased selection:bg-[#4f7fff] selection:text-white overflow-x-clip relative">
+      <div className="bg-[#F6F2E7] dark:bg-[#030305] text-[#14151A] dark:text-[#F6F2E7] min-h-screen flex flex-col font-body antialiased selection:bg-[#4f7fff] selection:text-white overflow-x-clip relative transition-colors duration-200">
         
         {/* CINEMATIC AURORA BACKGROUND */}
         <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-          <div className="absolute inset-0 bg-grid opacity-30"></div>
-          <motion.div animate={{ rotate: 360, scale: [1, 1.1, 1] }} transition={{ repeat: Infinity, duration: 40, ease: "linear" }} className="absolute -top-[20%] -left-[10%] w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] bg-[#4f7fff] opacity-[0.05] blur-[100px] rounded-full mix-blend-screen" />
-          <motion.div animate={{ rotate: -360, scale: [1, 1.2, 1] }} transition={{ repeat: Infinity, duration: 50, ease: "linear" }} className="absolute top-[20%] -right-[10%] w-[50vw] h-[50vw] max-w-[700px] max-h-[700px] bg-[#ff3d81] opacity-[0.03] blur-[120px] rounded-full mix-blend-screen" />
-          <motion.div animate={{ y: [0, -50, 0], x: [0, 50, 0] }} transition={{ repeat: Infinity, duration: 20, ease: "easeInOut" }} className="absolute -bottom-[20%] left-[20%] w-[60vw] h-[60vw] max-w-[900px] max-h-[900px] bg-[#34d399] opacity-[0.04] blur-[130px] rounded-full mix-blend-screen" />
+          <div className="absolute inset-0 bg-grid opacity-20 dark:opacity-30"></div>
+          <motion.div animate={{ rotate: 360, scale: [1, 1.1, 1] }} transition={{ repeat: Infinity, duration: 40, ease: "linear" }} className="absolute -top-[20%] -left-[10%] w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] bg-[#4f7fff] opacity-[0.08] dark:opacity-[0.05] blur-[100px] rounded-full mix-blend-multiply dark:mix-blend-screen" />
+          <motion.div animate={{ rotate: -360, scale: [1, 1.2, 1] }} transition={{ repeat: Infinity, duration: 50, ease: "linear" }} className="absolute top-[20%] -right-[10%] w-[50vw] h-[50vw] max-w-[700px] max-h-[700px] bg-[#ff3d81] opacity-[0.05] dark:opacity-[0.03] blur-[120px] rounded-full mix-blend-multiply dark:mix-blend-screen" />
+          <motion.div animate={{ y: [0, -50, 0], x: [0, 50, 0] }} transition={{ repeat: Infinity, duration: 20, ease: "easeInOut" }} className="absolute -bottom-[20%] left-[20%] w-[60vw] h-[60vw] max-w-[900px] max-h-[900px] bg-[#34d399] opacity-[0.06] dark:opacity-[0.04] blur-[130px] rounded-full mix-blend-multiply dark:mix-blend-screen" />
         </div>
 
-        <Nav active="/download" theme="dark" />
+        <Nav active="/download" />
 
         <main className="flex-grow flex flex-col items-center pt-12 sm:pt-16 md:pt-20 pb-24 px-6 relative z-10">
           
           {/* ELITE HERO SECTION */}
           <div className="w-full max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-16 items-center mb-28 md:mb-32">
             <motion.div variants={stagger} initial="hidden" animate="show" className="relative z-20">
-              <motion.div variants={fadeUp} className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 mb-8 backdrop-blur-md shadow-2xl">
+              <motion.div variants={fadeUp} className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 mb-8 backdrop-blur-md shadow-sm dark:shadow-2xl">
                 <span className="w-2 h-2 rounded-full bg-[#34d399] shadow-[0_0_10px_#34d399] animate-[pulse_2s_cubic-bezier(0.4,0,0.6,1)_infinite]"></span>
-                <span className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-[#e2e2e2] font-semibold">V1.0 Live on Play Store</span>
+                <span className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-[#14151A] dark:text-[#e2e2e2] font-semibold">V1.0 Live on Play Store</span>
               </motion.div>
               
-              <motion.h1 variants={fadeUp} className="font-display text-[clamp(3rem,7vw,5.5rem)] uppercase mb-6 leading-[0.9] tracking-tighter text-white">
+              <motion.h1 variants={fadeUp} className="font-display text-[clamp(3rem,7vw,5.5rem)] uppercase mb-6 leading-[0.9] tracking-tighter text-[#14151A] dark:text-white">
                 Your campus, <br /> 
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#a1a1aa] to-[#52525b]">amplified.</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#14151A] via-[#46473f] to-[#8a8a7f] dark:from-white dark:via-[#a1a1aa] dark:to-[#52525b]">amplified.</span>
               </motion.h1>
               
-              <motion.p variants={fadeUp} className="text-[#a1a1aa] text-lg md:text-xl leading-relaxed max-w-[500px] mb-10 font-medium">
+              <motion.p variants={fadeUp} className="text-[#46473f] dark:text-[#a1a1aa] text-lg md:text-xl leading-relaxed max-w-[500px] mb-10 font-medium">
                 Verify your matric number, join your exact department, and open your campus shop. The ultimate survival kit for university.
               </motion.p>
 
-              <motion.div variants={fadeUp} className="flex items-center gap-5 p-4 rounded-3xl bg-white/[0.02] border border-white/5 w-fit backdrop-blur-sm">
+              <motion.div variants={fadeUp} className="flex items-center gap-5 p-4 rounded-3xl bg-black/[0.03] dark:bg-white/[0.02] border border-black/10 dark:border-white/5 w-fit backdrop-blur-sm">
                 <div className="flex -space-x-4">
                   {['Harrison', 'Tolu', 'Chuks'].map((seed, i) => (
-                    <img key={i} src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${seed}&backgroundColor=e2e2e2`} alt="Avatar" className="w-12 h-12 rounded-full border-[3px] border-[#030305] bg-[#14151A]" />
+                    <img key={i} src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${seed}&backgroundColor=e2e2e2`} alt="Avatar" className="w-12 h-12 rounded-full border-[3px] border-[#F6F2E7] dark:border-[#030305] bg-[#14151A]" />
                   ))}
                 </div>
                 <div className="flex flex-col pr-4">
                   <div className="flex text-[#FFD23F] text-[0.9rem] gap-0.5 tracking-tighter">★★★★★</div>
-                  <span className="font-mono text-[0.65rem] text-[#a1a1aa] uppercase tracking-[0.1em] font-bold mt-1">400+ Verified Users</span>
+                  <span className="font-mono text-[0.65rem] text-[#686975] dark:text-[#a1a1aa] uppercase tracking-[0.1em] font-bold mt-1">400+ Verified Users</span>
                 </div>
               </motion.div>
             </motion.div>
@@ -234,10 +234,10 @@ export default function DownloadPage() {
                     <div className="w-12 h-12 bg-[#34d399]/10 rounded-2xl flex items-center justify-center border border-[#34d399]/20 shadow-[0_0_20px_rgba(52,211,153,0.1)]">
                        <svg className="w-7 h-7 text-[#34d399]" fill="currentColor" viewBox="0 0 24 24"><path d="M17.6 9.48l1.84-3.18c.16-.27.06-.61-.21-.76-.27-.15-.61-.06-.76.21L16.62 9c-1.37-.62-2.92-.96-4.57-.96-1.65 0-3.2.34-4.57.96L5.63 5.75c-.15-.27-.49-.36-.76-.21-.27.15-.37.49-.21.76l1.84 3.18C3.76 11.04 1.7 13.9 1 17.5h22.1c-.7-3.6-2.76-6.46-5.5-8.02zM8.2 15c-.44 0-.8-.36-.8-.8s.36-.8.8-.8.8.36.8.8-.36.8-.8.8zm7.7 0c-.44 0-.8-.36-.8-.8s.36-.8.8-.8.8.36.8.8-.36.8-.8.8z"/></svg>
                     </div>
-                    <h2 className="font-display text-4xl uppercase text-white">Android</h2>
+                    <h2 className="font-display text-4xl uppercase text-[#14151A] dark:text-white">Android</h2>
                   </div>
                   
-                  <p className="text-[#a1a1aa] mb-10 leading-relaxed text-[1.05rem]">
+                  <p className="text-[#46473f] dark:text-[#a1a1aa] mb-10 leading-relaxed text-[1.05rem]">
                     P2P marketplace, anonymous confessions, and your AI Study Tutor. Start earning Status Points (SP) today.
                   </p>
                   
@@ -246,22 +246,22 @@ export default function DownloadPage() {
                     whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }}
                     className="inline-block relative group"
                   >
-                    <div className="absolute inset-0 bg-white/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl"></div>
+                    <div className="absolute inset-0 bg-[#FFD23F]/20 dark:bg-white/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl"></div>
                     <img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" className="h-[64px] relative z-10 drop-shadow-2xl" />
                   </motion.a>
                 </div>
 
-                <div className="mt-12 pt-8 border-t border-white/5 flex items-center gap-6">
+                <div className="mt-12 pt-8 border-t border-black/10 dark:border-white/5 flex items-center gap-6">
                   <div 
                     onClick={() => setIsQrZoomed(true)}
-                    className="relative bg-white p-3 rounded-[1.25rem] shadow-[0_0_50px_rgba(52,211,153,0.15)] overflow-hidden shrink-0 group-hover:shadow-[0_0_60px_rgba(52,211,153,0.3)] transition-all duration-500 cursor-pointer border-2 border-transparent hover:border-[#34d399]/50"
+                    className="relative bg-white p-3 rounded-[1.25rem] shadow-[0_0_50px_rgba(52,211,153,0.15)] overflow-hidden shrink-0 group-hover:shadow-[0_0_60px_rgba(52,211,153,0.3)] transition-all duration-500 cursor-pointer border-2 border-black/10 dark:border-transparent hover:border-[#34d399]/50"
                   >
                     <div className="scan-line"></div>
                     <img src={`https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(PLAYSTORE_URL)}`} alt="QR Code" className="w-[80px] h-[80px] rounded-xl mix-blend-multiply relative z-0" />
                   </div>
                   <div>
-                    <span className="block font-mono text-[0.65rem] text-[#34d399] uppercase tracking-[0.2em] font-bold mb-1.5">Fast Install</span>
-                    <span className="block text-[#a1a1aa] text-[0.85rem] hover:text-white transition-colors cursor-pointer" onClick={() => setIsQrZoomed(true)}>Click QR to enlarge</span>
+                    <span className="block font-mono text-[0.65rem] text-[#10b981] dark:text-[#34d399] uppercase tracking-[0.2em] font-bold mb-1.5">Fast Install</span>
+                    <span className="block text-[#686975] dark:text-[#a1a1aa] text-[0.85rem] hover:text-[#14151A] dark:hover:text-white transition-colors cursor-pointer" onClick={() => setIsQrZoomed(true)}>Click QR to enlarge</span>
                   </div>
                 </div>
               </SpotlightCard>
@@ -269,39 +269,39 @@ export default function DownloadPage() {
 
             {/* CAMPUS EXPANSION / REQUEST CARD */}
             <motion.div 
-              className="bg-[#09090b] rounded-[32px] overflow-hidden relative shadow-2xl h-full border border-white/10 group flex flex-col justify-between p-8 sm:p-10"
+              className="bg-white dark:bg-[#09090b] rounded-[32px] overflow-hidden relative shadow-xl dark:shadow-2xl h-full border border-black/10 dark:border-white/10 group flex flex-col justify-between p-8 sm:p-10"
               initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.7, delay: 0.15 }}
             >
               <div className="absolute inset-0 z-0 pointer-events-none">
                 <img 
                   src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=800&auto=format&fit=crop" 
                   alt="Students" 
-                  className="w-full h-full object-cover opacity-20 mix-blend-luminosity group-hover:scale-105 transition-all duration-700"
+                  className="w-full h-full object-cover opacity-10 dark:opacity-20 mix-blend-luminosity group-hover:scale-105 transition-all duration-700" 
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-[#09090b]/85 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-white via-white/85 to-transparent dark:from-[#09090b] dark:via-[#09090b]/85 dark:to-transparent"></div>
               </div>
 
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-6">
-                  <span className="font-mono text-[0.65rem] bg-[#FFD23F]/10 border border-[#FFD23F]/30 text-[#FFD23F] px-3.5 py-1.5 rounded-full font-bold uppercase tracking-[0.15em]">
+                  <span className="font-mono text-[0.65rem] bg-[#FFD23F]/15 border border-[#FFD23F]/30 text-[#14151A] dark:text-[#FFD23F] px-3.5 py-1.5 rounded-full font-bold uppercase tracking-[0.15em]">
                     Campus Expansion
                   </span>
-                  <span className="font-mono text-xs text-[#a1a1aa] flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="font-mono text-xs text-[#686975] dark:text-[#a1a1aa] flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                     Vote Open
                   </span>
                 </div>
 
-                <h3 className="font-display text-2xl sm:text-3xl uppercase text-white mb-3 leading-tight">
+                <h3 className="font-display text-2xl sm:text-3xl uppercase text-[#14151A] dark:text-white mb-3 leading-tight">
                   Not at OOU yet?
                 </h3>
-                <p className="text-[#a1a1aa] text-[0.92rem] leading-relaxed mb-6">
+                <p className="text-[#46473f] dark:text-[#a1a1aa] text-[0.92rem] leading-relaxed mb-6">
                   Help us prioritize our next campus launch. Cast your vote and rally your coursemates to bring UniLife to your university.
                 </p>
 
                 <div className="flex flex-wrap gap-2 mb-8">
                   {["UNILAG", "UI", "OAU", "LASU", "FUTA", "UNIBEN"].map((uni) => (
-                    <span key={uni} className="font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-white/70">
+                    <span key={uni} className="font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-md bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-[#14151A] dark:text-white/70">
                       {uni}
                     </span>
                   ))}
@@ -321,23 +321,23 @@ export default function DownloadPage() {
 
             {/* iOS WAITLIST CARD */}
             <motion.div className="h-full" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.7, delay: 0.3 }}>
-              <SpotlightCard className="p-10 flex flex-col justify-between h-full" color="rgba(255,255,255,0.15)">
+              <SpotlightCard className="p-10 flex flex-col justify-between h-full" color="rgba(79,127,255,0.2)">
                 <div>
                   <div className="flex items-center justify-between mb-8">
-                    <h2 className="font-display text-3xl uppercase text-white flex items-center gap-3">
-                      <span className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center border border-white/10">
-                        <svg className="w-5 h-5 text-white mb-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.15 2.67.72 3.4 1.8-3.12 1.87-2.6 5.98.48 7.32-.71 1.7-1.53 3.06-2.53 3.89zM12.03 7.25C11.92 5.14 13.84 3.18 16 3c.21 2.22-1.92 4.29-3.97 4.25z"/></svg>
+                    <h2 className="font-display text-3xl uppercase text-[#14151A] dark:text-white flex items-center gap-3">
+                      <span className="w-10 h-10 bg-black/5 dark:bg-white/10 rounded-xl flex items-center justify-center border border-black/10 dark:border-white/10">
+                        <svg className="w-5 h-5 text-[#14151A] dark:text-white mb-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.15 2.67.72 3.4 1.8-3.12 1.87-2.6 5.98.48 7.32-.71 1.7-1.53 3.06-2.53 3.89zM12.03 7.25C11.92 5.14 13.84 3.18 16 3c.21 2.22-1.92 4.29-3.97 4.25z"/></svg>
                       </span>
                       iPhone
                     </h2>
-                    <span className="font-mono text-[0.6rem] bg-white/5 text-[#a1a1aa] px-3 py-1.5 rounded-full uppercase tracking-[0.1em] border border-white/10 font-semibold shadow-inner">
+                    <span className="font-mono text-[0.6rem] bg-black/5 dark:bg-white/5 text-[#686975] dark:text-[#a1a1aa] px-3 py-1.5 rounded-full uppercase tracking-[0.1em] border border-black/10 dark:border-white/10 font-semibold shadow-inner">
                       In Dev
                     </span>
                   </div>
 
-                  <img alt="App Store" src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1276560000&h=7e7b68fad19738b5649a1bfb78ff46e9" className="h-[44px] rounded-lg opacity-30 grayscale mb-8 pointer-events-none" />
+                  <img alt="App Store" src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1276560000&h=7e7b68fad19738b5649a1bfb78ff46e9" className="h-[44px] rounded-lg opacity-40 dark:opacity-30 grayscale mb-8 pointer-events-none" />
                   
-                  <p className="text-[#a1a1aa] text-[0.95rem] leading-relaxed mb-6">
+                  <p className="text-[#46473f] dark:text-[#a1a1aa] text-[0.95rem] leading-relaxed mb-6">
                     Finalizing the iOS build. Drop your email and we&apos;ll ping you the second it hits the App Store.
                   </p>
                 </div>
@@ -350,16 +350,16 @@ export default function DownloadPage() {
                           <input 
                             type="email" value={waitlistEmail} onChange={(e) => setWaitlistEmail(e.target.value)}
                             placeholder="Student email..." disabled={isSubmitting}
-                            className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-4 text-sm text-white placeholder:text-[#52525b] focus:outline-none focus:border-[#4f7fff] focus:ring-1 focus:ring-[#4f7fff] transition-all disabled:opacity-50 shadow-inner"
+                            className="w-full bg-black/5 dark:bg-black/40 border border-black/15 dark:border-white/10 rounded-xl px-4 py-4 text-sm text-[#14151A] dark:text-white placeholder:text-[#8a8a7f] dark:placeholder:text-[#52525b] focus:outline-none focus:border-[#4f7fff] focus:ring-1 focus:ring-[#4f7fff] transition-all disabled:opacity-50 shadow-inner"
                             required
                           />
                         </div>
                         <button 
                           type="submit" disabled={isSubmitting}
-                          className="w-full bg-white text-[#14151A] px-5 py-4 rounded-xl text-sm font-bold hover:bg-[#e2e2e2] transition-colors shadow-[0_0_30px_rgba(255,255,255,0.1)] flex justify-center items-center disabled:opacity-80"
+                          className="w-full bg-[#14151A] dark:bg-white text-white dark:text-[#14151A] px-5 py-4 rounded-xl text-sm font-bold hover:bg-[#282a35] dark:hover:bg-[#e2e2e2] transition-colors shadow-md flex justify-center items-center disabled:opacity-80"
                         >
                           {isSubmitting ? (
-                            <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: "linear" }} className="w-5 h-5 border-[3px] border-[#14151A] border-t-transparent rounded-full" />
+                            <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: "linear" }} className="w-5 h-5 border-[3px] border-white dark:border-[#14151A] border-t-transparent rounded-full" />
                           ) : "Notify Me"}
                         </button>
                       </motion.form>
@@ -367,8 +367,8 @@ export default function DownloadPage() {
                       <motion.div key="success" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-[#34d399]/10 border border-[#34d399]/30 rounded-xl p-5 flex items-center gap-4 shadow-inner">
                         <div className="w-12 h-12 rounded-full bg-[#34d399] flex items-center justify-center text-[#14151A] shrink-0 font-bold text-xl shadow-[0_0_20px_rgba(52,211,153,0.4)]">✓</div>
                         <div>
-                          <p className="text-[#34d399] font-bold text-[0.95rem] mb-1">You&apos;re on the list ✌️</p>
-                          <p className="text-[#a1a1aa] text-xs leading-tight">Alerting {waitlistEmail}.</p>
+                          <p className="text-emerald-700 dark:text-[#34d399] font-bold text-[0.95rem] mb-1">You&apos;re on the list ✌️</p>
+                          <p className="text-[#686975] dark:text-[#a1a1aa] text-xs leading-tight">Alerting {waitlistEmail}.</p>
                         </div>
                       </motion.div>
                     )}
@@ -379,7 +379,7 @@ export default function DownloadPage() {
 
             {/* CINEMATIC WHATSAPP BANNER */}
             <motion.div 
-              className="lg:col-span-3 rounded-[32px] overflow-hidden relative flex flex-col md:flex-row shadow-2xl mt-8 group border border-white/10 bg-[#09090b]"
+              className="lg:col-span-3 rounded-[32px] overflow-hidden relative flex flex-col md:flex-row shadow-2xl mt-8 group border border-black/10 dark:border-white/10 bg-[#14151A] text-[#F6F2E7]"
               initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.7, delay: 0.4 }}
             >
               <div className="absolute inset-0 z-0">
@@ -399,14 +399,14 @@ export default function DownloadPage() {
                   <h2 className="font-display text-3xl md:text-4xl uppercase text-white">The Core Community</h2>
                 </div>
                 
-                <p className="text-[#a1a1aa] text-base max-w-[500px] mx-auto md:mx-0 leading-relaxed mb-10 drop-shadow-md">
+                <p className="text-[rgba(246,242,231,0.75)] text-base max-w-[500px] mx-auto md:mx-0 leading-relaxed mb-10 drop-shadow-md">
                   Get real-time updates, chat directly with the founders, and connect with other early adopters. Your voice shapes the ecosystem.
                 </p>
                 
                 <a 
                   href={WHATSAPP_URL} 
                   target="_blank" rel="noopener noreferrer"
-                  className="inline-block self-center md:self-start bg-[#25D366] text-white px-8 py-4 rounded-xl font-bold text-[1rem] hover:bg-[#20b858] hover:-translate-y-1 transition-all shadow-[0_15px_40px_rgba(37,211,102,0.4)] whitespace-nowrap"
+                  className="inline-block self-center md:self-start bg-[#25D366] text-white px-8 py-4 rounded-xl font-bold text-[1rem] hover:bg-[#20b858] hover:-translate-y-0.5 transition-all shadow-[0_15px_40px_rgba(37,211,102,0.4)] whitespace-nowrap"
                 >
                   Join WhatsApp Group →
                 </a>
@@ -416,7 +416,7 @@ export default function DownloadPage() {
 
         </main>
         
-        <div className="border-t border-white/5 bg-[#030305] relative z-20">
+        <div className="border-t border-black/10 dark:border-white/5 relative z-20">
           <Footer />
         </div>
       </div>
