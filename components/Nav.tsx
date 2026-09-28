@@ -4,9 +4,62 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
+import { Sun, Moon, Monitor } from "lucide-react";
+import { useTheme } from "@/components/ThemeContext";
 
 const LOGIN_URL = "https://app.unilife.com.ng";
 const DROPDOWN_CLOSE_DELAY = 120;
+
+function ThemeToggleButton({
+  isDark,
+  onToggle,
+}: {
+  isDark: boolean;
+  onToggle: () => void;
+}) {
+  const prefersReducedMotion = useReducedMotion();
+  return (
+    <motion.button
+      type="button"
+      onClick={onToggle}
+      className={`relative w-9 h-9 rounded-full flex items-center justify-center border transition-all cursor-pointer shrink-0 ${
+        isDark
+          ? "bg-white/10 hover:bg-white/20 border-white/20 text-[#FFD23F]"
+          : "bg-black/[0.04] hover:bg-black/[0.08] border-[rgba(20,21,26,0.12)] text-[#14151A]"
+      }`}
+      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      title={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      whileHover={prefersReducedMotion ? undefined : { scale: 1.08 }}
+      whileTap={prefersReducedMotion ? undefined : { scale: 0.92 }}
+    >
+      <AnimatePresence mode="wait" initial={false}>
+        {isDark ? (
+          <motion.span
+            key="sun"
+            initial={{ rotate: -90, scale: 0.5, opacity: 0 }}
+            animate={{ rotate: 0, scale: 1, opacity: 1 }}
+            exit={{ rotate: 90, scale: 0.5, opacity: 0 }}
+            transition={{ duration: 0.18 }}
+            className="flex items-center justify-center"
+          >
+            <Sun size={17} strokeWidth={2.3} />
+          </motion.span>
+        ) : (
+          <motion.span
+            key="moon"
+            initial={{ rotate: 90, scale: 0.5, opacity: 0 }}
+            animate={{ rotate: 0, scale: 1, opacity: 1 }}
+            exit={{ rotate: -90, scale: 0.5, opacity: 0 }}
+            transition={{ duration: 0.18 }}
+            className="flex items-center justify-center"
+          >
+            <Moon size={17} strokeWidth={2.3} />
+          </motion.span>
+        )}
+      </AnimatePresence>
+    </motion.button>
+  );
+}
 
 type NavItem = {
   href: string;
@@ -420,17 +473,18 @@ function DesktopLink({
 // --- Main Nav Component ---
 export default function Nav({
   active,
-  theme,
+  theme: explicitTheme,
 }: {
   active?: string;
   theme?: "light" | "dark";
 }) {
+  const { theme: currentTheme, resolvedTheme, toggleTheme, setTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openSection, setOpenSection] = useState<"product" | "solutions" | "join" | "others" | null>(null);
   const prefersReducedMotion = useReducedMotion();
 
-  // Automatic dark mode detection on dark pages (such as /alliances and /download) or explicit theme
-  const isDark = theme === "dark" || active === "/alliances" || active === "/download";
+  // If explicit theme prop is supplied honor it, otherwise dynamically follow resolvedTheme
+  const isDark = explicitTheme ? explicitTheme === "dark" : resolvedTheme === "dark";
 
   const closeNav = () => {
     setMobileMenuOpen(false);
@@ -498,6 +552,7 @@ export default function Nav({
 
           {/* ---- DESKTOP ACTIONS ---- */}
           <div className="hidden lg:flex items-center justify-end gap-3.5 xl:gap-5 shrink-0">
+            <ThemeToggleButton isDark={isDark} onToggle={toggleTheme} />
             <Link
               href={LOGIN_URL}
               className={`font-body font-bold text-[0.92rem] whitespace-nowrap transition-colors relative after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 ${
@@ -523,31 +578,34 @@ export default function Nav({
             </motion.a>
           </div>
 
-          {/* ---- MOBILE TOGGLE ---- */}
-          <button
-            className={`lg:hidden relative w-10 h-10 border rounded-full shrink-0 flex flex-col justify-center items-center overflow-hidden cursor-pointer ${
-              isDark
-                ? "border-white/20 bg-white/10"
-                : "border-[rgba(20,21,26,0.15)] bg-white/50"
-            }`}
-            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={mobileMenuOpen}
-            aria-controls="mobile-nav-drawer"
-            onClick={() => setMobileMenuOpen((v) => !v)}
-          >
-            <motion.span
-              animate={mobileMenuOpen ? { rotate: 45, y: 5 } : { rotate: 0, y: -4 }}
-              className={`absolute w-4 h-[2px] rounded-full transition-transform ${isDark ? "bg-[#F6F2E7]" : "bg-[#14151A]"}`}
-            />
-            <motion.span
-              animate={mobileMenuOpen ? { opacity: 0, x: 10 } : { opacity: 1, x: 0 }}
-              className={`absolute w-4 h-[2px] rounded-full transition-opacity ${isDark ? "bg-[#F6F2E7]" : "bg-[#14151A]"}`}
-            />
-            <motion.span
-              animate={mobileMenuOpen ? { rotate: -45, y: -5 } : { rotate: 0, y: 4 }}
-              className={`absolute w-4 h-[2px] rounded-full transition-transform ${isDark ? "bg-[#F6F2E7]" : "bg-[#14151A]"}`}
-            />
-          </button>
+          {/* ---- MOBILE TOGGLE & QUICK THEME ---- */}
+          <div className="lg:hidden flex items-center gap-2 shrink-0">
+            <ThemeToggleButton isDark={isDark} onToggle={toggleTheme} />
+            <button
+              className={`relative w-10 h-10 border rounded-full shrink-0 flex flex-col justify-center items-center overflow-hidden cursor-pointer ${
+                isDark
+                  ? "border-white/20 bg-white/10"
+                  : "border-[rgba(20,21,26,0.15)] bg-white/50"
+              }`}
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-nav-drawer"
+              onClick={() => setMobileMenuOpen((v) => !v)}
+            >
+              <motion.span
+                animate={mobileMenuOpen ? { rotate: 45, y: 5 } : { rotate: 0, y: -4 }}
+                className={`absolute w-4 h-[2px] rounded-full transition-transform ${isDark ? "bg-[#F6F2E7]" : "bg-[#14151A]"}`}
+              />
+              <motion.span
+                animate={mobileMenuOpen ? { opacity: 0, x: 10 } : { opacity: 1, x: 0 }}
+                className={`absolute w-4 h-[2px] rounded-full transition-opacity ${isDark ? "bg-[#F6F2E7]" : "bg-[#14151A]"}`}
+              />
+              <motion.span
+                animate={mobileMenuOpen ? { rotate: -45, y: -5 } : { rotate: 0, y: 4 }}
+                className={`absolute w-4 h-[2px] rounded-full transition-transform ${isDark ? "bg-[#F6F2E7]" : "bg-[#14151A]"}`}
+              />
+            </button>
+          </div>
         </motion.nav>
 
         {/* ---- MOBILE MENU DRAWER ---- */}
@@ -659,11 +717,79 @@ export default function Nav({
                 </motion.div>
               </motion.div>
 
+              {/* ---- MOBILE APPEARANCE SWITCHER ---- */}
+              <motion.div
+                variants={slideInItem}
+                className={`p-4 rounded-2xl mb-4 border ${
+                  isDark
+                    ? "bg-white/5 border-white/10"
+                    : "bg-[#f4f6fc] border-[rgba(20,21,26,0.08)]"
+                }`}
+              >
+                <div className="flex items-center justify-between mb-2.5">
+                  <span className={`font-mono text-[0.72rem] uppercase tracking-wider font-semibold ${
+                    isDark ? "text-white/60" : "text-[#14151A]/60"
+                  }`}>
+                    Theme Appearance
+                  </span>
+                  <span className={`font-mono text-[0.68rem] uppercase px-2 py-0.5 rounded-full font-bold ${
+                    isDark ? "bg-[#FFD23F]/20 text-[#FFD23F]" : "bg-[#4f7fff]/15 text-[#4f7fff]"
+                  }`}>
+                    {currentTheme === "system" ? `Auto (${resolvedTheme})` : currentTheme}
+                  </span>
+                </div>
+                <div className={`grid grid-cols-3 gap-1.5 p-1 rounded-xl ${
+                  isDark ? "bg-black/40" : "bg-black/5"
+                }`}>
+                  <button
+                    type="button"
+                    onClick={() => setTheme("light")}
+                    className={`flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                      currentTheme === "light"
+                        ? "bg-white text-[#14151A] shadow-sm"
+                        : isDark
+                        ? "text-white/70 hover:text-white"
+                        : "text-[#14151A]/70 hover:text-[#14151A]"
+                    }`}
+                  >
+                    <Sun size={13} strokeWidth={2.4} /> Light
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setTheme("dark")}
+                    className={`flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                      currentTheme === "dark"
+                        ? "bg-[#181920] text-white shadow-sm border border-white/15"
+                        : isDark
+                        ? "text-white/70 hover:text-white"
+                        : "text-[#14151A]/70 hover:text-[#14151A]"
+                    }`}
+                  >
+                    <Moon size={13} strokeWidth={2.4} /> Dark
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setTheme("system")}
+                    className={`flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                      currentTheme === "system"
+                        ? (resolvedTheme === "dark"
+                            ? "bg-[#181920] text-white border border-white/15 shadow-sm"
+                            : "bg-white text-[#14151A] shadow-sm")
+                        : isDark
+                        ? "text-white/70 hover:text-white"
+                        : "text-[#14151A]/70 hover:text-[#14151A]"
+                    }`}
+                  >
+                    <Monitor size={13} strokeWidth={2.4} /> Auto
+                  </button>
+                </div>
+              </motion.div>
+
               <motion.div
                 variants={slideInItem}
                 initial="hidden"
                 animate="show"
-                className={`grid grid-cols-1 gap-3 pt-6 border-t ${
+                className={`grid grid-cols-1 gap-3 pt-4 border-t ${
                   isDark ? "border-white/10" : "border-[rgba(20,21,26,0.08)]"
                 }`}
               >

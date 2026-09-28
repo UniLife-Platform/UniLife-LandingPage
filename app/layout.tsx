@@ -3,6 +3,7 @@ import "./globals.css";
 import CustomCursor from "@/components/CustomCursor";
 import { CookieProvider } from "@/components/CookieContext";
 import CookieConsentSystem from "@/components/CookieConsentSystem";
+import { ThemeProvider } from "@/components/ThemeContext";
 
 const BASE_URL = "https://unilife.com.ng";
 
@@ -187,19 +188,40 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                var stored = localStorage.getItem('unilife-theme');
+                var isDark = stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                if (isDark) {
+                  document.documentElement.classList.add('dark');
+                  document.documentElement.style.colorScheme = 'dark';
+                } else {
+                  document.documentElement.classList.remove('dark');
+                  document.documentElement.style.colorScheme = 'light';
+                }
+              } catch (e) {}
+            `,
+          }}
+        />
+      </head>
       <body className="antialiased">
-        <CookieProvider>
-          <CustomCursor />
-          <script
-            id="schema-org-jsonld"
-            key="schema-org-jsonld"
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-          />
-          {children}
-          <CookieConsentSystem />
-        </CookieProvider>
+        <ThemeProvider>
+          <CookieProvider>
+            <CustomCursor />
+            <script
+              id="schema-org-jsonld"
+              key="schema-org-jsonld"
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
+            {children}
+            <CookieConsentSystem />
+          </CookieProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
