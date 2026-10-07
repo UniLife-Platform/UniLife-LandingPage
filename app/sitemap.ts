@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { ALL_CHALLENGES } from "@/lib/challengesData";
 
 const BASE_URL = "https://unilife.com.ng";
 
@@ -22,6 +23,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/join", priority: 0.6, freq: "monthly" as const },
     { path: "/terms", priority: 0.4, freq: "yearly" as const },
     { path: "/policy", priority: 0.4, freq: "yearly" as const },
+    { path: "/download", priority: 0.8, freq: "weekly" as const },
+    { path: "/guidelines", priority: 0.5, freq: "yearly" as const },
+    { path: "/child-safety", priority: 0.5, freq: "yearly" as const },
+    { path: "/delete-account", priority: 0.4, freq: "yearly" as const },
+    { path: "/request-campus", priority: 0.6, freq: "monthly" as const },
+    ...ALL_CHALLENGES.map((challenge) => ({ path: `/challenge/${challenge.slug}`, priority: 0.8, freq: "weekly" as const })),
   ];
 
   return routes.map((route) => ({
