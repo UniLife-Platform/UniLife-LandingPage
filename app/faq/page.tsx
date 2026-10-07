@@ -164,6 +164,7 @@ export default function FAQPage() {
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formError, setFormError] = useState("");
 
   const toggleItem = (id: string) => {
     setOpenItems((prev) => ({
@@ -172,35 +173,30 @@ export default function FAQPage() {
     }));
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formState.name.trim() || !formState.message.trim()) return;
 
     setIsSubmitting(true);
+    setFormError("");
 
-    const subject = `[UniLife FAQ Inquiry] ${formState.name.trim()}`;
-    const bodyText = `Hello UniLife Support,\n\nMy name: ${formState.name.trim()}\nEmail: ${formState.email.trim()}\nPhone / WhatsApp: ${formState.phone.trim() || "N/A"}\n\nQuestion / Message:\n${formState.message.trim()}\n\n--\nSent from UniLife FAQ Page`;
-
-    // Construct Gmail Web Compose URL (direct to Gmail browser)
-    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=support@unilife.com.ng,hello@unilife.com.ng&su=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(bodyText)}`;
-
-    // Standard mailto protocol
-    const mailtoUrl = `mailto:support@unilife.com.ng,hello@unilife.com.ng?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(bodyText)}`;
-
-    if (typeof window !== "undefined") {
-      // Try opening Gmail directly in a new tab; fallback to mailto
-      const opened = window.open(gmailUrl, "_blank");
-      if (!opened || opened.closed || typeof opened.closed === "undefined") {
-        window.location.href = mailtoUrl;
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...formState, source: "FAQ Page" }),
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.error || "Could not send that message.");
+      if (data.sentVia === "direct" && data.mailtoUrl) {
+        window.location.href = data.mailtoUrl;
       }
+      setFormSubmitted(true);
+    } catch (error) {
+      setFormError(error instanceof Error ? error.message : "Could not send that message.");
+    } finally {
+      setIsSubmitting(false);
     }
-
-    setFormSubmitted(true);
-    setIsSubmitting(false);
   };
 
   // Filter sections based on search query
@@ -391,6 +387,7 @@ export default function FAQPage() {
               </div>
 
               {/* Form or Success State */}
+              {formError && <p className="text-sm text-[#14151A]">{formError}</p>}
               {formSubmitted ? (
                 <div className="bg-[#FAF9F5] border border-[#E2E1DA] rounded-2xl p-6 text-center">
                   <div className="w-11 h-11 bg-[#10b981]/15 text-[#10b981] rounded-full flex items-center justify-center mx-auto mb-3 shadow-xs">

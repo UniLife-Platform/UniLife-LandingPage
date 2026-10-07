@@ -14,7 +14,8 @@ export async function POST(request: Request) {
     }
 
     const recipientEmails = ["support@unilife.com.ng", "hello@unilife.com.ng"];
-    const senderEmail = email || "no-reply@unilife.com.ng";
+    const cleanEmail = typeof email === "string" ? email.trim() : "";
+    const senderEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail) ? cleanEmail : "no-reply@unilife.com.ng";
     const subject = `[UniLife Inquiry] ${name} via ${source}`;
 
     const textContent = `
@@ -62,8 +63,7 @@ ${message}
     }
 
     // When SMTP isn't configured in environment, log securely and return mailto payload fallback
-    console.log(`[UniLife Contact API] Email would be sent to: ${recipientEmails.join(", ")}`);
-    console.log(`[UniLife Contact API] Details:`, { name, email, phone, message });
+    console.log(`[UniLife Contact API] SMTP is not configured. Inquiry from ${name} was not emailed.`);
 
     const mailtoUrl = `mailto:support@unilife.com.ng,hello@unilife.com.ng?subject=${encodeURIComponent(
       subject
