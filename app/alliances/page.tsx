@@ -67,8 +67,8 @@ const stagger = {
 
 export default function AlliancesPage() {
   return (
-    <div className="bg-[#14151A] text-[#F6F2E7] min-h-screen overflow-x-clip font-body antialiased selection:bg-[#FFD23F] selection:text-[#14151A]">
-      <Nav active="/alliances" theme="dark" />
+    <div className="bg-[#F6F2E7] dark:bg-[#14151A] text-[#14151A] dark:text-[#F6F2E7] min-h-screen overflow-x-clip font-body antialiased selection:bg-[#FFD23F] selection:text-[#14151A] transition-colors duration-200">
+      <Nav active="/alliances" />
 
       <main className="relative z-10 pt-28 sm:pt-32 pb-24 md:pb-32 px-6 md:px-16 max-w-[1160px] mx-auto">
         {/* Subtle Ambient Background Lighting */}
@@ -87,7 +87,7 @@ export default function AlliancesPage() {
           >
             <motion.h1
               variants={fadeUp}
-              className="font-display text-[clamp(2.5rem,6.8vw,5rem)] uppercase leading-[0.98] tracking-tight text-[#F6F2E7] mb-6"
+              className="font-display text-[clamp(2.5rem,6.8vw,5rem)] uppercase leading-[0.98] tracking-tight text-[#14151A] dark:text-[#F6F2E7] mb-6"
             >
               Shape the{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFD23F] via-[#ff3d81] to-[#4f7fff]">
@@ -98,7 +98,7 @@ export default function AlliancesPage() {
 
             <motion.p
               variants={fadeUp}
-              className="text-[rgba(246,242,231,0.7)] text-lg md:text-xl leading-relaxed max-w-[740px] mx-auto font-normal"
+              className="text-[#46473f] dark:text-[rgba(246,242,231,0.7)] text-lg md:text-xl leading-relaxed max-w-[740px] mx-auto font-normal"
             >
               Forward-thinking brands can either integrate their services or amplify their reach across the OOU student ecosystem. Choose your path below.
             </motion.p>
@@ -114,7 +114,7 @@ export default function AlliancesPage() {
             className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-stretch"
           >
             {/* CARD A: SPONSORSHIP & BACKING */}
-            <div className="relative group rounded-[32px] p-8 sm:p-10 md:p-12 bg-gradient-to-b from-[#1c1d25] to-[#15161D] border border-[rgba(246,242,231,0.12)] hover:border-[#FFD23F]/60 transition-all duration-300 shadow-[0_20px_40px_rgba(0,0,0,0.45)] flex flex-col justify-between overflow-hidden">
+            <div className="relative group rounded-[32px] p-8 sm:p-10 md:p-12 bg-white dark:bg-gradient-to-b dark:from-[#1c1d25] dark:to-[#15161D] border border-black/10 dark:border-[rgba(246,242,231,0.12)] hover:border-[#FFD23F]/60 transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.45)] flex flex-col justify-between overflow-hidden">
               {/* Subtle accent glow at corner */}
               <div
                 aria-hidden="true"
@@ -133,29 +133,29 @@ export default function AlliancesPage() {
                 </div>
 
                 {/* Title */}
-                <h2 className="font-display text-2xl sm:text-3xl lg:text-[2rem] uppercase leading-tight text-[#F6F2E7] mb-4">
+                <h2 className="font-display text-2xl sm:text-3xl lg:text-[2rem] uppercase leading-tight text-[#14151A] dark:text-[#F6F2E7] mb-4">
                   Sponsorship &amp; Corporate Backing
                 </h2>
 
                 {/* Description */}
-                <p className="text-[rgba(246,242,231,0.7)] text-[0.98rem] leading-relaxed mb-8">
+                <p className="text-[#46473f] dark:text-[rgba(246,242,231,0.7)] text-[0.98rem] leading-relaxed mb-8">
                   Direct brand amplification, programmatic banner placements, and campus event co-sponsorships across 10,000+ verified undergraduate accounts. Perfect for FMCGs, fintech apps, telecom, and consumer tech.
                 </p>
 
                 {/* Deliverables / Scope Checklist */}
-                <div className="space-y-3 mb-10 pt-4 border-t border-white/5">
+                <div className="space-y-3 mb-10 pt-4 border-t border-black/10 dark:border-white/5">
                   <span className="block font-mono text-[11px] uppercase tracking-wider text-[#8a8a7f]">
                     Scope Highlights:
                   </span>
-                  <div className="flex items-start gap-2.5 text-xs text-[rgba(246,242,231,0.85)]">
+                  <div className="flex items-start gap-2.5 text-xs text-[#2c2d33] dark:text-[rgba(246,242,231,0.85)]">
                     <CheckCircle2 className="w-4 h-4 text-[#FFD23F] shrink-0 mt-0.5" />
                     <span>Prime Real Estate on Live Campus Interactive Map</span>
                   </div>
-                  <div className="flex items-start gap-2.5 text-xs text-[rgba(246,242,231,0.85)]">
+                  <div className="flex items-start gap-2.5 text-xs text-[#2c2d33] dark:text-[rgba(246,242,231,0.85)]">
                     <CheckCircle2 className="w-4 h-4 text-[#FFD23F] shrink-0 mt-0.5" />
                     <span>Exclusive Title Sponsorship of OOU Tech Sprints &amp; Hackathons</span>
                   </div>
-                  <div className="flex items-start gap-2.5 text-xs text-[rgba(246,242,231,0.85)]">
+                  <div className="flex items-start gap-2.5 text-xs text-[#2c2d33] dark:text-[rgba(246,242,231,0.85)]">
                     <CheckCircle2 className="w-4 h-4 text-[#FFD23F] shrink-0 mt-0.5" />
                     <span>Gamified SP Reward Missions &amp; Leaderboard Banners</span>
                   </div>
@@ -177,7 +177,7 @@ export default function AlliancesPage() {
             </div>
 
             {/* CARD B: STRATEGIC PARTNERSHIPS */}
-            <div className="relative group rounded-[32px] p-8 sm:p-10 md:p-12 bg-gradient-to-b from-[#1c1d25] to-[#15161D] border border-[rgba(246,242,231,0.12)] hover:border-[#4f7fff]/60 transition-all duration-300 shadow-[0_20px_40px_rgba(0,0,0,0.45)] flex flex-col justify-between overflow-hidden">
+            <div className="relative group rounded-[32px] p-8 sm:p-10 md:p-12 bg-white dark:bg-gradient-to-b dark:from-[#1c1d25] dark:to-[#15161D] border border-black/10 dark:border-[rgba(246,242,231,0.12)] hover:border-[#4f7fff]/60 transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.45)] flex flex-col justify-between overflow-hidden">
               {/* Subtle accent glow at corner */}
               <div
                 aria-hidden="true"
@@ -196,29 +196,29 @@ export default function AlliancesPage() {
                 </div>
 
                 {/* Title */}
-                <h2 className="font-display text-2xl sm:text-3xl lg:text-[2rem] uppercase leading-tight text-[#F6F2E7] mb-4">
+                <h2 className="font-display text-2xl sm:text-3xl lg:text-[2rem] uppercase leading-tight text-[#14151A] dark:text-[#F6F2E7] mb-4">
                   Strategic Integrations
                 </h2>
 
                 {/* Description */}
-                <p className="text-[rgba(246,242,231,0.7)] text-[0.98rem] leading-relaxed mb-8">
+                <p className="text-[#46473f] dark:text-[rgba(246,242,231,0.7)] text-[0.98rem] leading-relaxed mb-8">
                   Integrate your platform&apos;s services directly into the UniLife app to create frictionless experiences for thousands of daily active students. Ideal for tech infrastructure, payment gateways, and local service providers.
                 </p>
 
                 {/* Deliverables / Scope Checklist */}
-                <div className="space-y-3 mb-10 pt-4 border-t border-white/5">
+                <div className="space-y-3 mb-10 pt-4 border-t border-black/10 dark:border-white/5">
                   <span className="block font-mono text-[11px] uppercase tracking-wider text-[#8a8a7f]">
                     Integration Surfaces:
                   </span>
-                  <div className="flex items-start gap-2.5 text-xs text-[rgba(246,242,231,0.85)]">
+                  <div className="flex items-start gap-2.5 text-xs text-[#2c2d33] dark:text-[rgba(246,242,231,0.85)]">
                     <CheckCircle2 className="w-4 h-4 text-[#4f7fff] shrink-0 mt-0.5" />
                     <span>In-App Campus Checkout &amp; Escrow Payment Rails</span>
                   </div>
-                  <div className="flex items-start gap-2.5 text-xs text-[rgba(246,242,231,0.85)]">
+                  <div className="flex items-start gap-2.5 text-xs text-[#2c2d33] dark:text-[rgba(246,242,231,0.85)]">
                     <CheckCircle2 className="w-4 h-4 text-[#4f7fff] shrink-0 mt-0.5" />
                     <span>Student Verification, Single Sign-On &amp; API Webhooks</span>
                   </div>
-                  <div className="flex items-start gap-2.5 text-xs text-[rgba(246,242,231,0.85)]">
+                  <div className="flex items-start gap-2.5 text-xs text-[#2c2d33] dark:text-[rgba(246,242,231,0.85)]">
                     <CheckCircle2 className="w-4 h-4 text-[#4f7fff] shrink-0 mt-0.5" />
                     <span>Hostel Accommodations, Study Tools &amp; Local Deliveries</span>
                   </div>
@@ -242,7 +242,7 @@ export default function AlliancesPage() {
         </section>
 
         {/* 3. TRUST STRIP / SOCIAL PROOF */}
-        <section className="pt-6 border-t border-[rgba(246,242,231,0.08)]">
+        <section className="pt-6 border-t border-black/10 dark:border-[rgba(246,242,231,0.08)]">
           <div className="text-center mb-8">
             <span className="font-mono text-xs uppercase tracking-widest text-[#8a8a7f]">
               Ecosystem Partners &amp; Institutional Alliances
@@ -253,7 +253,7 @@ export default function AlliancesPage() {
             {TRUSTED_PARTNERS.map((partner) => (
               <div
                 key={partner.name}
-                className="grayscale contrast-125 opacity-70 hover:opacity-100 hover:grayscale-0 transition-all duration-300 flex items-center justify-center p-2 rounded-xl bg-white/[0.03] border border-white/5"
+                className="grayscale contrast-125 opacity-70 hover:opacity-100 hover:grayscale-0 transition-all duration-300 flex items-center justify-center p-2 rounded-xl bg-black/[0.03] dark:bg-white/[0.03] border border-black/10 dark:border-white/5"
                 title={partner.label}
               >
                 <Image
@@ -266,7 +266,7 @@ export default function AlliancesPage() {
               </div>
             ))}
             <div
-              className="grayscale contrast-125 opacity-70 hover:opacity-100 hover:grayscale-0 transition-all duration-300 flex items-center gap-2 px-4 py-2 rounded-xl bg-white/[0.03] border border-white/5 font-display text-sm tracking-wider uppercase text-[#F6F2E7]"
+              className="grayscale contrast-125 opacity-70 hover:opacity-100 hover:grayscale-0 transition-all duration-300 flex items-center gap-2 px-4 py-2 rounded-xl bg-black/[0.03] dark:bg-white/[0.03] border border-black/10 dark:border-white/5 font-display text-sm tracking-wider uppercase text-[#14151A] dark:text-[#F6F2E7]"
               title="OOU Student Union Government"
             >
               <span>🏛️ OOU SUG Official</span>
@@ -276,38 +276,38 @@ export default function AlliancesPage() {
 
         {/* 4. VALUE PROPOSITION STRIP */}
         <section className="mt-20 md:mt-28 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="rounded-2xl p-6 bg-white/[0.02] border border-white/5">
+          <div className="rounded-2xl p-6 bg-white dark:bg-white/[0.02] border border-black/10 dark:border-white/5 shadow-sm dark:shadow-none">
             <div className="w-10 h-10 rounded-xl bg-[#FFD23F]/10 border border-[#FFD23F]/20 text-[#FFD23F] flex items-center justify-center mb-4">
               <TrendingUp className="w-5 h-5" />
             </div>
-            <h3 className="font-display text-lg uppercase text-[#F6F2E7] mb-2">
+            <h3 className="font-display text-lg uppercase text-[#14151A] dark:text-[#F6F2E7] mb-2">
               High Density Engagement
             </h3>
-            <p className="text-xs text-[rgba(246,242,231,0.65)] leading-relaxed">
+            <p className="text-xs text-[#46473f] dark:text-[rgba(246,242,231,0.65)] leading-relaxed">
               Target students precisely during active campus hours when daily academic and transactional volume peak.
             </p>
           </div>
 
-          <div className="rounded-2xl p-6 bg-white/[0.02] border border-white/5">
+          <div className="rounded-2xl p-6 bg-white dark:bg-white/[0.02] border border-black/10 dark:border-white/5 shadow-sm dark:shadow-none">
             <div className="w-10 h-10 rounded-xl bg-[#4f7fff]/10 border border-[#4f7fff]/20 text-[#4f7fff] flex items-center justify-center mb-4">
               <Cpu className="w-5 h-5" />
             </div>
-            <h3 className="font-display text-lg uppercase text-[#F6F2E7] mb-2">
+            <h3 className="font-display text-lg uppercase text-[#14151A] dark:text-[#F6F2E7] mb-2">
               Developer-First APIs
             </h3>
-            <p className="text-xs text-[rgba(246,242,231,0.65)] leading-relaxed">
+            <p className="text-xs text-[#46473f] dark:text-[rgba(246,242,231,0.65)] leading-relaxed">
               Fast, well-documented webhook and authentication endpoints built to plug directly into existing infrastructure.
             </p>
           </div>
 
-          <div className="rounded-2xl p-6 bg-white/[0.02] border border-white/5">
+          <div className="rounded-2xl p-6 bg-white dark:bg-white/[0.02] border border-black/10 dark:border-white/5 shadow-sm dark:shadow-none">
             <div className="w-10 h-10 rounded-xl bg-[#ff3d81]/10 border border-[#ff3d81]/20 text-[#ff3d81] flex items-center justify-center mb-4">
               <ShieldCheck className="w-5 h-5" />
             </div>
-            <h3 className="font-display text-lg uppercase text-[#F6F2E7] mb-2">
+            <h3 className="font-display text-lg uppercase text-[#14151A] dark:text-[#F6F2E7] mb-2">
               Verified Undergraduate Base
             </h3>
-            <p className="text-xs text-[rgba(246,242,231,0.65)] leading-relaxed">
+            <p className="text-xs text-[#46473f] dark:text-[rgba(246,242,231,0.65)] leading-relaxed">
               Zero bot traffic or ghost metrics. Every active user profile is authenticated against student identification.
             </p>
           </div>

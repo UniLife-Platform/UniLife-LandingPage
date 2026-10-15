@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Sun, Moon } from "lucide-react";
+import { useTheme } from "@/components/ThemeContext";
 
 const LINKS = [
   { href: "/referral", label: "Home" },
@@ -16,6 +18,7 @@ const LINKS = [
 
 export default function ReferralNav({ active }: { active?: string }) {
   const [open, setOpen] = useState(false);
+  const { resolvedTheme, toggleTheme } = useTheme();
 
   return (
     <>
@@ -34,6 +37,15 @@ export default function ReferralNav({ active }: { active?: string }) {
               </li>
             ))}
           </ul>
+          <button
+            type="button"
+            onClick={toggleTheme}
+            className="w-8 h-8 rounded-full border border-[var(--r-card-line)] flex items-center justify-center text-[var(--r-ink)] hover:text-[var(--r-gold)] transition-colors cursor-pointer"
+            aria-label={`Switch to ${resolvedTheme === "dark" ? "light" : "dark"} mode`}
+            title={`Switch to ${resolvedTheme === "dark" ? "light" : "dark"} mode`}
+          >
+            {resolvedTheme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
+          </button>
           <button
             className={`hamburger${open ? " open" : ""}`}
             aria-label="Toggle menu"

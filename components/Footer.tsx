@@ -3,7 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "motion/react";
-import { MessageCircle, Mail, Smartphone } from "lucide-react";
+import { MessageCircle, Mail, Smartphone, Sun, Moon } from "lucide-react";
+import { useTheme } from "@/components/ThemeContext";
 
 const SOCIALS = [
   {
@@ -165,8 +166,10 @@ function FooterLink({ href, label, badge, badgeColor }: FooterLinkItem) {
 }
 
 export default function Footer() {
+  const { resolvedTheme, toggleTheme } = useTheme();
+
   return (
-    <footer className="relative bg-[#14151A] text-[#F6F2E7] overflow-hidden">
+    <footer className="relative bg-[#14151A] text-[#F6F2E7] overflow-hidden border-t border-[rgba(246,242,231,0.08)]">
       {/* Subtle background glow accents */}
       <div className="pointer-events-none absolute -top-40 -left-40 w-96 h-96 rounded-full bg-[#4f7fff] opacity-[0.04] blur-[120px]" />
       <div className="pointer-events-none absolute bottom-0 right-0 w-[450px] h-[450px] rounded-full bg-[#FFD23F] opacity-[0.03] blur-[140px]" />
@@ -365,6 +368,20 @@ export default function Footer() {
               © 2026 UniLife — Built by Nigerian students, for university students
             </span>
             <div className="flex flex-wrap items-center justify-center gap-4">
+              <button
+                type="button"
+                onClick={toggleTheme}
+                className="font-mono text-[0.7rem] tracking-widest uppercase text-[rgba(246,242,231,0.7)] hover:text-[#FFD23F] transition-colors flex items-center gap-1.5 cursor-pointer"
+                title={`Switch to ${resolvedTheme === "dark" ? "light" : "dark"} mode`}
+                aria-label={`Current theme: ${resolvedTheme}. Click to switch theme.`}
+              >
+                {resolvedTheme === "dark" ? (
+                  <Sun size={12} className="text-[#FFD23F]" />
+                ) : (
+                  <Moon size={12} />
+                )}
+                <span>Theme: {resolvedTheme === "dark" ? "Dark" : "Light"}</span>
+              </button>
               <Link
                 href="/cookies"
                 className="font-mono text-[0.7rem] tracking-widest uppercase text-[rgba(246,242,231,0.7)] hover:text-[#FFD23F] transition-colors underline underline-offset-4"

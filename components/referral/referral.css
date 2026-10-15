@@ -28,6 +28,36 @@
   min-height: 100vh;
   overflow-x: clip;
   position: relative;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+html:not(.dark) .referral-root {
+  --r-bg: #F6F2E7;
+  --r-bg-soft: #EDE8D8;
+  --r-card: #FFFFFF;
+  --r-card-line: rgba(20, 21, 26, 0.12);
+  --r-pink: #e01b57;
+  --r-pink-deep: #b80f44;
+  --r-pink-glow: rgba(224, 27, 87, 0.25);
+  --r-gold: #c89510;
+  --r-green: #059669;
+  --r-green-glow: rgba(5, 150, 105, 0.25);
+  --r-ink: #14151A;
+  --r-muted: #4e4f5a;
+  --r-muted-2: #727482;
+}
+
+html:not(.dark) .referral-root .topnav {
+  background: rgba(246, 242, 231, 0.9);
+  border-bottom: 1px solid rgba(20, 21, 26, 0.1);
+}
+
+html:not(.dark) .referral-root .mobile-menu {
+  background: #EDE8D8;
+}
+
+html:not(.dark) .referral-root .grain {
+  opacity: 0.015;
 }
 
 .referral-root * { box-sizing: border-box; }

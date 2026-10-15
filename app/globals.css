@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-display: "Anton", sans-serif;
   --font-body: "Work Sans", sans-serif;
@@ -9,10 +11,31 @@
 
 :root {
   --paper: #F6F2E7;
+  --paper-elevated: #FFFFFF;
+  --paper-subtle: #EFE9D9;
   --ink: #14151A;
+  --ink-secondary: #46473f;
+  --ink-muted: #8a8a7f;
+  --border-subtle: rgba(20, 21, 26, 0.08);
+  --border-light: rgba(20, 21, 26, 0.12);
+  --border-strong: rgba(20, 21, 26, 0.2);
+  --card-bg: #FFFFFF;
   --font-display: "Anton", sans-serif;
   --font-body: "Work Sans", sans-serif;
   --font-mono: "IBM Plex Mono", monospace;
+}
+
+html.dark, :root.dark {
+  --paper: #0B0C10;
+  --paper-elevated: #15161F;
+  --paper-subtle: #1C1E2A;
+  --ink: #F6F2E7;
+  --ink-secondary: #B9BCD0;
+  --ink-muted: #84889E;
+  --border-subtle: rgba(246, 242, 231, 0.08);
+  --border-light: rgba(246, 242, 231, 0.14);
+  --border-strong: rgba(246, 242, 231, 0.25);
+  --card-bg: #15161F;
 }
 
 @layer utilities {
@@ -44,14 +67,16 @@
 }
 
 /* =========================================================
-   UNILIFE — Shared Stylesheet (Light Theme / Unee Register)
+   UNILIFE — Universal Styling & Theme Transitions
    ========================================================= */
 
 * {
   box-sizing: border-box;
 }
+
 html {
   scroll-behavior: smooth;
+  transition: color-scheme 0.25s ease;
 }
 
 /* ---- Base Document ---- */
@@ -61,6 +86,7 @@ body {
   color: var(--ink);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 h1,
@@ -77,3 +103,125 @@ a {
 .mono {
   font-family: var(--font-mono);
 }
+
+/* ---- Dark Mode Global Theme Mappings ---- */
+html.dark body {
+  background: #0B0C10;
+  color: #F6F2E7;
+}
+
+html.dark .bg-\[\#F6F2E7\] {
+  background-color: #0B0C10 !important;
+}
+
+html.dark .bg-\[\#FAF9F5\] {
+  background-color: #0B0C10 !important;
+}
+
+html.dark .bg-white:not([data-keep-light]) {
+  background-color: #15161F !important;
+}
+
+html.dark .bg-white\/95 {
+  background-color: rgba(21, 22, 31, 0.95) !important;
+}
+
+html.dark .bg-white\/90 {
+  background-color: rgba(21, 22, 31, 0.9) !important;
+}
+
+html.dark .bg-\[\#fdfbf7\] {
+  background-color: #15161F !important;
+}
+
+html.dark .bg-\[\#f4f6fc\] {
+  background-color: #1C1E2A !important;
+}
+
+html.dark .bg-\[\#EFE9D9\] {
+  background-color: #191B26 !important;
+}
+
+html.dark .text-\[\#14151A\]:not([data-keep-dark]) {
+  color: #F6F2E7 !important;
+}
+
+html.dark .text-\[\#46473f\] {
+  color: #B9BCD0 !important;
+}
+
+html.dark .text-\[\#8a8a7f\] {
+  color: #84889E !important;
+}
+
+html.dark .border-\[rgba\(20\,21\,26\,0\.12\)\] {
+  border-color: rgba(246, 242, 231, 0.14) !important;
+}
+
+html.dark .border-\[rgba\(20\,21\,26\,0\.08\)\] {
+  border-color: rgba(246, 242, 231, 0.08) !important;
+}
+
+html.dark .border-\[rgba\(20\,21\,26\,0\.06\)\] {
+  border-color: rgba(246, 242, 231, 0.06) !important;
+}
+
+html.dark .border-\[rgba\(20\,21\,26\,0\.15\)\] {
+  border-color: rgba(246, 242, 231, 0.16) !important;
+}
+
+html.dark .border-\[\#14151A\] {
+  border-color: #F6F2E7 !important;
+}
+
+/* Dark mode form elements */
+html.dark input:not([type="checkbox"]):not([type="radio"]),
+html.dark textarea,
+html.dark select {
+  background-color: #15161F !important;
+  color: #F6F2E7 !important;
+  border-color: rgba(246, 242, 231, 0.18) !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: #84889E !important;
+}
+
+/* Outlined buttons in dark mode */
+html.dark a.border-\[\#14151A\],
+html.dark button.border-\[\#14151A\] {
+  border-color: #F6F2E7 !important;
+  color: #F6F2E7 !important;
+}
+
+html.dark a.border-\[\#14151A\]:hover,
+html.dark button.border-\[\#14151A\]:hover {
+  background-color: #F6F2E7 !important;
+  color: #0B0C10 !important;
+}
+
+/* Primary filled buttons in dark mode */
+html.dark a > div.bg-\[\#14151A\],
+html.dark button.bg-\[\#14151A\] {
+  background-color: #FFD23F !important;
+  color: #14151A !important;
+  border-color: #FFD23F !important;
+}
+
+/* Ensure badges in dark mode keep readable text */
+html.dark span.bg-white,
+html.dark div.bg-white {
+  background-color: #15161F !important;
+  color: #F6F2E7 !important;
+}
+
+/* Dark mode shadows */
+html.dark .shadow-2xl {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7) !important;
+}
+
+html.dark .shadow-xl {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5) !important;
+}
+
