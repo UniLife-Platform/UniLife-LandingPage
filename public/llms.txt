@@ -1,0 +1,19 @@
+# UniLife Nigeria
+
+> Nigeria's all-in-one campus super-app for university students.
+
+## What is UniLife?
+UniLife is a verified platform connecting Nigerian university students with scholarships, campus innovation challenges (including OOU), a student marketplace, hostel accommodation, and peer communities.
+
+## Key sections
+- [Scholarships](https://unilife.com.ng/scholarships): Verified student scholarships and tuition grants.
+- [Challenges](https://unilife.com.ng/challenge): Campus innovation challenges and OOU challenge.
+- [Marketplace / Sellers](https://unilife.com.ng/sellers): Buy and sell campus items with zero commission.
+- [Students](https://unilife.com.ng/students): Campus life, study groups, communities.
+- [FAQ](https://unilife.com.ng/faq): Answers on verification, safety, and features.
+
+## Target audience
+Nigerian university students looking for scholarships, campus communities, marketplace, and study tools.
+
+## Official site
+https://unilife.com.ng
