@@ -140,7 +140,7 @@ function DesktopMegaMenu({ active, isDark }: { active?: string; isDark?: boolean
                   : "bg-white/98 backdrop-blur-2xl border border-[rgba(20,21,26,0.12)] shadow-[0_35px_90px_rgba(20,21,26,0.16)] text-[#14151A]"
               }`}
             >
-              
+
               {/* Column 1: Products */}
               <div className="flex-1">
                 <h4 className={`font-mono text-[0.68rem] font-bold tracking-widest uppercase mb-3.5 pl-3 ${isDark ? "text-[#FFD23F]/90" : "text-[#8a8a7f]"}`}>
@@ -577,7 +577,7 @@ export default function Nav({
                     Home
                   </Link>
                 </motion.div>
-                
+
                 <MobileAccordion
                   title="Products"
                   items={FEATURES}
@@ -681,8 +681,8 @@ export default function Nav({
                   href="/download"
                   className={`flex items-center justify-center w-full py-4 rounded-full font-bold shadow-xl active:scale-[0.98] transition-transform ${
                     isDark
-                      ? "bg-[#FFD23F] text-[#14151A]"
-                      : "bg-[#14151A] text-white"
+                      ? "bg-[#FFD23F] text-[#14151A]!"
+                      : "bg-[#14151A] text-white!"
                   }`}
                 >
                   Download App
