@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Script from "next/script";
+import { Anton, Work_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import CustomCursor from "@/components/CustomCursor";
 import { CookieProvider } from "@/components/CookieContext";
@@ -6,6 +8,11 @@ import CookieConsentSystem from "@/components/CookieConsentSystem";
 import { ThemeProvider } from "@/components/ThemeContext";
 
 const BASE_URL = "https://unilife.com.ng";
+
+// Self-hosted by Next at build time: no render-blocking CSS @import, no layout shift.
+const anton = Anton({ subsets: ["latin"], weight: "400", display: "swap", variable: "--font-anton" });
+const workSans = Work_Sans({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800"], display: "swap", variable: "--font-work-sans" });
+const plexMono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "500", "600", "700"], display: "swap", variable: "--font-plex-mono" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -30,21 +37,12 @@ export const metadata: Metadata = {
   creator: "UniLife",
   publisher: "UniLife Nigeria",
   alternates: {
-    canonical: BASE_URL,
+    canonical: "./",
   },
   openGraph: {
     title: "UniLife (Nigeria) – The All-in-One Campus Super-App",
     description:
       "Discover UniLife (Nigeria): verified student scholarships, campus innovation challenges, student marketplace, hostel accommodation, and university peer communities.",
-    images: [
-      {
-        url: "/icon.png",
-        width: 512,
-        height: 512,
-        alt: "UniLife Nigeria Super-App",
-      },
-    ],
-    url: BASE_URL,
     type: "website",
     siteName: "UniLife",
     locale: "en_NG",
@@ -54,7 +52,7 @@ export const metadata: Metadata = {
     title: "UniLife (Nigeria) – The All-in-One Campus Super-App",
     description:
       "Discover UniLife (Nigeria): verified student scholarships, campus innovation challenges, student marketplace, hostel accommodation, and university peer communities.",
-    images: ["/icon.png"],
+    site: "@unilife_connect",
     creator: "@unilife_connect",
   },
   robots: {
@@ -188,14 +186,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <script
+    <html lang="en" suppressHydrationWarning className={`${anton.variable} ${workSans.variable} ${plexMono.variable}`}>
+      <body className="antialiased">
+        <Script
+          id="theme-init"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               try {
                 var stored = localStorage.getItem('unilife-theme');
-                var isDark = stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                var isDark = stored === 'dark' || ((!stored || stored === 'system') && window.matchMedia('(prefers-color-scheme: dark)').matches);
                 if (isDark) {
                   document.documentElement.classList.add('dark');
                   document.documentElement.style.colorScheme = 'dark';
@@ -207,8 +207,6 @@ export default function RootLayout({
             `,
           }}
         />
-      </head>
-      <body className="antialiased">
         <ThemeProvider>
           <CookieProvider>
             <CustomCursor />

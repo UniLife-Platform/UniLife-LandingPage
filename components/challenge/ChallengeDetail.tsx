@@ -99,6 +99,12 @@ export default function ChallengeDetail({ challenge }: { challenge: NonNullable<
 
               {/* Action Buttons */}
               <div className="flex flex-wrap items-center gap-4">
+                {challenge.status === "Closed" ? (
+                  <span className="px-8 py-4 rounded-full font-bold text-sm md:text-base border-2 border-dashed border-[rgba(20,21,26,0.3)] text-[#46473f]">
+                    Applications closed on {challenge.deadline}
+                  </span>
+                ) : (
+                <>
                 {challenge.formType === "google_form" || challenge.formType === "external" ? (
                   <a
                     href={challenge.formUrl}
@@ -129,6 +135,8 @@ export default function ChallengeDetail({ challenge }: { challenge: NonNullable<
                       <ExternalLink className="w-4 h-4" />
                     </a>
                   </>
+                )}
+                </>
                 )}
               </div>
             </div>
@@ -265,6 +273,7 @@ export default function ChallengeDetail({ challenge }: { challenge: NonNullable<
                     )}
                   </div>
 
+                  {challenge.status !== "Closed" && (
                   <div className="pt-4 mt-2">
                     {challenge.formType === "google_form" || challenge.formType === "external" ? (
                       <a
@@ -288,6 +297,7 @@ export default function ChallengeDetail({ challenge }: { challenge: NonNullable<
                       </button>
                     )}
                   </div>
+                  )}
                 </div>
               ))}
             </div>

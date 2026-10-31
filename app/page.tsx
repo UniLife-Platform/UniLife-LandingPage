@@ -131,7 +131,7 @@ export default function Home() {
                 </div>
 
                 <div className="w-full h-[170px] rounded-xl mb-5 bg-gradient-to-br from-[#8fb0ff] to-[#1c2c66] flex items-center justify-center relative overflow-hidden before:content-[''] before:absolute before:inset-0 before:bg-[repeating-linear-gradient(45deg,rgba(255,255,255,0.05)_0_2px,transparent_2px_10px)]">
-                  <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Harrison" alt="Student Avatar" className="w-[50px] h-[50px] relative z-10 rounded-md" />
+                  <span role="img" aria-label="Student photo placeholder" className="relative z-10 flex h-[64px] w-[64px] items-center justify-center rounded-md bg-white/15 font-display text-2xl text-white">U</span>
                 </div>
 
                 <h2 className="font-display text-[2.2rem] uppercase leading-none mb-1">You, Verified</h2>
@@ -151,7 +151,7 @@ export default function Home() {
                 <div className="absolute bottom-[56px] left-0 right-0 h-[1px] bg-[rgba(20,21,26,0.06)] border-b border-white"></div>
                 
                 <div className="absolute bottom-4 left-6 right-4 flex justify-between items-end">
-                  <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=UL-26-COMPENG-HARRISON" className="w-[42px] h-[42px] rounded mix-blend-multiply opacity-85" alt="Verified QR" />
+                  <img loading="lazy" decoding="async" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=UL-26-COMPENG-HARRISON" className="w-[42px] h-[42px] rounded mix-blend-multiply opacity-85" alt="Verified QR" />
                   <div className="border-2 border-[#34d399] text-[#34d399] font-mono text-[0.7rem] font-bold tracking-[1.5px] px-2.5 py-1 rounded-md -rotate-6">VERIFIED ✓</div>
                 </div>
               </motion.div>
@@ -192,7 +192,7 @@ export default function Home() {
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6, delay: 0.15 }}
             >
-              <img
+              <img loading="lazy" decoding="async"
                 src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=800&auto=format&fit=crop"
                 alt="Students on campus between classes"
                 className="w-full h-auto aspect-[4/5] object-cover rounded-[24px] shadow-2xl"
@@ -275,7 +275,7 @@ export default function Home() {
                 transition={{ duration: 0.4 }}
               >
                 <div className="relative w-full h-[110px] overflow-hidden">
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={m.img}
                     alt={m.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
@@ -354,7 +354,7 @@ export default function Home() {
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <img 
+              <img loading="lazy" decoding="async" 
                 src="https://images.unsplash.com/photo-1531496730074-83b638c0a7ac?q=80&w=800&auto=format&fit=crop" 
                 alt="Nigerian Students Studying" 
                 className="w-full h-auto aspect-[4/5] object-cover rounded-[24px] shadow-2xl" 
@@ -392,7 +392,7 @@ export default function Home() {
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.6 }}
               >
-                <img 
+                <img loading="lazy" decoding="async" 
                   src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=800&auto=format&fit=crop" 
                   alt="Student Seller" 
                   className="w-full h-auto aspect-square object-cover rounded-[24px] shadow-2xl" 

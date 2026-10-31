@@ -133,7 +133,7 @@ export default function LegalLayout({
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           className="w-full h-[30vh] md:h-[42vh] rounded-[32px] overflow-hidden shadow-2xl relative bg-[#EFE9D9]"
         >
-          <img
+          <img loading="lazy" decoding="async"
             src={heroImage}
             alt={heroImageAlt}
             className="w-full h-full object-cover"
@@ -172,7 +172,7 @@ export default function LegalLayout({
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6 }}
         >
-          <img
+          <img loading="lazy" decoding="async"
             src="https://images.pexels.com/photos/1181534/pexels-photo-1181534.jpeg?auto=compress&cs=tinysrgb&w=1200"
             alt="Background texture"
             className="absolute inset-0 w-full h-full object-cover opacity-15 mix-blend-overlay"

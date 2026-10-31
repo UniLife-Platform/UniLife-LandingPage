@@ -1,19 +1,11 @@
-import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Partnership & Sponsorship Hub | UniLife",
+export const metadata = buildMetadata({
+  title: "Partnership & Sponsorship Hub",
   description:
-    "Shape the digital heartbeat of the campus. Forward-thinking brands can either integrate their services or amplify their reach across the OOU student ecosystem.",
-  openGraph: {
-    title: "Partnership & Sponsorship Hub | UniLife",
-    description:
-      "Shape the digital heartbeat of the campus. Forward-thinking brands can either integrate their services or amplify their reach across the OOU student ecosystem.",
-    url: "https://unilife.com.ng/alliances",
-    siteName: "UniLife",
-    locale: "en_NG",
-    type: "website",
-  },
-};
+    "Shape the digital heartbeat of the campus. Forward-thinking brands can integrate their services or amplify their reach across the OOU student ecosystem.",
+  path: "/alliances",
+});
 
 export default function AlliancesLayout({
   children,

@@ -117,7 +117,7 @@ export default function ScholarshipsDirectory({ activeNav = "/scholarships" }: P
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
             className="w-full h-auto aspect-[4/3] rounded-[32px] overflow-hidden shadow-xl bg-[#EFE9D9] relative border border-[rgba(20,21,26,0.1)]"
           >
-            <img
+            <img loading="lazy" decoding="async"
               src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1000&auto=format&fit=crop"
               alt="Nigerian university students studying together"
               className="w-full h-full object-cover"

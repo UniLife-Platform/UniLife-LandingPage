@@ -7,13 +7,14 @@ export interface ChallengeItem {
   category: "Entrepreneurship & Innovation" | "Alumni & Mentorship";
   institution: string; // e.g. "Olabisi Onabanjo University"
   campusScope: string; // e.g. "OOU (Ago-Iwoye, Sagamu, Ayetoro, Ibogun)" or "All Nigerian Universities"
-  status: "Open" | "Active Sprint" | "Judging" | "Coming Soon";
+  status: "Open" | "Active Sprint" | "Judging" | "Coming Soon" | "Closed";
   statusColor: string;
   badge: string;
   badgeAccent: string;
   badgeBg: string;
   prizePool?: string;
-  deadline: string;
+  deadline: string; // display text, e.g. "October 30, 2026" or "Rolling Admissions"
+  closesAt?: string; // ISO timestamp with offset; when it passes, an "Open" challenge shows as Closed
   participantsCount: string;
   heroImage: string;
   formType: "tally" | "google_form" | "external";
@@ -37,7 +38,7 @@ export interface ChallengeItem {
   highlights?: string[];
 }
 
-export const ALL_CHALLENGES: ChallengeItem[] = [
+const RAW_CHALLENGES: ChallengeItem[] = [
   {
     id: "oou-venture-2026",
     slug: "oou-venture-2026",
@@ -54,6 +55,7 @@ export const ALL_CHALLENGES: ChallengeItem[] = [
     badgeBg: "rgba(16,185,129,0.12)",
     prizePool: "Seed Grants & Incubation",
     deadline: "October 30, 2026",
+    closesAt: "2026-10-30T23:59:59+01:00", // end of day, Lagos time
     participantsCount: "640+ students registered",
     heroImage: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1200&auto=format&fit=crop",
     formType: "tally",
@@ -149,6 +151,24 @@ export const ALL_CHALLENGES: ChallengeItem[] = [
     ]
   }
 ];
+
+const CLOSED_COLOR = "#6b7280";
+
+/** Turns an "Open" challenge into "Closed" once its closesAt time has passed. */
+function withDeadlineStatus(c: ChallengeItem): ChallengeItem {
+  if (c.status !== "Open" || !c.closesAt) return c;
+  const closes = Date.parse(c.closesAt);
+  if (Number.isNaN(closes) || Date.now() <= closes) return c;
+  return {
+    ...c,
+    status: "Closed",
+    statusColor: CLOSED_COLOR,
+    badgeAccent: CLOSED_COLOR,
+    badgeBg: "rgba(107,114,128,0.12)",
+  };
+}
+
+export const ALL_CHALLENGES: ChallengeItem[] = RAW_CHALLENGES.map(withDeadlineStatus);
 
 export function getChallengeBySlug(slug: string): ChallengeItem | undefined {
   return ALL_CHALLENGES.find((c) => c.slug === slug || c.id === slug);

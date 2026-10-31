@@ -22,6 +22,22 @@ function getPointerServerSnapshot() {
   return false;
 }
 
+function subscribeReducedMotion(callback: () => void) {
+  if (typeof window === "undefined") return () => {};
+  const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+  mq.addEventListener("change", callback);
+  return () => mq.removeEventListener("change", callback);
+}
+
+function getReducedMotionSnapshot() {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+// Text-entry elements keep the native I-beam so people can see where they are typing
+const TEXT_FIELD_SELECTOR =
+  'input:not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="range"]), textarea, [contenteditable="true"]';
+
 /**
  * Optimized Custom Cursor - Preserving the signature inverted circular lens
  * with high-performance Framer Motion springs outside React's render cycle.
@@ -39,7 +55,14 @@ export default function CustomCursor() {
     getPointerServerSnapshot
   );
 
+  const prefersReducedMotion = useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotionSnapshot,
+    getPointerServerSnapshot
+  );
+
   const [isHovering, setIsHovering] = useState(false);
+  const [isOverTextField, setIsOverTextField] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -50,7 +73,7 @@ export default function CustomCursor() {
   const lastTargetRef = useRef<EventTarget | null>(null);
 
   useEffect(() => {
-    if (!isFinePointer) return;
+    if (!isFinePointer || prefersReducedMotion) return;
 
     const handleMouseMove = (e: MouseEvent) => {
       // Direct 1:1 hardware mouse tracking without physics delay
@@ -72,6 +95,8 @@ export default function CustomCursor() {
         );
 
         setIsHovering((prev) => (prev !== isInteractive ? isInteractive : prev));
+        const overText = !!target.closest(TEXT_FIELD_SELECTOR);
+        setIsOverTextField((prev) => (prev !== overText ? overText : prev));
       }
     };
 
@@ -101,9 +126,9 @@ export default function CustomCursor() {
       document.removeEventListener("mouseleave", handleMouseLeaveWindow);
       document.removeEventListener("mouseenter", handleMouseEnterWindow);
     };
-  }, [isFinePointer, isVisible, cursorX, cursorY]);
+  }, [isFinePointer, prefersReducedMotion, isVisible, cursorX, cursorY]);
 
-  if (!isFinePointer || !isVisible) {
+  if (!isFinePointer || prefersReducedMotion || !isVisible) {
     return null;
   }
 
@@ -122,12 +147,18 @@ export default function CustomCursor() {
               a, button, [role="button"], input, select, textarea, summary, label {
                 cursor: none !important;
               }
+              input:not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="range"]),
+              textarea,
+              [contenteditable="true"] {
+                cursor: text !important;
+              }
             }
           `,
         }}
       />
 
-      {/* Outer inverse circular lens */}
+      {/* Outer inverse circular lens (hidden over text fields so the native I-beam shows) */}
+      {!isOverTextField && (
       <motion.div
         aria-hidden="true"
         className="fixed top-0 left-0 rounded-full pointer-events-none z-[999999] mix-blend-difference bg-white flex items-center justify-center overflow-hidden shadow-[0_0_20px_rgba(255,255,255,0.4)]"
@@ -162,6 +193,7 @@ export default function CustomCursor() {
           className="w-2 h-2 rounded-full bg-black pointer-events-none"
         />
       </motion.div>
+      )}
     </>
   );
 }

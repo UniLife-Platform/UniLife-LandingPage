@@ -149,6 +149,18 @@ const FAQ_SECTIONS: FAQSection[] = [
   },
 ];
 
+const FAQ_JSON_LD = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ_SECTIONS.flatMap((section) =>
+    section.items.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a },
+    }))
+  ),
+}).replace(/</g, "\\u003c");
+
 export default function FAQPage() {
   const [openItems, setOpenItems] = useState<Record<string, boolean>>({
     "free-to-use": true, // open first by default like many modern FAQ designs
@@ -161,6 +173,7 @@ export default function FAQPage() {
     email: "",
     phone: "",
     message: "",
+    website: "", // honeypot: hidden from people, bots tend to fill it
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -187,7 +200,11 @@ export default function FAQPage() {
         body: JSON.stringify({ ...formState, source: "FAQ Page" }),
       });
       const data = await response.json().catch(() => ({}));
-      if (!response.ok) throw new Error(data.error || "Could not send that message.");
+      if (!response.ok) {
+        // Server couldn't email it: offer the visitor's own mail app so the message isn't lost.
+        if (data.mailtoUrl) window.location.href = data.mailtoUrl;
+        throw new Error(data.error || "Could not send that message.");
+      }
       if (data.sentVia === "direct" && data.mailtoUrl) {
         window.location.href = data.mailtoUrl;
       }
@@ -218,6 +235,7 @@ export default function FAQPage() {
   return (
     <div className="bg-[#FAF9F5] text-[#14151A] min-h-screen overflow-x-clip font-body antialiased selection:bg-[#ff3d81] selection:text-white">
       <Nav active="/faq" />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: FAQ_JSON_LD }} />
 
       {/* ---- HERO HEADER ---- */}
       <header className="pt-14 sm:pt-20 pb-8 px-4 sm:px-8 md:px-14 max-w-[1440px] mx-auto">
@@ -365,17 +383,17 @@ export default function FAQPage() {
 
               {/* Support Avatars */}
               <div className="flex items-center -space-x-2 mb-6">
-                <img
+                <img loading="lazy" decoding="async"
                   src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=120&auto=format&fit=crop"
                   alt="Support rep"
                   className="w-9 h-9 rounded-full border-2 border-white object-cover shadow-xs"
                 />
-                <img
+                <img loading="lazy" decoding="async"
                   src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=120&auto=format&fit=crop"
                   alt="Support rep"
                   className="w-9 h-9 rounded-full border-2 border-white object-cover shadow-xs"
                 />
-                <img
+                <img loading="lazy" decoding="async"
                   src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=120&auto=format&fit=crop"
                   alt="Support rep"
                   className="w-9 h-9 rounded-full border-2 border-white object-cover shadow-xs"
@@ -414,6 +432,19 @@ export default function FAQPage() {
                 </div>
               ) : (
                 <form onSubmit={handleFormSubmit} className="space-y-3">
+                  <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+                    <label>
+                      Website
+                      <input
+                        type="text"
+                        name="website"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        value={formState.website}
+                        onChange={(e) => setFormState({ ...formState, website: e.target.value })}
+                      />
+                    </label>
+                  </div>
                   <div>
                     <input
                       type="text"

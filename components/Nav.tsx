@@ -4,11 +4,17 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
-import { Sun, Moon, Monitor } from "lucide-react";
+import {
+  Sun, Moon, Monitor,
+  BookOpen, Store, Trophy, GraduationCap, Briefcase, Landmark,
+  UserPlus, Building2, Rocket, Zap, Award, ArrowRight,
+  type LucideIcon,
+} from "lucide-react";
 import { useTheme } from "@/components/ThemeContext";
 
 const LOGIN_URL = "https://app.unilife.com.ng";
 const DROPDOWN_CLOSE_DELAY = 120;
+const DROPDOWN_OPEN_DELAY = 80;
 
 function ThemeToggleButton({
   isDark,
@@ -65,32 +71,31 @@ type NavItem = {
   href: string;
   label: string;
   desc: string;
-  icon: string;
+  icon: LucideIcon;
 };
 
 const FEATURES: NavItem[] = [
-  { href: "/#study", label: "Study Hub & AI", desc: "Past questions and PDF AI tutor.", icon: "📚" },
-  { href: "/#marketplace", label: "Campus Marketplace", desc: "Buy and sell peer-to-peer.", icon: "🏪" },
-  { href: "/#gamification", label: "Campus Economy", desc: "Earn SP and climb the leaderboards.", icon: "🏆" },
+  { href: "/#study", label: "Study Hub & AI", desc: "Past questions and PDF AI tutor.", icon: BookOpen },
+  { href: "/#marketplace", label: "Campus Marketplace", desc: "Buy and sell peer-to-peer.", icon: Store },
+  { href: "/#gamification", label: "Campus Economy", desc: "Earn SP and climb the leaderboards.", icon: Trophy },
 ];
 
 const SOLUTIONS: NavItem[] = [
-  { href: "/students", label: "For Students", desc: "Connect, study, and earn rewards.", icon: "🎓" },
-  { href: "/sellers", label: "For Sellers", desc: "Open a UniShop with zero fees.", icon: "💼" },
-  { href: "/partners", label: "For School Bodies", desc: "Verified pages for unions and clubs.", icon: "🏛️" },
+  { href: "/students", label: "For Students", desc: "Connect, study, and earn rewards.", icon: GraduationCap },
+  { href: "/sellers", label: "For Sellers", desc: "Open a UniShop with zero fees.", icon: Briefcase },
+  { href: "/partners", label: "For School Bodies", desc: "Verified pages for unions and clubs.", icon: Landmark },
 ];
 
+// "/join#pathways" lands visitors straight on the role cards
 const JOIN_US: NavItem[] = [
-  { href: "/join", label: "Campus Ambassadors", desc: "Lead the expansion at your school.", icon: "📢" },
-  { href: "/join", label: "Department Partners", desc: "Digitize your faculty association.", icon: "🤝" },
-  { href: "/join", label: "Core Team", desc: "Build the future of campus tech.", icon: "💻" },
+  { href: "/join#pathways", label: "Join the UniLife Team", desc: "Ambassador, Partner or Builder. Find the role that fits you.", icon: UserPlus },
+  { href: "/alliances", label: "Campus Alliances", desc: "Institutional partnerships, student unions & sponsors.", icon: Building2 },
+  { href: "/request", label: "Request Your Campus", desc: "Vote to bring UniLife to your university.", icon: Rocket },
 ];
 
 const OTHERS: NavItem[] = [
-  { href: "/alliances", label: "Campus Alliances", desc: "Institutional partnerships, student unions & sponsors.", icon: "🤝" },
-  { href: "/challenge", label: "Challenges & Sprints", desc: "Compete in live university innovation challenges.", icon: "⚡" },
-  { href: "/scholarships", label: "Scholarships", desc: "Verified tuition grants, student funds & sponsorships.", icon: "🎓" },
-  { href: "/request", label: "Request Your Campus", desc: "Vote to bring UniLife to your university.", icon: "🚀" },
+  { href: "/challenge", label: "Challenges & Sprints", desc: "Compete in live university innovation challenges.", icon: Zap },
+  { href: "/scholarships", label: "Scholarships", desc: "Verified tuition grants, student funds & sponsorships.", icon: Award },
 ];
 
 // --- Animation Variants ---
@@ -108,10 +113,72 @@ const slideInItem = {
   show: { opacity: 1, x: 0, y: 0, transition: { type: "spring" as const, stiffness: 400, damping: 20 } }
 };
 
+// --- Desktop menu column ---
+function MenuColumn({
+  title,
+  items,
+  isDark,
+  divider,
+  onNavigate,
+}: {
+  title: string;
+  items: NavItem[];
+  isDark?: boolean;
+  divider?: boolean;
+  onNavigate: () => void;
+}) {
+  return (
+    <div className={`flex-1 ${divider ? `border-l pl-6 ${isDark ? "border-white/10" : "border-[rgba(20,21,26,0.08)]"}` : ""}`}>
+      <h4 className={`font-mono text-[0.68rem] font-bold tracking-widest uppercase mb-3.5 pl-3 ${isDark ? "text-[#FFD23F]/90" : "text-[#8a8a7f]"}`}>
+        {title}
+      </h4>
+      <div className="flex flex-col gap-1.5">
+        {items.map((item, idx) => {
+          const Icon = item.icon;
+          return (
+            <Link
+              key={`${item.href}-${idx}`}
+              href={item.href}
+              onClick={onNavigate}
+              className={`flex items-start gap-3.5 p-3 rounded-[16px] transition-all duration-200 group hover:translate-x-1 hover:shadow-xs ${
+                isDark ? "hover:bg-white/5" : "hover:bg-[#f4f6fc]"
+              }`}
+            >
+              <div
+                className={`w-11 h-11 flex items-center justify-center rounded-2xl shadow-xs group-hover:scale-110 group-hover:-rotate-3 transition-all shrink-0 duration-300 ${
+                  isDark
+                    ? "bg-white/5 border border-white/10 group-hover:border-[#FFD23F]/50 group-hover:bg-white/10"
+                    : "bg-[#fdfbf7] border border-[rgba(20,21,26,0.06)] group-hover:border-[#4f7fff]/30 group-hover:bg-white"
+                }`}
+                style={{ color: isDark ? "#FFD23F" : "#2f5bd8" }}
+              >
+                <Icon size={20} strokeWidth={2.1} aria-hidden />
+              </div>
+              <div className="pt-0.5">
+                <div className={`font-bold text-[0.95rem] mb-0.5 transition-colors ${
+                  isDark ? "text-[#F6F2E7] group-hover:text-[#FFD23F]" : "text-[#14151A] group-hover:text-[#4f7fff]"
+                }`}>
+                  {item.label}
+                </div>
+                <div className={`text-[0.84rem] leading-snug transition-colors ${
+                  isDark ? "text-white/65 group-hover:text-white/85" : "text-[#5f6168] group-hover:text-[#46473f]"
+                }`}>
+                  {item.desc}
+                </div>
+              </div>
+            </Link>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 // --- Desktop Mega Menu Component ---
 function DesktopMegaMenu({ active, isDark }: { active?: string; isDark?: boolean }) {
   const [open, setOpen] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const openTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const clearCloseTimer = () => {
     if (closeTimer.current) {
@@ -120,9 +187,24 @@ function DesktopMegaMenu({ active, isDark }: { active?: string; isDark?: boolean
     }
   };
 
+  const clearOpenTimer = () => {
+    if (openTimer.current) {
+      clearTimeout(openTimer.current);
+      openTimer.current = null;
+    }
+  };
+
   const scheduleClose = () => {
+    clearOpenTimer();
     clearCloseTimer();
     closeTimer.current = setTimeout(() => setOpen(false), DROPDOWN_CLOSE_DELAY);
+  };
+
+  // Short intent delay so the menu doesn't flash open when the cursor just passes over "Explore"
+  const scheduleOpen = () => {
+    clearCloseTimer();
+    clearOpenTimer();
+    openTimer.current = setTimeout(() => setOpen(true), DROPDOWN_OPEN_DELAY);
   };
 
   const isActive = [FEATURES, SOLUTIONS, JOIN_US, OTHERS].flat().some((item) => {
@@ -133,10 +215,7 @@ function DesktopMegaMenu({ active, isDark }: { active?: string; isDark?: boolean
   return (
     <div
       className="group"
-      onMouseEnter={() => {
-        clearCloseTimer();
-        setOpen(true);
-      }}
+      onMouseEnter={scheduleOpen}
       onMouseLeave={scheduleClose}
       onBlur={(e) => {
         if (!e.currentTarget.contains(e.relatedTarget as Node)) setOpen(false);
@@ -160,6 +239,7 @@ function DesktopMegaMenu({ active, isDark }: { active?: string; isDark?: boolean
         aria-expanded={open}
         onFocus={() => {
           clearCloseTimer();
+          clearOpenTimer();
           setOpen(true);
         }}
         onKeyDown={(e) => {
@@ -185,177 +265,44 @@ function DesktopMegaMenu({ active, isDark }: { active?: string; isDark?: boolean
             exit={{ opacity: 0, y: 10, scale: 0.98 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
             onMouseEnter={clearCloseTimer}
-            className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-[min(1080px,calc(100vw-3rem))] z-[70] pointer-events-auto"
+            className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-[min(980px,calc(100vw-3rem))] z-[70] pointer-events-auto"
           >
             <div
-              className={`rounded-[28px] p-8 sm:p-9 flex gap-6 ${
+              className={`rounded-[28px] p-8 sm:p-9 flex flex-col gap-6 ${
                 isDark
                   ? "bg-[#181920]/98 backdrop-blur-2xl border border-white/15 shadow-[0_35px_90px_rgba(0,0,0,0.7)] text-[#F6F2E7]"
                   : "bg-white/98 backdrop-blur-2xl border border-[rgba(20,21,26,0.12)] shadow-[0_35px_90px_rgba(20,21,26,0.16)] text-[#14151A]"
               }`}
             >
+              <div className="flex gap-6">
+                <MenuColumn title="Products" items={FEATURES} isDark={isDark} onNavigate={() => setOpen(false)} />
+                <MenuColumn title="Solutions" items={SOLUTIONS} isDark={isDark} divider onNavigate={() => setOpen(false)} />
+                <MenuColumn title="Join Us" items={JOIN_US} isDark={isDark} divider onNavigate={() => setOpen(false)} />
+              </div>
 
-              {/* Column 1: Products */}
-              <div className="flex-1">
-                <h4 className={`font-mono text-[0.68rem] font-bold tracking-widest uppercase mb-3.5 pl-3 ${isDark ? "text-[#FFD23F]/90" : "text-[#8a8a7f]"}`}>
-                  Products
-                </h4>
-                <div className="flex flex-col gap-1.5">
-                  {FEATURES.map((item, idx) => (
+              {/* Footer row: secondary destinations */}
+              <div className={`flex items-center gap-3 pt-5 border-t ${isDark ? "border-white/10" : "border-[rgba(20,21,26,0.08)]"}`}>
+                <span className={`font-mono text-[0.68rem] font-bold tracking-widest uppercase pl-3 ${isDark ? "text-[#FFD23F]/90" : "text-[#8a8a7f]"}`}>
+                  Also
+                </span>
+                {OTHERS.map((item) => {
+                  const Icon = item.icon;
+                  return (
                     <Link
-                      key={`${item.href}-${idx}`}
+                      key={item.href}
                       href={item.href}
                       onClick={() => setOpen(false)}
-                      className={`flex items-start gap-3.5 p-3 rounded-[16px] transition-all duration-200 group hover:translate-x-1 hover:shadow-xs ${
-                        isDark ? "hover:bg-white/5" : "hover:bg-[#f4f6fc]"
+                      className={`group inline-flex items-center gap-2 rounded-full px-4 py-2 text-[0.88rem] font-bold transition-colors ${
+                        isDark ? "text-[#F6F2E7] hover:bg-white/10" : "text-[#14151A] hover:bg-[#f4f6fc]"
                       }`}
                     >
-                      <div className={`text-xl w-11 h-11 flex items-center justify-center rounded-2xl shadow-xs group-hover:scale-110 group-hover:-rotate-3 transition-all shrink-0 duration-300 ${
-                        isDark
-                          ? "bg-white/5 border border-white/10 group-hover:border-[#FFD23F]/50 group-hover:bg-white/10"
-                          : "bg-[#fdfbf7] border border-[rgba(20,21,26,0.06)] group-hover:border-[#4f7fff]/30 group-hover:bg-white"
-                      }`}>
-                        {item.icon}
-                      </div>
-                      <div className="pt-0.5">
-                        <div className={`font-bold text-[0.92rem] mb-0.5 transition-colors ${
-                          isDark ? "text-[#F6F2E7] group-hover:text-[#FFD23F]" : "text-[#14151A] group-hover:text-[#4f7fff]"
-                        }`}>
-                          {item.label}
-                        </div>
-                        <div className={`text-[0.78rem] leading-snug transition-colors ${
-                          isDark ? "text-white/60 group-hover:text-white/80" : "text-[#73757d] group-hover:text-[#46473f]"
-                        }`}>
-                          {item.desc}
-                        </div>
-                      </div>
+                      <Icon size={16} strokeWidth={2.2} aria-hidden style={{ color: isDark ? "#FFD23F" : "#2f5bd8" }} />
+                      {item.label}
+                      <ArrowRight size={14} aria-hidden className="transition-transform group-hover:translate-x-1" />
                     </Link>
-                  ))}
-                </div>
+                  );
+                })}
               </div>
-
-              {/* Column 2: Solutions */}
-              <div className={`flex-1 border-l pl-6 ${isDark ? "border-white/10" : "border-[rgba(20,21,26,0.08)]"}`}>
-                <h4 className={`font-mono text-[0.68rem] font-bold tracking-widest uppercase mb-3.5 pl-3 ${isDark ? "text-[#FFD23F]/90" : "text-[#8a8a7f]"}`}>
-                  Solutions
-                </h4>
-                <div className="flex flex-col gap-1.5">
-                  {SOLUTIONS.map((item, idx) => (
-                    <Link
-                      key={`${item.href}-${idx}`}
-                      href={item.href}
-                      onClick={() => setOpen(false)}
-                      className={`flex items-start gap-3.5 p-3 rounded-[16px] transition-all duration-200 group hover:translate-x-1 hover:shadow-xs ${
-                        isDark ? "hover:bg-white/5" : "hover:bg-[#f4f6fc]"
-                      }`}
-                    >
-                      <div className={`text-xl w-11 h-11 flex items-center justify-center rounded-2xl shadow-xs group-hover:scale-110 group-hover:-rotate-3 transition-all shrink-0 duration-300 ${
-                        isDark
-                          ? "bg-white/5 border border-white/10 group-hover:border-[#FFD23F]/50 group-hover:bg-white/10"
-                          : "bg-[#fdfbf7] border border-[rgba(20,21,26,0.06)] group-hover:border-[#4f7fff]/30 group-hover:bg-white"
-                      }`}>
-                        {item.icon}
-                      </div>
-                      <div className="pt-0.5">
-                        <div className={`font-bold text-[0.92rem] mb-0.5 transition-colors ${
-                          isDark ? "text-[#F6F2E7] group-hover:text-[#FFD23F]" : "text-[#14151A] group-hover:text-[#4f7fff]"
-                        }`}>
-                          {item.label}
-                        </div>
-                        <div className={`text-[0.78rem] leading-snug transition-colors ${
-                          isDark ? "text-white/60 group-hover:text-white/80" : "text-[#73757d] group-hover:text-[#46473f]"
-                        }`}>
-                          {item.desc}
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              {/* Column 3: Join Us */}
-              <div className={`flex-1 border-l pl-6 ${isDark ? "border-white/10" : "border-[rgba(20,21,26,0.08)]"}`}>
-                <h4 className={`font-mono text-[0.68rem] font-bold tracking-widest uppercase mb-3.5 pl-3 ${isDark ? "text-[#FFD23F]/90" : "text-[#8a8a7f]"}`}>
-                  Join Us
-                </h4>
-                <div className="flex flex-col gap-1.5">
-                  {JOIN_US.map((item, idx) => (
-                    <Link
-                      key={`${item.href}-${idx}`}
-                      href={item.href}
-                      onClick={() => setOpen(false)}
-                      className={`flex items-start gap-3.5 p-3 rounded-[16px] transition-all duration-200 group hover:translate-x-1 hover:shadow-xs ${
-                        isDark ? "hover:bg-white/5" : "hover:bg-[#f4f6fc]"
-                      }`}
-                    >
-                      <div className={`text-xl w-11 h-11 flex items-center justify-center rounded-2xl shadow-xs group-hover:scale-110 group-hover:-rotate-3 transition-all shrink-0 duration-300 ${
-                        isDark
-                          ? "bg-white/5 border border-white/10 group-hover:border-[#FFD23F]/50 group-hover:bg-white/10"
-                          : "bg-[#fdfbf7] border border-[rgba(20,21,26,0.06)] group-hover:border-[#4f7fff]/30 group-hover:bg-white"
-                      }`}>
-                        {item.icon}
-                      </div>
-                      <div className="pt-0.5">
-                        <div className={`font-bold text-[0.92rem] mb-0.5 transition-colors ${
-                          isDark ? "text-[#F6F2E7] group-hover:text-[#FFD23F]" : "text-[#14151A] group-hover:text-[#4f7fff]"
-                        }`}>
-                          {item.label}
-                        </div>
-                        <div className={`text-[0.78rem] leading-snug transition-colors ${
-                          isDark ? "text-white/60 group-hover:text-white/80" : "text-[#73757d] group-hover:text-[#46473f]"
-                        }`}>
-                          {item.desc}
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              {/* Column 4: Others (Challenges & Sponsorships) */}
-              <div className={`flex-1 border-l pl-6 ${isDark ? "border-white/10" : "border-[rgba(20,21,26,0.08)]"}`}>
-                <h4 className={`font-mono text-[0.68rem] font-bold tracking-widest uppercase mb-3.5 pl-3 ${isDark ? "text-[#FFD23F]/90" : "text-[#8a8a7f]"}`}>
-                  Others
-                </h4>
-                <div className="flex flex-col gap-1.5">
-                  {OTHERS.map((item, idx) => {
-                    const isExternal = item.href.startsWith("http");
-                    return (
-                      <Link
-                        key={`${item.href}-${idx}`}
-                        href={item.href}
-                        target={isExternal ? "_blank" : undefined}
-                        rel={isExternal ? "noopener noreferrer" : undefined}
-                        onClick={() => setOpen(false)}
-                        className={`flex items-start gap-3.5 p-3 rounded-[16px] transition-all duration-200 group hover:translate-x-1 hover:shadow-xs ${
-                          isDark ? "hover:bg-white/5" : "hover:bg-[#f4f6fc]"
-                        }`}
-                      >
-                        <div className={`text-xl w-11 h-11 flex items-center justify-center rounded-2xl shadow-xs group-hover:scale-110 group-hover:-rotate-3 transition-all shrink-0 duration-300 ${
-                          isDark
-                            ? "bg-white/5 border border-white/10 group-hover:border-[#ff3d81]/50 group-hover:bg-white/10"
-                            : "bg-[#fdfbf7] border border-[rgba(20,21,26,0.06)] group-hover:border-[#ff3d81]/30 group-hover:bg-white"
-                        }`}>
-                          {item.icon}
-                        </div>
-                        <div className="pt-0.5">
-                          <div className={`font-bold text-[0.92rem] mb-0.5 transition-colors ${
-                            isDark ? "text-[#F6F2E7] group-hover:text-[#ff3d81]" : "text-[#14151A] group-hover:text-[#ff3d81]"
-                          }`}>
-                            {item.label}
-                          </div>
-                          <div className={`text-[0.78rem] leading-snug transition-colors ${
-                            isDark ? "text-white/60 group-hover:text-white/80" : "text-[#73757d] group-hover:text-[#46473f]"
-                          }`}>
-                            {item.desc}
-                          </div>
-                        </div>
-                      </Link>
-                    );
-                  })}
-                </div>
-              </div>
-
             </div>
           </motion.div>
         )}
@@ -424,7 +371,7 @@ function MobileAccordion({
                         : "bg-[#f4f6fc] text-[#46473f] hover:bg-[#e9edf8]"
                     }`}
                   >
-                    <span className="text-lg shrink-0">{item.icon}</span>
+                    <item.icon size={18} strokeWidth={2.1} aria-hidden className="shrink-0" style={{ color: isDark ? "#FFD23F" : "#2f5bd8" }} />
                     {item.label}
                   </Link>
                 );
@@ -546,7 +493,6 @@ export default function Nav({
             <DesktopLink href="/" label="Home" active={active} isDark={isDark} />
             <DesktopMegaMenu active={active} isDark={isDark} />
             <DesktopLink href="/about" label="About" active={active} isDark={isDark} />
-            <DesktopLink href="/alliances" label="Alliances" active={active} isDark={isDark} />
             <DesktopLink href="/pricing" label="Pricing" active={active} isDark={isDark} />
             <DesktopLink href="/faq" label="FAQ" active={active} isDark={isDark} />
             <DesktopLink href="/contact" label="Contact" active={active} isDark={isDark} />
@@ -686,17 +632,6 @@ export default function Nav({
                     }`}
                   >
                     About
-                  </Link>
-                </motion.div>
-                <motion.div variants={slideInItem}>
-                  <Link
-                    href="/alliances"
-                    onClick={closeNav}
-                    className={`block py-3 text-[1.1rem] font-bold ${
-                      isDark ? "text-[#F6F2E7] active:text-[#FFD23F]" : "text-[#14151A] active:text-[#4f7fff]"
-                    }`}
-                  >
-                    Alliances
                   </Link>
                 </motion.div>
                 <motion.div variants={slideInItem}>

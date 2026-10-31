@@ -3,6 +3,7 @@
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Link from "next/link";
+import InitialsAvatar from "@/components/Avatar";
 import { motion } from "motion/react";
 import { MessageCircle, ArrowUpRight } from "lucide-react";
 
@@ -201,7 +202,7 @@ export default function ContactContent() {
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           className="w-full h-[36vh] md:h-[52vh] rounded-[32px] overflow-hidden shadow-2xl relative bg-[#EFE9D9]"
         >
-          <img
+          <img loading="lazy" decoding="async"
             src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1600"
             alt="Student checking messages on their phone between classes"
             className="w-full h-full object-cover"
@@ -428,11 +429,7 @@ export default function ContactContent() {
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.5 }}
         >
-          <img
-            src="https://api.dicebear.com/7.x/avataaars/svg?seed=Harrison"
-            alt="Harrison Ariwodo, Founder of UniLife"
-            className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#8fb0ff] to-[#1c2c66] p-2 shrink-0"
-          />
+          <InitialsAvatar name="Harrison Ariwodo" shape="rounded" className="w-20 h-20 text-3xl" />
           <div>
             <div className="font-mono text-[0.7rem] tracking-widest uppercase text-[#8a8a7f] font-semibold mb-1">
               Founder, UniLife
@@ -455,7 +452,7 @@ export default function ContactContent() {
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6 }}
         >
-          <img
+          <img loading="lazy" decoding="async"
             src="https://images.pexels.com/photos/1105315/pexels-photo-1105315.jpeg?auto=compress&cs=tinysrgb&w=1200"
             alt="Background texture"
             className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-overlay"

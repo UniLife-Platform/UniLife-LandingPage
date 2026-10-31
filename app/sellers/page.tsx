@@ -52,7 +52,7 @@ export default function SellersPage() {
               transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
               className="w-full h-auto aspect-square md:aspect-[4/3] rounded-[32px] overflow-hidden shadow-2xl bg-[#EFE9D9]"
             >
-              <img
+              <img loading="lazy" decoding="async"
                 src="https://images.pexels.com/photos/5632402/pexels-photo-5632402.jpeg?auto=compress&cs=tinysrgb&w=800"
                 alt="Student entrepreneur managing products"
                 className="w-full h-full object-cover"
@@ -124,7 +124,7 @@ export default function SellersPage() {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6 }}
           >
-            <img
+            <img loading="lazy" decoding="async"
               src="https://images.pexels.com/photos/6077382/pexels-photo-6077382.jpeg?auto=compress&cs=tinysrgb&w=1200"
               alt="Student preparing online orders"
               className="w-full h-full object-cover"
@@ -188,7 +188,7 @@ export default function SellersPage() {
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
                 >
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={perk.img}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     alt={perk.title}

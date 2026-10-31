@@ -82,7 +82,7 @@ export default function DownloadPage() {
               </p>
 
               <div className="relative bg-white p-4 rounded-2xl border border-[rgba(20,21,26,0.1)] shadow-inner mb-6 flex justify-center">
-                <img
+                <img loading="lazy" decoding="async"
                   src={`https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=${encodeURIComponent(PLAYSTORE_URL)}`}
                   alt="UniLife App Download QR Code"
                   width={240}
@@ -227,7 +227,7 @@ export default function DownloadPage() {
                 title="Click to expand QR Code"
               >
                 <div className="w-16 h-16 bg-white p-1 rounded-xl shadow-xs group-hover:scale-105 transition-transform">
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={`https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(PLAYSTORE_URL)}`}
                     alt="QR"
                     className="w-full h-full object-contain"

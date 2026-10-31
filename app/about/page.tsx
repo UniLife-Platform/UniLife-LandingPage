@@ -42,7 +42,7 @@ export default function AboutPage() {
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             className="w-full h-[40vh] md:h-[60vh] rounded-[32px] overflow-hidden shadow-2xl relative bg-[#EFE9D9]"
           >
-            <img
+            <img loading="lazy" decoding="async"
               src="https://images.pexels.com/photos/1181373/pexels-photo-1181373.jpeg?auto=compress&cs=tinysrgb&w=1600"
               alt="Students walking together on campus"
               className="w-full h-full object-cover"
@@ -60,7 +60,7 @@ export default function AboutPage() {
             transition={{ duration: 0.6 }}
           >
             {/* Dark Overlay Background with Image */}
-            <img
+            <img loading="lazy" decoding="async"
               src="https://images.pexels.com/photos/1105315/pexels-photo-1105315.jpeg?auto=compress&cs=tinysrgb&w=1200"
               alt="Background texture"
               className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-overlay"
@@ -94,7 +94,7 @@ export default function AboutPage() {
               </p>
 
               <div className="w-full h-auto aspect-video rounded-[24px] shadow-lg overflow-hidden bg-[#EFE9D9]">
-                <img
+                <img loading="lazy" decoding="async"
                   src="https://images.pexels.com/photos/3755755/pexels-photo-3755755.jpeg?auto=compress&cs=tinysrgb&w=800"
                   alt="Frustrated student studying"
                   className="w-full h-full object-cover"
@@ -234,7 +234,7 @@ export default function AboutPage() {
               </p>
 
               <div className="w-full h-auto aspect-video rounded-[24px] shadow-lg overflow-hidden bg-[#EFE9D9]">
-                <img
+                <img loading="lazy" decoding="async"
                   src="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=800"
                   alt="Students collaborating and smiling"
                   className="w-full h-full object-cover"
@@ -261,7 +261,7 @@ export default function AboutPage() {
                   The platform grows because using it is rewarding.
                 </h2>
                 <div className="w-full h-auto aspect-square lg:aspect-auto lg:h-[400px] rounded-[24px] shadow-xl mt-8 hidden md:block overflow-hidden bg-[#EFE9D9]">
-                  <img
+                  <img loading="lazy" decoding="async"
                     src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=800"
                     alt="Vibrant student community"
                     className="w-full h-full object-cover"

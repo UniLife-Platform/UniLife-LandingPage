@@ -1,12 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-@theme {
-  --font-display: "Anton", sans-serif;
-  --font-body: "Work Sans", sans-serif;
-  --font-mono: "IBM Plex Mono", monospace;
+@theme inline {
+  --font-display: var(--font-anton), "Anton", sans-serif;
+  --font-body: var(--font-work-sans), "Work Sans", sans-serif;
+  --font-mono: var(--font-plex-mono), "IBM Plex Mono", monospace;
 }
 
 :root {
@@ -15,14 +14,23 @@
   --paper-subtle: #EFE9D9;
   --ink: #14151A;
   --ink-secondary: #46473f;
-  --ink-muted: #8a8a7f;
+  --ink-muted: #66665b; /* was #8a8a7f (3.1:1) -> 5.2:1 on paper */
   --border-subtle: rgba(20, 21, 26, 0.08);
   --border-light: rgba(20, 21, 26, 0.12);
   --border-strong: rgba(20, 21, 26, 0.2);
   --card-bg: #FFFFFF;
-  --font-display: "Anton", sans-serif;
-  --font-body: "Work Sans", sans-serif;
-  --font-mono: "IBM Plex Mono", monospace;
+  --font-display: var(--font-anton), "Anton", sans-serif;
+  --font-body: var(--font-work-sans), "Work Sans", sans-serif;
+  --font-mono: var(--font-plex-mono), "IBM Plex Mono", monospace;
+  /* Accent colors as TEXT (AA-safe on light paper). Fills keep the bright brand hues. */
+  --accent-pink: #ff3d81;
+  --accent-blue: #4f7fff;
+  --accent-yellow: #FFD23F;
+  --accent-pink-text: #c4144f;
+  --accent-blue-text: #2f5bd8;
+  /* Always-dark surface (role cards, hero blocks) in both themes */
+  --surface-night: #0A0A0C;
+  --focus-ring: #2f5bd8;
 }
 
 html.dark, :root.dark {
@@ -31,11 +39,14 @@ html.dark, :root.dark {
   --paper-subtle: #1C1E2A;
   --ink: #F6F2E7;
   --ink-secondary: #B9BCD0;
-  --ink-muted: #84889E;
+  --ink-muted: #9a9eb4;
   --border-subtle: rgba(246, 242, 231, 0.08);
   --border-light: rgba(246, 242, 231, 0.14);
   --border-strong: rgba(246, 242, 231, 0.25);
   --card-bg: #15161F;
+  --accent-pink-text: #ff6b9d;
+  --accent-blue-text: #7c9cff;
+  --focus-ring: #FFD23F;
 }
 
 @layer utilities {
@@ -65,6 +76,21 @@ html.dark, :root.dark {
   0%, 100% { transform: translateY(0); } 
   50% { transform: translateY(-12px); } 
 }
+
+/* =========================================================
+   THEMING GUIDE (read before adding colours)
+   ---------------------------------------------------------
+   New code: use the tokens, which flip automatically in dark mode.
+     text:     text-[var(--ink)] / [var(--ink-secondary)] / [var(--ink-muted)]
+     surfaces: bg-[var(--paper)] / [var(--paper-subtle)] / [var(--card-bg)]
+     borders:  border-[var(--border-light)] / [var(--border-strong)]
+     accents as TEXT: var(--accent-pink-text) / var(--accent-blue-text)
+     accents as FILL: #ff3d81 / #4f7fff / #FFD23F with dark ink text on top
+   Legacy code: hard-coded hex classes (text-[#14151A], bg-white, ...) are remapped
+   by the "Dark Mode Global Theme Mappings" block below. When you touch a page,
+   swap its hex classes for tokens; once no page uses a hex class, delete its
+   override rule. /join is already fully on tokens.
+   ========================================================= */
 
 /* =========================================================
    UNILIFE — Universal Styling & Theme Transitions
@@ -151,7 +177,7 @@ html.dark .text-\[\#46473f\] {
 }
 
 html.dark .text-\[\#8a8a7f\] {
-  color: #84889E !important;
+  color: #9a9eb4 !important;
 }
 
 html.dark .border-\[rgba\(20\,21\,26\,0\.12\)\] {
@@ -185,7 +211,7 @@ html.dark select {
 
 html.dark input::placeholder,
 html.dark textarea::placeholder {
-  color: #84889E !important;
+  color: #9a9eb4 !important;
 }
 
 /* Outlined buttons in dark mode */
@@ -225,3 +251,46 @@ html.dark .shadow-xl {
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5) !important;
 }
 
+
+/* =========================================================
+   Contrast + accessibility fixes
+   ========================================================= */
+
+/* Muted text used in ~90 places: lift it to AA on light surfaces without touching every file */
+.text-\[\#8a8a7f\] {
+  color: var(--ink-muted);
+}
+
+/* Visible keyboard focus everywhere */
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: #ff3d81;
+  color: #fff;
+}
+
+/* Black-opacity utilities were invisible on dark surfaces */
+html.dark .text-black\/40,
+html.dark .text-black\/50,
+html.dark .text-black\/60 { color: rgba(246, 242, 231, 0.7) !important; }
+html.dark .text-black\/70,
+html.dark .text-black\/80 { color: rgba(246, 242, 231, 0.85) !important; }
+html.dark .border-black\/5  { border-color: rgba(246, 242, 231, 0.06) !important; }
+html.dark .border-black\/10 { border-color: rgba(246, 242, 231, 0.12) !important; }
+html.dark .border-black\/15,
+html.dark .border-black\/20 { border-color: rgba(246, 242, 231, 0.2) !important; }
+html.dark .bg-black\/5  { background-color: rgba(246, 242, 231, 0.05) !important; }
+html.dark .bg-black\/10 { background-color: rgba(246, 242, 231, 0.09) !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

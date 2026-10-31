@@ -458,7 +458,7 @@ export function PartnerChip({
     <a className="partner-chip" href={href} target="_blank" rel="noopener">
       {/* using plain img: partner logos are third-party, arbitrary aspect ratios */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={src} alt={alt} />
+      <img loading="lazy" decoding="async" src={src} alt={alt} />
     </a>
   );
 }

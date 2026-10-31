@@ -167,6 +167,7 @@ export default function ChallengesDirectoryPage() {
                   <option value="Open">Open</option>
                   <option value="Active Sprint">Active Sprint</option>
                   <option value="Coming Soon">Coming Soon</option>
+                  <option value="Closed">Closed</option>
                 </select>
               </div>
             </div>
@@ -326,6 +327,12 @@ export default function ChallengesDirectoryPage() {
                       <ChevronRight className="w-3.5 h-3.5" />
                     </Link>
 
+                    {challenge.status === "Closed" ? (
+                      <span className="px-4 py-1.5 rounded-full border-2 border-dashed border-[rgba(20,21,26,0.25)] text-[#46473f] font-bold text-xs">
+                        Applications closed
+                      </span>
+                    ) : (
+                      <>
                     {challenge.formType === "google_form" || challenge.formType === "external" ? (
                       <a
                         href={challenge.formUrl}
@@ -351,6 +358,8 @@ export default function ChallengesDirectoryPage() {
                         <span className="text-white font-bold">Apply</span>
                         <ArrowUpRight className="w-3.5 h-3.5 text-[#FFD23F]" />
                       </button>
+                    )}
+                      </>
                     )}
                   </div>
                 </motion.div>

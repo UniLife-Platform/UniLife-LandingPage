@@ -28,6 +28,17 @@ function getSystemTheme(): ResolvedTheme {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
+function getServerSystemTheme(): ResolvedTheme {
+  return "light";
+}
+
+function subscribeSystemTheme(callback: () => void) {
+  if (typeof window === "undefined") return () => {};
+  const mq = window.matchMedia("(prefers-color-scheme: dark)");
+  mq.addEventListener("change", callback);
+  return () => mq.removeEventListener("change", callback);
+}
+
 function getThemeSnapshot(): Theme {
   if (typeof window === "undefined") return "system";
   try {
@@ -80,8 +91,16 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     getServerThemeSnapshot
   );
 
+  // Read the OS theme through useSyncExternalStore too, so the first client render
+  // matches the server HTML (server snapshot = "light") and then updates after hydration.
+  const systemTheme = useSyncExternalStore(
+    subscribeSystemTheme,
+    getSystemTheme,
+    getServerSystemTheme
+  );
+
   const resolvedTheme: ResolvedTheme =
-    theme === "system" ? getSystemTheme() : theme;
+    theme === "system" ? systemTheme : theme;
 
   useEffect(() => {
     applyThemeToDocument(resolvedTheme);

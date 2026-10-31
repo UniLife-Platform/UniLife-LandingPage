@@ -1,26 +1,12 @@
-import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 import ScholarshipsDirectory from "@/components/ScholarshipsDirectory";
 
-export const metadata: Metadata = {
-  title: "Scholarships & Student Grants (2026) | UniLife Nigeria",
+export const metadata = buildMetadata({
+  title: "Scholarships & Student Grants (2026)",
   description:
-    "Explore verified corporate scholarships, university tuition grants, and financial sponsorships for Nigerian undergraduates and postgraduates with zero middleman fees.",
-  alternates: { canonical: "https://unilife.com.ng/scholarships" },
-  openGraph: {
-    title: "Verified Student Scholarships & Grants (2026) | UniLife Nigeria",
-    description:
-      "Explore verified corporate scholarships, university tuition grants, and financial sponsorships for Nigerian undergraduates and postgraduates.",
-    url: "https://unilife.com.ng/scholarships",
-    type: "website",
-    siteName: "UniLife",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Verified Student Scholarships & Grants (2026) | UniLife Nigeria",
-    description:
-      "Explore verified corporate scholarships, university tuition grants, and financial sponsorships for Nigerian undergraduates.",
-  },
-};
+    "Explore verified corporate scholarships, university tuition grants and financial sponsorships for Nigerian undergraduates and postgraduates with zero middleman fees.",
+  path: "/scholarships",
+});
 
 export default function ScholarshipsPage() {
   return <ScholarshipsDirectory activeNav="/scholarships" />;

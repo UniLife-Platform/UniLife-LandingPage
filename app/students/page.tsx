@@ -51,7 +51,7 @@ export default function StudentsPage() {
               transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
               className="w-full h-auto aspect-square md:aspect-[4/3] rounded-[32px] overflow-hidden shadow-2xl bg-[#EFE9D9] relative"
             >
-              <img
+              <img loading="lazy" decoding="async"
                 src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1000&auto=format&fit=crop"
                 alt="Nigerian university students on campus"
                 className="w-full h-full object-cover"
