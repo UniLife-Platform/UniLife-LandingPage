@@ -38,7 +38,8 @@ const FAQ_SECTIONS: FAQSection[] = [
   {
     id: "getting-started",
     title: "Getting Started & Verification",
-    description: "Account creation, student matric ID verification, campus availability, and privacy.",
+    description:
+      "Account creation, student matric ID verification, campus availability, and privacy.",
     items: [
       {
         id: "free-to-use",
@@ -69,7 +70,8 @@ const FAQ_SECTIONS: FAQSection[] = [
   {
     id: "marketplace-safety",
     title: "Marketplace, Safety & Escrow",
-    description: "Buying, selling, safe campus meetup zones, scam prevention, and order delivery.",
+    description:
+      "Buying, selling, safe campus meetup zones, scam prevention, and order delivery.",
     items: [
       {
         id: "anti-scam-marketplace",
@@ -100,7 +102,8 @@ const FAQ_SECTIONS: FAQSection[] = [
   {
     id: "rewards-economy",
     title: "SP (Status Points) & Cash Referrals",
-    description: "Earning reward points, leaderboard climbing, and cash prize disbursements.",
+    description:
+      "Earning reward points, leaderboard climbing, and cash prize disbursements.",
     items: [
       {
         id: "what-is-sp",
@@ -125,7 +128,8 @@ const FAQ_SECTIONS: FAQSection[] = [
   {
     id: "study-faculty",
     title: "AI Study Hub & Campus Leadership",
-    description: "Past exam question banks, PDF handout tutors, and SUG faculty dues collection.",
+    description:
+      "Past exam question banks, PDF handout tutors, and SUG faculty dues collection.",
     items: [
       {
         id: "ai-study-hub",
@@ -157,7 +161,7 @@ const FAQ_JSON_LD = JSON.stringify({
       "@type": "Question",
       name: item.q,
       acceptedAnswer: { "@type": "Answer", text: item.a },
-    }))
+    })),
   ),
 }).replace(/</g, "\\u003c");
 
@@ -210,7 +214,9 @@ export default function FAQPage() {
       }
       setFormSubmitted(true);
     } catch (error) {
-      setFormError(error instanceof Error ? error.message : "Could not send that message.");
+      setFormError(
+        error instanceof Error ? error.message : "Could not send that message.",
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -223,7 +229,8 @@ export default function FAQPage() {
 
     return FAQ_SECTIONS.map((sec) => {
       const filtered = sec.items.filter(
-        (item) => item.q.toLowerCase().includes(q) || item.a.toLowerCase().includes(q)
+        (item) =>
+          item.q.toLowerCase().includes(q) || item.a.toLowerCase().includes(q),
       );
       return {
         ...sec,
@@ -235,7 +242,10 @@ export default function FAQPage() {
   return (
     <div className="bg-[#FAF9F5] text-[#14151A] min-h-screen overflow-x-clip font-body antialiased selection:bg-[#ff3d81] selection:text-white">
       <Nav active="/faq" />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: FAQ_JSON_LD }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: FAQ_JSON_LD }}
+      />
 
       {/* ---- HERO HEADER ---- */}
       <header className="pt-14 sm:pt-20 pb-8 px-4 sm:px-8 md:px-14 max-w-[1440px] mx-auto">
@@ -244,7 +254,10 @@ export default function FAQPage() {
             Frequently Asked Questions
           </h1>
           <p className="text-[#60626a] text-sm sm:text-base leading-relaxed max-w-3xl">
-            Find answers to the most common questions about student onboarding, marketplace verification, past questions AI, status points, and campus leadership. If you can&apos;t find what you&apos;re looking for, our student support team is always happy to help.
+            Find answers to the most common questions about student onboarding,
+            marketplace verification, past questions AI, status points, and
+            campus leadership. If you can&apos;t find what you&apos;re looking
+            for, our student support team is always happy to help.
           </p>
 
           {/* Search bar with interactive focus & hover states */}
@@ -272,7 +285,6 @@ export default function FAQPage() {
       {/* ---- MAIN 2-COLUMN LAYOUT ---- */}
       <div className="px-4 sm:px-8 md:px-14 max-w-[1440px] mx-auto pb-24 pt-4">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
-          
           {/* LEFT COLUMN: FAQ Category Cards with Accordions (8 cols on desktop) */}
           <main className="lg:col-span-8 space-y-7">
             {filteredSections.length === 0 ? (
@@ -282,7 +294,9 @@ export default function FAQPage() {
                   No matching questions found
                 </h3>
                 <p className="text-sm text-[#60626a] max-w-md mx-auto mb-6">
-                  We couldn&apos;t find an answer matching &ldquo;{searchQuery}&rdquo;. You can submit your question directly in the form on the right or chat with our team on WhatsApp.
+                  We couldn&apos;t find an answer matching &ldquo;{searchQuery}
+                  &rdquo;. You can submit your question directly in the form on
+                  the right or chat with our team on WhatsApp.
                 </p>
                 <div className="flex flex-wrap justify-center gap-3">
                   <button
@@ -323,7 +337,10 @@ export default function FAQPage() {
                     {section.items.map((item) => {
                       const isOpen = !!openItems[item.id];
                       return (
-                        <div key={item.id} className="py-4 first:pt-1 last:pb-1">
+                        <div
+                          key={item.id}
+                          className="py-4 first:pt-1 last:pb-1"
+                        >
                           <button
                             onClick={() => toggleItem(item.id)}
                             className="w-full flex items-center justify-between text-left gap-4 group focus:outline-none p-2 -mx-2 rounded-xl hover:bg-[#f6f8fe] transition-all duration-200 cursor-pointer"
@@ -332,11 +349,13 @@ export default function FAQPage() {
                             <span className="text-[0.96rem] sm:text-[1rem] font-semibold text-[#14151A] group-hover:text-[#4f7fff] transition-colors pr-2">
                               {item.q}
                             </span>
-                            <span className={`shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-200 ${
-                              isOpen
-                                ? "bg-[#14151A] text-white"
-                                : "bg-[#F3F2EB] text-[#8a8a7f] group-hover:bg-[#4f7fff]/15 group-hover:text-[#4f7fff]"
-                            }`}>
+                            <span
+                              className={`shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-200 ${
+                                isOpen
+                                  ? "bg-[#14151A] text-white"
+                                  : "bg-[#F3F2EB] text-[#8a8a7f] group-hover:bg-[#4f7fff]/15 group-hover:text-[#4f7fff]"
+                              }`}
+                            >
                               {isOpen ? (
                                 <Minus className="w-3.5 h-3.5 stroke-[2.4]" />
                               ) : (
@@ -372,28 +391,41 @@ export default function FAQPage() {
           {/* RIGHT COLUMN: "Didn't find your answer?" Contact Card (4 cols on desktop) */}
           <aside className="lg:col-span-4 sticky top-24">
             <div className="bg-white border border-[#E5E4DC] hover:border-[#14151A]/25 rounded-3xl p-7 sm:p-8 shadow-[0_4px_20px_rgba(20,21,26,0.05)] hover:shadow-[0_16px_36px_rgba(20,21,26,0.08)] transition-all duration-300">
-              
               {/* Card Header */}
               <h3 className="text-xl font-bold text-[#14151A] tracking-tight">
                 Didn&apos;t find your answer?
               </h3>
               <p className="text-xs text-[#8a8a7f] mt-1 mb-4">
-                Our campus support team responds via <strong className="text-[#14151A] font-semibold">support@unilife.com.ng</strong> & <strong className="text-[#14151A] font-semibold">hello@unilife.com.ng</strong>.
+                Our campus support team responds via{" "}
+                <strong className="text-[#14151A] font-semibold">
+                  support@unilife.com.ng
+                </strong>{" "}
+                &{" "}
+                <strong className="text-[#14151A] font-semibold">
+                  hello@unilife.com.ng
+                </strong>
+                .
               </p>
 
               {/* Support Avatars */}
               <div className="flex items-center -space-x-2 mb-6">
-                <img loading="lazy" decoding="async"
+                <img
+                  loading="lazy"
+                  decoding="async"
                   src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=120&auto=format&fit=crop"
                   alt="Support rep"
                   className="w-9 h-9 rounded-full border-2 border-white object-cover shadow-xs"
                 />
-                <img loading="lazy" decoding="async"
+                <img
+                  loading="lazy"
+                  decoding="async"
                   src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=120&auto=format&fit=crop"
                   alt="Support rep"
                   className="w-9 h-9 rounded-full border-2 border-white object-cover shadow-xs"
                 />
-                <img loading="lazy" decoding="async"
+                <img
+                  loading="lazy"
+                  decoding="async"
                   src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=120&auto=format&fit=crop"
                   alt="Support rep"
                   className="w-9 h-9 rounded-full border-2 border-white object-cover shadow-xs"
@@ -405,7 +437,9 @@ export default function FAQPage() {
               </div>
 
               {/* Form or Success State */}
-              {formError && <p className="text-sm text-[#14151A]">{formError}</p>}
+              {formError && (
+                <p className="text-sm text-[#14151A]">{formError}</p>
+              )}
               {formSubmitted ? (
                 <div className="bg-[#FAF9F5] border border-[#E2E1DA] rounded-2xl p-6 text-center">
                   <div className="w-11 h-11 bg-[#10b981]/15 text-[#10b981] rounded-full flex items-center justify-center mx-auto mb-3 shadow-xs">
@@ -415,15 +449,30 @@ export default function FAQPage() {
                     Message Sent to Support!
                   </h4>
                   <p className="text-xs text-[#60626a] mb-2 leading-relaxed">
-                    Opening your email client to send to <span className="font-semibold text-[#14151A]">support@unilife.com.ng</span> &amp; <span className="font-semibold text-[#14151A]">hello@unilife.com.ng</span>.
+                    Opening your email client to send to{" "}
+                    <span className="font-semibold text-[#14151A]">
+                      support@unilife.com.ng
+                    </span>{" "}
+                    &amp;{" "}
+                    <span className="font-semibold text-[#14151A]">
+                      hello@unilife.com.ng
+                    </span>
+                    .
                   </p>
                   <p className="text-[11px] text-[#8a8a7f] mb-5">
-                    If your email window didn&apos;t pop up, you can also email us directly below.
+                    If your email window didn&apos;t pop up, you can also email
+                    us directly below.
                   </p>
                   <button
                     onClick={() => {
                       setFormSubmitted(false);
-                      setFormState({ name: "", email: "", phone: "", message: "" });
+                      setFormState({
+                        name: "",
+                        email: "",
+                        phone: "",
+                        message: "",
+                        website: "",
+                      });
                     }}
                     className="text-xs font-semibold text-[#14151A] underline underline-offset-2 hover:text-[#4f7fff] transition-colors cursor-pointer"
                   >
@@ -432,7 +481,10 @@ export default function FAQPage() {
                 </div>
               ) : (
                 <form onSubmit={handleFormSubmit} className="space-y-3">
-                  <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+                  <div
+                    aria-hidden="true"
+                    className="absolute -left-[9999px] h-0 w-0 overflow-hidden"
+                  >
                     <label>
                       Website
                       <input
@@ -441,7 +493,12 @@ export default function FAQPage() {
                         tabIndex={-1}
                         autoComplete="off"
                         value={formState.website}
-                        onChange={(e) => setFormState({ ...formState, website: e.target.value })}
+                        onChange={(e) =>
+                          setFormState({
+                            ...formState,
+                            website: e.target.value,
+                          })
+                        }
                       />
                     </label>
                   </div>
@@ -451,7 +508,9 @@ export default function FAQPage() {
                       required
                       placeholder="Name"
                       value={formState.name}
-                      onChange={(e) => setFormState({ ...formState, name: e.target.value })}
+                      onChange={(e) =>
+                        setFormState({ ...formState, name: e.target.value })
+                      }
                       className="w-full px-4 py-2.5 bg-[#FAF9F6] border border-[#E2E1DA] hover:border-[#14151A]/30 focus:border-[#4f7fff] focus:ring-3 focus:ring-[#4f7fff]/10 rounded-xl text-xs placeholder:text-[#9c9c94] text-[#14151A] focus:outline-none focus:bg-white transition-all"
                     />
                   </div>
@@ -462,7 +521,9 @@ export default function FAQPage() {
                       required
                       placeholder="Email"
                       value={formState.email}
-                      onChange={(e) => setFormState({ ...formState, email: e.target.value })}
+                      onChange={(e) =>
+                        setFormState({ ...formState, email: e.target.value })
+                      }
                       className="w-full px-4 py-2.5 bg-[#FAF9F6] border border-[#E2E1DA] hover:border-[#14151A]/30 focus:border-[#4f7fff] focus:ring-3 focus:ring-[#4f7fff]/10 rounded-xl text-xs placeholder:text-[#9c9c94] text-[#14151A] focus:outline-none focus:bg-white transition-all"
                     />
                   </div>
@@ -472,7 +533,9 @@ export default function FAQPage() {
                       type="tel"
                       placeholder="Phone number (WhatsApp optional)"
                       value={formState.phone}
-                      onChange={(e) => setFormState({ ...formState, phone: e.target.value })}
+                      onChange={(e) =>
+                        setFormState({ ...formState, phone: e.target.value })
+                      }
                       className="w-full px-4 py-2.5 bg-[#FAF9F6] border border-[#E2E1DA] hover:border-[#14151A]/30 focus:border-[#4f7fff] focus:ring-3 focus:ring-[#4f7fff]/10 rounded-xl text-xs placeholder:text-[#9c9c94] text-[#14151A] focus:outline-none focus:bg-white transition-all"
                     />
                   </div>
@@ -483,7 +546,9 @@ export default function FAQPage() {
                       rows={4}
                       placeholder="Message"
                       value={formState.message}
-                      onChange={(e) => setFormState({ ...formState, message: e.target.value })}
+                      onChange={(e) =>
+                        setFormState({ ...formState, message: e.target.value })
+                      }
                       className="w-full px-4 py-2.5 bg-[#FAF9F6] border border-[#E2E1DA] hover:border-[#14151A]/30 focus:border-[#4f7fff] focus:ring-3 focus:ring-[#4f7fff]/10 rounded-xl text-xs placeholder:text-[#9c9c94] text-[#14151A] focus:outline-none focus:bg-white transition-all resize-none"
                     />
                   </div>
@@ -530,17 +595,14 @@ export default function FAQPage() {
                   </a>
                 </div>
               </div>
-
             </div>
           </aside>
-
         </div>
       </div>
 
       {/* ---- BOTTOM VALUE BANNER (Matching the 4 feature items at the bottom of the reference screenshot) ---- */}
       <section className="border-t border-[#E5E4DC] bg-white py-12 px-4 sm:px-8 md:px-14">
         <div className="max-w-[1440px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-          
           <div className="flex items-start gap-3.5">
             <div className="shrink-0 w-8 h-8 rounded-full bg-[#FAF9F5] border border-[#E5E4DC] flex items-center justify-center text-[#14151A] mt-0.5">
               <Sparkles className="w-4 h-4 text-[#ff3d81]" />
@@ -550,7 +612,8 @@ export default function FAQPage() {
                 Zero Fees for Students
               </h4>
               <p className="text-xs text-[#60626a] leading-relaxed">
-                Free past questions, study rooms, and student marketplace profiles across all campuses.
+                Free past questions, study rooms, and student marketplace
+                profiles across all campuses.
               </p>
             </div>
           </div>
@@ -564,7 +627,8 @@ export default function FAQPage() {
                 Verified Matric Profiles
               </h4>
               <p className="text-xs text-[#60626a] leading-relaxed">
-                Every buyer and seller is verified with real institution matriculation numbers or school emails.
+                Every buyer and seller is verified with real institution
+                matriculation numbers or school emails.
               </p>
             </div>
           </div>
@@ -578,7 +642,8 @@ export default function FAQPage() {
                 Fast Student Support
               </h4>
               <p className="text-xs text-[#60626a] leading-relaxed">
-                Friendly support reps located on Nigerian campuses, ready to resolve disputes and questions.
+                Friendly support reps located on Nigerian campuses, ready to
+                resolve disputes and questions.
               </p>
             </div>
           </div>
@@ -592,11 +657,11 @@ export default function FAQPage() {
                 Low Data Consumption
               </h4>
               <p className="text-xs text-[#60626a] leading-relaxed">
-                Optimized for Nigerian telco networks (MTN, Airtel, Glo) with offline past question caching.
+                Optimized for Nigerian telco networks (MTN, Airtel, Glo) with
+                offline past question caching.
               </p>
             </div>
           </div>
-
         </div>
       </section>
 
