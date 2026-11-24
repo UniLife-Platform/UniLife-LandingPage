@@ -6,7 +6,7 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import type { ReactNode } from "react";
 
-const WHATSAPP_URL = "https://wa.me/2348164670694";
+const WHATSAPP_URL = "https://wa.me/2349038163213";
 
 export function Section({
   number,
@@ -133,7 +133,9 @@ export default function LegalLayout({
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           className="w-full h-[30vh] md:h-[42vh] rounded-[32px] overflow-hidden shadow-2xl relative bg-[#EFE9D9]"
         >
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             src={heroImage}
             alt={heroImageAlt}
             className="w-full h-full object-cover"
@@ -172,7 +174,9 @@ export default function LegalLayout({
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6 }}
         >
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             src="https://images.pexels.com/photos/1181534/pexels-photo-1181534.jpeg?auto=compress&cs=tinysrgb&w=1200"
             alt="Background texture"
             className="absolute inset-0 w-full h-full object-cover opacity-15 mix-blend-overlay"

@@ -17,7 +17,7 @@ import {
   AlertCircle,
 } from "lucide-react";
 
-const WHATSAPP_URL = "https://wa.me/2348164670694";
+const WHATSAPP_URL = "https://wa.me/2349038163213";
 const SUPPORT_EMAIL_URL = "mailto:support@unilife.com.ng,hello@unilife.com.ng";
 
 interface FAQItem {

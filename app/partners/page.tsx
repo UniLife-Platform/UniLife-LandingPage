@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import { motion } from "motion/react";
 
-const WHATSAPP_URL = "https://wa.me/2348164670694";
+const WHATSAPP_URL = "https://wa.me/2349038163213";
 const EMAIL_URL = "mailto:hello@unilife.com.ng";
 
 type BenefitItem = { code: string; title: string; points: string[] };
@@ -98,7 +98,9 @@ function PartnersMarquee({ partners }: { partners: Partner[] }) {
             rel="noopener noreferrer"
             className="bg-white border border-[rgba(20,21,26,0.12)] rounded-2xl p-8 flex items-center justify-center h-[140px] w-[220px] shrink-0 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(20,21,26,0.08)] transition-all duration-300"
           >
-            <img loading="lazy" decoding="async"
+            <img
+              loading="lazy"
+              decoding="async"
               src={p.img}
               alt={p.name}
               className="max-h-[64px] max-w-full object-contain"
@@ -186,7 +188,9 @@ export default function PartnersPage() {
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             className="w-full h-[40vh] md:h-[55vh] rounded-[32px] overflow-hidden shadow-2xl relative bg-[#EFE9D9] mb-20"
           >
-            <img loading="lazy" decoding="async"
+            <img
+              loading="lazy"
+              decoding="async"
               src="https://images.pexels.com/photos/6592665/pexels-photo-6592665.jpeg?auto=compress&cs=tinysrgb&w=1600"
               alt="Student union leaders in a meeting"
               className="w-full h-full object-cover"
@@ -201,7 +205,9 @@ export default function PartnersPage() {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6 }}
           >
-            <img loading="lazy" decoding="async"
+            <img
+              loading="lazy"
+              decoding="async"
               src="https://images.pexels.com/photos/1105315/pexels-photo-1105315.jpeg?auto=compress&cs=tinysrgb&w=1200"
               alt="Background texture"
               className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-overlay"
@@ -264,7 +270,9 @@ export default function PartnersPage() {
               </p>
 
               <div className="w-full h-auto aspect-video rounded-[24px] shadow-lg overflow-hidden bg-[#EFE9D9]">
-                <img loading="lazy" decoding="async"
+                <img
+                  loading="lazy"
+                  decoding="async"
                   src="https://images.pexels.com/photos/7092613/pexels-photo-7092613.jpeg?auto=compress&cs=tinysrgb&w=800"
                   alt="Student council presenting to members"
                   className="w-full h-full object-cover"
@@ -416,7 +424,9 @@ export default function PartnersPage() {
               </p>
 
               <div className="relative w-full h-auto aspect-square rounded-[24px] shadow-lg overflow-hidden bg-[#EFE9D9]">
-                <img loading="lazy" decoding="async"
+                <img
+                  loading="lazy"
+                  decoding="async"
                   src="https://images.pexels.com/photos/7414277/pexels-photo-7414277.jpeg?auto=compress&cs=tinysrgb&w=800"
                   alt="Students onboarding onto a platform together"
                   className="w-full h-full object-cover"
@@ -474,7 +484,9 @@ export default function PartnersPage() {
               transition={{ duration: 0.5 }}
             >
               <div className="absolute top-0 right-0 w-[140px] h-[140px] rounded-bl-[28px] overflow-hidden opacity-90">
-                <img loading="lazy" decoding="async"
+                <img
+                  loading="lazy"
+                  decoding="async"
                   src="https://images.pexels.com/photos/6146978/pexels-photo-6146978.jpeg?auto=compress&cs=tinysrgb&w=400"
                   alt="Founding partner badge visual"
                   className="w-full h-full object-cover mix-blend-luminosity opacity-40"
@@ -569,7 +581,9 @@ export default function PartnersPage() {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6 }}
           >
-            <img loading="lazy" decoding="async"
+            <img
+              loading="lazy"
+              decoding="async"
               src="https://images.pexels.com/photos/1181534/pexels-photo-1181534.jpeg?auto=compress&cs=tinysrgb&w=1200"
               alt="Background texture"
               className="absolute inset-0 w-full h-full object-cover opacity-15 mix-blend-overlay"

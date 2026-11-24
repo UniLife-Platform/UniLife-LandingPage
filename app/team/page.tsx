@@ -4,7 +4,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { motion } from "motion/react";
 
-const WHATSAPP_URL = "https://wa.me/2348164670694";
+const WHATSAPP_URL = "https://wa.me/2349038163213";
 const EMAIL_URL = "mailto:hello@unilife.com.ng";
 
 type Role = { title: string; desc: string };

@@ -2,7 +2,14 @@ export interface ScholarshipItem {
   id: string;
   title: string;
   provider: string;
-  category: "undergraduate" | "masters" | "fellowship" | "competition" | "internship" | "training" | "event_sponsor";
+  category:
+    | "undergraduate"
+    | "masters"
+    | "fellowship"
+    | "competition"
+    | "internship"
+    | "training"
+    | "event_sponsor";
   awardValue: string;
   coverage: string;
   targetAudience: string;
@@ -20,7 +27,12 @@ export interface ScholarshipItem {
     name: string;
     domain: string;
     verifiedAt: string;
-    sourceType: "corporate" | "foundation" | "government" | "tech_brand" | "ngo";
+    sourceType:
+      | "corporate"
+      | "foundation"
+      | "government"
+      | "tech_brand"
+      | "ngo";
     officialUrl: string;
   };
 }
@@ -40,7 +52,8 @@ export const ACTIVE_2026_SCHOLARSHIPS: ScholarshipItem[] = [
     category: "undergraduate",
     awardValue: "₦300,000 / year",
     coverage: "Annual tuition stipend till graduation + Laptop & Mentorship",
-    targetAudience: "200L/300L STEM Undergraduates in Nigerian Public Tertiary Institutions",
+    targetAudience:
+      "200L/300L STEM Undergraduates in Nigerian Public Tertiary Institutions",
     deadline: "2026-11-30",
     daysRemaining: 76,
     featured: true,
@@ -58,7 +71,12 @@ export const ACTIVE_2026_SCHOLARSHIPS: ScholarshipItem[] = [
       "Priority consideration for MTN National Youth Service Corps (NYSC) placement",
     ],
     applicationUrl: "https://www.mtn.ng/scholarships/",
-    requirements: ["Valid Student ID", "Current Official Transcript", "Passport Photograph", "Admission Letter"],
+    requirements: [
+      "Valid Student ID",
+      "Current Official Transcript",
+      "Passport Photograph",
+      "Admission Letter",
+    ],
     tags: ["Undergraduate", "STEM", "Nigeria", "₦300k/yr"],
   },
   {
@@ -75,7 +93,8 @@ export const ACTIVE_2026_SCHOLARSHIPS: ScholarshipItem[] = [
     category: "undergraduate",
     awardValue: "₦10,000,000 Total Fund (₦500,000 per Student)",
     coverage: "Direct financial grant for tuition and academic development",
-    targetAudience: "Undergraduates in Any Nigerian Accredited Tertiary Institution",
+    targetAudience:
+      "Undergraduates in Any Nigerian Accredited Tertiary Institution",
     deadline: "2026-11-15",
     daysRemaining: 61,
     featured: true,
@@ -93,7 +112,11 @@ export const ACTIVE_2026_SCHOLARSHIPS: ScholarshipItem[] = [
       "Internship & shadowing opportunities at Selar",
     ],
     applicationUrl: "https://www.scholarshipregion.com/selar-tuition-fund/",
-    requirements: ["School ID / Admission Verification", "Statement of Purpose Essay", "Bank Details"],
+    requirements: [
+      "School ID / Admission Verification",
+      "Statement of Purpose Essay",
+      "Bank Details",
+    ],
     tags: ["Undergraduate", "All Faculties", "Tuition Grant", "₦500k/Student"],
   },
   {
@@ -105,12 +128,14 @@ export const ACTIVE_2026_SCHOLARSHIPS: ScholarshipItem[] = [
       domain: "scholarshipregion.com",
       verifiedAt: "2026-09-15",
       sourceType: "corporate",
-      officialUrl: "https://www.scholarshipregion.com/dufil-prima-foods-scholarship/",
+      officialUrl:
+        "https://www.scholarshipregion.com/dufil-prima-foods-scholarship/",
     },
     category: "undergraduate",
     awardValue: "₦200,000 / year",
     coverage: "Annual academic grant and living allowance",
-    targetAudience: "Nigerian Undergraduates (Nutrition, Food Science, Engineering, Management)",
+    targetAudience:
+      "Nigerian Undergraduates (Nutrition, Food Science, Engineering, Management)",
     deadline: "2026-12-10",
     daysRemaining: 86,
     status: "open",
@@ -126,8 +151,13 @@ export const ACTIVE_2026_SCHOLARSHIPS: ScholarshipItem[] = [
       "Indomie youth ambassador recognition and products package",
       "Factory tour and industrial attachment consideration",
     ],
-    applicationUrl: "https://www.scholarshipregion.com/dufil-prima-foods-scholarship/",
-    requirements: ["O-Level Certificate", "University Admission Letter", "Current Semester Results Slip"],
+    applicationUrl:
+      "https://www.scholarshipregion.com/dufil-prima-foods-scholarship/",
+    requirements: [
+      "O-Level Certificate",
+      "University Admission Letter",
+      "Current Semester Results Slip",
+    ],
     tags: ["Undergraduate", "Food Science", "Engineering", "Corporate Award"],
   },
   {
@@ -162,7 +192,11 @@ export const ACTIVE_2026_SCHOLARSHIPS: ScholarshipItem[] = [
       "Access to industry mentors",
     ],
     applicationUrl: "https://seplatgrowthacademy.com/scholarship/",
-    requirements: ["University ID", "Official Statement of Results/Transcript", "LGA Certificate of Origin"],
+    requirements: [
+      "University ID",
+      "Official Statement of Results/Transcript",
+      "LGA Certificate of Origin",
+    ],
     tags: ["Undergraduate", "Energy", "200L+", "National Merit"],
   },
   {
@@ -174,12 +208,14 @@ export const ACTIVE_2026_SCHOLARSHIPS: ScholarshipItem[] = [
       domain: "shell.com.ng",
       verifiedAt: "2026-09-15",
       sourceType: "corporate",
-      officialUrl: "https://www.shell.com.ng/sustainability/communities/education-programmes/scholarships.html",
+      officialUrl:
+        "https://www.shell.com.ng/sustainability/communities/education-programmes/scholarships.html",
     },
     category: "undergraduate",
     awardValue: "₦250,000 / year",
     coverage: "Full educational grant renewed annually with academic progress",
-    targetAudience: "100L/200L Students in Nigerian Federal & State Universities",
+    targetAudience:
+      "100L/200L Students in Nigerian Federal & State Universities",
     deadline: "2026-12-15",
     daysRemaining: 91,
     status: "open",
@@ -195,8 +231,14 @@ export const ACTIVE_2026_SCHOLARSHIPS: ScholarshipItem[] = [
       "Invitations to Shell tech hackathons and innovation hubs",
       "Priority consideration for student internships",
     ],
-    applicationUrl: "https://www.shell.com.ng/sustainability/communities/education-programmes/scholarships.html",
-    requirements: ["O-Level Results", "JAMB Result Slip", "University Admission Letter", "Student ID"],
+    applicationUrl:
+      "https://www.shell.com.ng/sustainability/communities/education-programmes/scholarships.html",
+    requirements: [
+      "O-Level Results",
+      "JAMB Result Slip",
+      "University Admission Letter",
+      "Student ID",
+    ],
     tags: ["Undergraduate", "Shell", "All Faculties", "Renewable"],
   },
   {
@@ -208,12 +250,15 @@ export const ACTIVE_2026_SCHOLARSHIPS: ScholarshipItem[] = [
       domain: "buildyourfuture.withgoogle.com",
       verifiedAt: "2026-09-15",
       sourceType: "tech_brand",
-      officialUrl: "https://buildyourfuture.withgoogle.com/scholarships/generation-google-scholarship-emea",
+      officialUrl:
+        "https://buildyourfuture.withgoogle.com/scholarships/generation-google-scholarship-emea",
     },
     category: "fellowship",
     awardValue: "€7,000 (~₦12,500,000)",
-    coverage: "One-time financial award for tuition, books, computer hardware, and living expenses",
-    targetAudience: "Computer Science & Engineering Undergraduates & Masters Students",
+    coverage:
+      "One-time financial award for tuition, books, computer hardware, and living expenses",
+    targetAudience:
+      "Computer Science & Engineering Undergraduates & Masters Students",
     deadline: "2026-11-15",
     daysRemaining: 61,
     featured: true,
@@ -230,8 +275,13 @@ export const ACTIVE_2026_SCHOLARSHIPS: ScholarshipItem[] = [
       "Google Virtual Student Retreat & Leadership Workshops",
       "Mentorship pairing with Google Senior Engineers",
     ],
-    applicationUrl: "https://buildyourfuture.withgoogle.com/scholarships/generation-google-scholarship-emea",
-    requirements: ["Resume / CV", "Academic Transcript", "Responses to short-essay questions"],
+    applicationUrl:
+      "https://buildyourfuture.withgoogle.com/scholarships/generation-google-scholarship-emea",
+    requirements: [
+      "Resume / CV",
+      "Academic Transcript",
+      "Responses to short-essay questions",
+    ],
     tags: ["Fellowship", "Tech", "Global Brand", "€7,000 Award"],
   },
   {
@@ -243,12 +293,16 @@ export const ACTIVE_2026_SCHOLARSHIPS: ScholarshipItem[] = [
       domain: "scholarshipregion.com",
       verifiedAt: "2026-09-15",
       sourceType: "government",
-      officialUrl: "https://www.scholarshipregion.com/category/scholarships/masters-scholarships/",
+      officialUrl:
+        "https://www.scholarshipregion.com/category/scholarships/masters-scholarships/",
     },
     category: "masters",
-    awardValue: "100% Fully Funded (Tuition + Flight + Monthly Living Allowance)",
-    coverage: "Full tuition waiver, visa fees, round-trip economy airfare, hostel accommodation, and monthly stipend",
-    targetAudience: "Nigerian High School Graduates (for BSc) and University Graduates (for MSc / PhD)",
+    awardValue:
+      "100% Fully Funded (Tuition + Flight + Monthly Living Allowance)",
+    coverage:
+      "Full tuition waiver, visa fees, round-trip economy airfare, hostel accommodation, and monthly stipend",
+    targetAudience:
+      "Nigerian High School Graduates (for BSc) and University Graduates (for MSc / PhD)",
     deadline: "2027-01-31",
     daysRemaining: 138,
     status: "open",
@@ -265,8 +319,14 @@ export const ACTIVE_2026_SCHOLARSHIPS: ScholarshipItem[] = [
       "Monthly living stipend deposited in INR",
       "Return international flight tickets",
     ],
-    applicationUrl: "https://www.scholarshipregion.com/category/scholarships/masters-scholarships/",
-    requirements: ["Academic Certificates & Transcripts", "International Passport", "Medical Fitness Certificate", "Passport Photograph"],
+    applicationUrl:
+      "https://www.scholarshipregion.com/category/scholarships/masters-scholarships/",
+    requirements: [
+      "Academic Certificates & Transcripts",
+      "International Passport",
+      "Medical Fitness Certificate",
+      "Passport Photograph",
+    ],
     tags: ["Masters", "Undergraduate", "Fully Funded", "International Flight"],
   },
   {
@@ -278,12 +338,15 @@ export const ACTIVE_2026_SCHOLARSHIPS: ScholarshipItem[] = [
       domain: "scholarshipregion.com",
       verifiedAt: "2026-09-15",
       sourceType: "foundation",
-      officialUrl: "https://www.scholarshipregion.com/university-of-notre-dame-undergraduate-scholars-program/",
+      officialUrl:
+        "https://www.scholarshipregion.com/university-of-notre-dame-undergraduate-scholars-program/",
     },
     category: "undergraduate",
     awardValue: "Full Tuition + $10,000 Enrichment Stipend (~$300,000 Total)",
-    coverage: "Complete undergraduate tuition coverage, room and board, plus $10,000 summer research/internship fund",
-    targetAudience: "Outstanding High School Seniors & Pre-University Applicants Seeking USA Bachelor's Degree",
+    coverage:
+      "Complete undergraduate tuition coverage, room and board, plus $10,000 summer research/internship fund",
+    targetAudience:
+      "Outstanding High School Seniors & Pre-University Applicants Seeking USA Bachelor's Degree",
     deadline: "2026-12-15",
     daysRemaining: 91,
     status: "open",
@@ -299,8 +362,14 @@ export const ACTIVE_2026_SCHOLARSHIPS: ScholarshipItem[] = [
       "$10,000 enrichment stipend for summer internships or research",
       "Special scholar seminars and dedicated faculty mentorship",
     ],
-    applicationUrl: "https://www.scholarshipregion.com/university-of-notre-dame-undergraduate-scholars-program/",
-    requirements: ["High School Transcript", "Standardized Test or Waiver", "Letters of Recommendation", "Personal Essay"],
+    applicationUrl:
+      "https://www.scholarshipregion.com/university-of-notre-dame-undergraduate-scholars-program/",
+    requirements: [
+      "High School Transcript",
+      "Standardized Test or Waiver",
+      "Letters of Recommendation",
+      "Personal Essay",
+    ],
     tags: ["Undergraduate", "USA", "Full Tuition", "$10k Enrichment"],
   },
   {
@@ -316,8 +385,10 @@ export const ACTIVE_2026_SCHOLARSHIPS: ScholarshipItem[] = [
     },
     category: "event_sponsor",
     awardValue: "₦100,000 – ₦500,000 per Event",
-    coverage: "Cash event sponsorship, stage branding, attendee swag, and digital ticketing infrastructure",
-    targetAudience: "Department Executives, Faculty Presidents, SUG Committees, Campus Tech Clubs (GDSC, IEEE, NACOS)",
+    coverage:
+      "Cash event sponsorship, stage branding, attendee swag, and digital ticketing infrastructure",
+    targetAudience:
+      "Department Executives, Faculty Presidents, SUG Committees, Campus Tech Clubs (GDSC, IEEE, NACOS)",
     deadline: "2026-12-31",
     daysRemaining: 107,
     featured: true,
@@ -334,8 +405,13 @@ export const ACTIVE_2026_SCHOLARSHIPS: ScholarshipItem[] = [
       "UniLife branded banners, shirts, and wristbands provided free",
       "Broadcast blast to all campus students on WhatsApp and app notifications",
     ],
-    applicationUrl: "https://wa.me/2348164670694?text=Hello%20UniLife!%20We%20want%20to%20apply%20for%20event%20sponsorship",
-    requirements: ["Event Proposal Pitch Deck (PDF)", "Estimated Budget Sheet", "Letter endorsed by Staff Adviser / President"],
+    applicationUrl:
+      "https://wa.me/2349038163213?text=Hello%20UniLife!%20We%20want%20to%20apply%20for%20event%20sponsorship",
+    requirements: [
+      "Event Proposal Pitch Deck (PDF)",
+      "Estimated Budget Sheet",
+      "Letter endorsed by Staff Adviser / President",
+    ],
     tags: ["Event Grants", "Faculty Dinners", "Tech Summits", "Direct Payout"],
   },
 ];

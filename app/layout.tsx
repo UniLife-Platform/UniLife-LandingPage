@@ -10,9 +10,24 @@ import { ThemeProvider } from "@/components/ThemeContext";
 const BASE_URL = "https://unilife.com.ng";
 
 // Self-hosted by Next at build time: no render-blocking CSS @import, no layout shift.
-const anton = Anton({ subsets: ["latin"], weight: "400", display: "swap", variable: "--font-anton" });
-const workSans = Work_Sans({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800"], display: "swap", variable: "--font-work-sans" });
-const plexMono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "500", "600", "700"], display: "swap", variable: "--font-plex-mono" });
+const anton = Anton({
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+  variable: "--font-anton",
+});
+const workSans = Work_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+  variable: "--font-work-sans",
+});
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-plex-mono",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -93,12 +108,12 @@ const jsonLd = {
         "https://x.com/unilife_connect",
         "https://www.tiktok.com/@unilifeconnect?_r=1&_t=ZS-992NpLGLfAC",
         "https://chat.whatsapp.com/I4DTryVfFCPDMqyceqxcQl",
-        "https://wa.me/2348164670694",
+        "https://wa.me/2349038163213",
       ],
       contactPoint: [
         {
           "@type": "ContactPoint",
-          telephone: "+2348164670694",
+          telephone: "+2349038163213",
           contactType: "customer support",
           areaServed: "NG",
           availableLanguage: ["English"],
@@ -186,7 +201,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${anton.variable} ${workSans.variable} ${plexMono.variable}`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${anton.variable} ${workSans.variable} ${plexMono.variable}`}
+    >
       <body className="antialiased">
         <Script
           id="theme-init"

@@ -4,7 +4,10 @@ import { useState, useMemo } from "react";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { motion, AnimatePresence } from "motion/react";
-import { VERIFIED_SPONSORSHIPS, SponsorshipOpportunity } from "@/lib/sponsorshipsData";
+import {
+  VERIFIED_SPONSORSHIPS,
+  SponsorshipOpportunity,
+} from "@/lib/sponsorshipsData";
 import { SCHOLARSHIP_PORTAL_CATEGORIES } from "@/lib/scholarshipCategories";
 import {
   ShieldCheck,
@@ -17,7 +20,7 @@ import {
   Copy,
   Check,
   X,
-  AlertCircle
+  AlertCircle,
 } from "lucide-react";
 
 const CATEGORIES = [
@@ -33,14 +36,19 @@ type Props = {
   activeNav?: string;
 };
 
-export default function ScholarshipsDirectory({ activeNav = "/scholarships" }: Props) {
+export default function ScholarshipsDirectory({
+  activeNav = "/scholarships",
+}: Props) {
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedOpportunity, setSelectedOpportunity] = useState<SponsorshipOpportunity | null>(null);
+  const [selectedOpportunity, setSelectedOpportunity] =
+    useState<SponsorshipOpportunity | null>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
   const categoryCounts = useMemo(() => {
-    const counts: Record<string, number> = { all: VERIFIED_SPONSORSHIPS.length };
+    const counts: Record<string, number> = {
+      all: VERIFIED_SPONSORSHIPS.length,
+    };
     VERIFIED_SPONSORSHIPS.forEach((item) => {
       counts[item.category] = (counts[item.category] || 0) + 1;
     });
@@ -49,7 +57,8 @@ export default function ScholarshipsDirectory({ activeNav = "/scholarships" }: P
 
   const filteredOpportunities = useMemo(() => {
     return VERIFIED_SPONSORSHIPS.filter((item) => {
-      const matchesCategory = activeCategory === "all" || item.category === activeCategory;
+      const matchesCategory =
+        activeCategory === "all" || item.category === activeCategory;
       const q = searchQuery.toLowerCase().trim();
       const matchesSearch =
         !q ||
@@ -92,7 +101,9 @@ export default function ScholarshipsDirectory({ activeNav = "/scholarships" }: P
             </h1>
 
             <p className="text-[#46473f] text-base sm:text-lg leading-relaxed mb-8 max-w-[500px]">
-              Direct corporate scholarships, tuition stipends, and campus grants for verified Nigerian undergraduates and postgraduates. Verified ongoing deadlines — zero middleman charges.
+              Direct corporate scholarships, tuition stipends, and campus grants
+              for verified Nigerian undergraduates and postgraduates. Verified
+              ongoing deadlines — zero middleman charges.
             </p>
 
             <div className="flex flex-wrap gap-4">
@@ -117,7 +128,9 @@ export default function ScholarshipsDirectory({ activeNav = "/scholarships" }: P
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
             className="w-full h-auto aspect-[4/3] rounded-[32px] overflow-hidden shadow-xl bg-[#EFE9D9] relative border border-[rgba(20,21,26,0.1)]"
           >
-            <img loading="lazy" decoding="async"
+            <img
+              loading="lazy"
+              decoding="async"
               src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1000&auto=format&fit=crop"
               alt="Nigerian university students studying together"
               className="w-full h-full object-cover"
@@ -148,11 +161,18 @@ export default function ScholarshipsDirectory({ activeNav = "/scholarships" }: P
       <div className="border-y border-[#14151A]/10 bg-white py-3 overflow-hidden">
         <div className="flex whitespace-nowrap animate-marquee">
           {[...Array(2)].map((_, i) => (
-            <div key={i} className="flex items-center gap-8 text-xs font-mono font-bold uppercase tracking-widest text-[#14151A]/70 px-4">
+            <div
+              key={i}
+              className="flex items-center gap-8 text-xs font-mono font-bold uppercase tracking-widest text-[#14151A]/70 px-4"
+            >
               <span>★ VERIFIED 2026 SCHOLARSHIPS</span>
-              <span className="text-[#ff3d81]">★ DIRECT APPLICATION PORTALS</span>
+              <span className="text-[#ff3d81]">
+                ★ DIRECT APPLICATION PORTALS
+              </span>
               <span>★ ZERO AGENT CHARGES</span>
-              <span className="text-[#4f7fff]">★ SCHOLARSHIP REGION AUDITED</span>
+              <span className="text-[#4f7fff]">
+                ★ SCHOLARSHIP REGION AUDITED
+              </span>
               <span>★ UNDERGRADUATE, MASTERS & TECH FELLOWSHIPS</span>
               <span className="text-emerald-600">★ 100% FREE TO APPLY</span>
             </div>
@@ -161,7 +181,10 @@ export default function ScholarshipsDirectory({ activeNav = "/scholarships" }: P
       </div>
 
       {/* ---- SECTION: EXPLORE BY LEVEL OF STUDY ---- */}
-      <section id="portals" className="py-20 px-6 md:px-16 max-w-[1160px] mx-auto">
+      <section
+        id="portals"
+        className="py-20 px-6 md:px-16 max-w-[1160px] mx-auto"
+      >
         <div className="text-center mb-14 max-w-[720px] mx-auto">
           <span className="inline-block font-mono text-xs tracking-widest text-[#059669] bg-[rgba(52,211,153,0.15)] border border-[rgba(52,211,153,0.3)] px-3 py-1 rounded-full mb-4 uppercase font-bold">
             Curated Academic Portals
@@ -170,7 +193,8 @@ export default function ScholarshipsDirectory({ activeNav = "/scholarships" }: P
             Verified Portals by Level of Study.
           </h2>
           <p className="text-[#46473f] text-base sm:text-lg leading-relaxed">
-            Direct directories maintained with official partner portals and <strong>Scholarship Region</strong>:
+            Direct directories maintained with official partner portals and{" "}
+            <strong>Scholarship Region</strong>:
           </p>
         </div>
 
@@ -197,7 +221,9 @@ export default function ScholarshipsDirectory({ activeNav = "/scholarships" }: P
                   </span>
                 </div>
 
-                <div className="text-xs font-mono text-black/50 mb-1">{cat.level}</div>
+                <div className="text-xs font-mono text-black/50 mb-1">
+                  {cat.level}
+                </div>
                 <h3 className="font-bold text-lg text-[#14151A] mb-2 group-hover:text-[#4f7fff] transition-colors leading-snug">
                   {cat.name}
                 </h3>
@@ -216,7 +242,10 @@ export default function ScholarshipsDirectory({ activeNav = "/scholarships" }: P
       </section>
 
       {/* ---- SECTION: VERIFIED SCHOLARSHIPS DIRECTORY ---- */}
-      <section id="opportunities" className="pb-24 px-6 md:px-16 max-w-[1160px] mx-auto">
+      <section
+        id="opportunities"
+        className="pb-24 px-6 md:px-16 max-w-[1160px] mx-auto"
+      >
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
           <div>
             <span className="inline-block font-mono text-xs tracking-widest text-[#4f7fff] bg-[rgba(79,127,255,0.1)] border border-[rgba(79,127,255,0.25)] px-3 py-1 rounded-full mb-3 uppercase font-bold">
@@ -228,7 +257,8 @@ export default function ScholarshipsDirectory({ activeNav = "/scholarships" }: P
           </div>
 
           <div className="text-xs font-mono text-black/60">
-            Showing {filteredOpportunities.length} of {VERIFIED_SPONSORSHIPS.length} active opportunities
+            Showing {filteredOpportunities.length} of{" "}
+            {VERIFIED_SPONSORSHIPS.length} active opportunities
           </div>
         </div>
 
@@ -269,7 +299,9 @@ export default function ScholarshipsDirectory({ activeNav = "/scholarships" }: P
                   <span>{cat.label}</span>
                   <span
                     className={`text-[10px] px-2 py-0.5 rounded-full ${
-                      isSelected ? "bg-[#ff3d81] text-white" : "bg-black/10 text-black/70"
+                      isSelected
+                        ? "bg-[#ff3d81] text-white"
+                        : "bg-black/10 text-black/70"
                     }`}
                   >
                     {categoryCounts[cat.id] || 0}
@@ -288,7 +320,9 @@ export default function ScholarshipsDirectory({ activeNav = "/scholarships" }: P
               No matching scholarships found
             </h3>
             <p className="text-black/60 max-w-md mx-auto text-sm mb-6">
-              Couldn&apos;t find opportunities matching &ldquo;{searchQuery}&rdquo;. Try broader keywords like &ldquo;Undergrad&rdquo;, &ldquo;STEM&rdquo;, or &ldquo;Nigeria&rdquo;.
+              Couldn&apos;t find opportunities matching &ldquo;{searchQuery}
+              &rdquo;. Try broader keywords like &ldquo;Undergrad&rdquo;,
+              &ldquo;STEM&rdquo;, or &ldquo;Nigeria&rdquo;.
             </p>
             <button
               onClick={() => {
@@ -336,7 +370,9 @@ export default function ScholarshipsDirectory({ activeNav = "/scholarships" }: P
 
                   {/* Target Audience */}
                   <div className="text-xs font-mono text-black/60 bg-[#F6F2E7] p-2.5 rounded-xl border border-black/5 mb-6">
-                    <span className="font-bold text-black/80">Eligibility: </span>
+                    <span className="font-bold text-black/80">
+                      Eligibility:{" "}
+                    </span>
                     {opp.targetAudience}
                   </div>
                 </div>
@@ -410,7 +446,8 @@ export default function ScholarshipsDirectory({ activeNav = "/scholarships" }: P
                     💰 {selectedOpportunity.awardValue}
                   </span>
                   <span className="font-mono text-xs text-black/60">
-                    Deadline: <strong>{selectedOpportunity.deadline}</strong> ({selectedOpportunity.daysRemaining} days remaining)
+                    Deadline: <strong>{selectedOpportunity.deadline}</strong> (
+                    {selectedOpportunity.daysRemaining} days remaining)
                   </span>
                 </div>
               </div>
@@ -428,7 +465,10 @@ export default function ScholarshipsDirectory({ activeNav = "/scholarships" }: P
                 </h4>
                 <div className="space-y-2">
                   {selectedOpportunity.eligibility.map((crit, idx) => (
-                    <div key={idx} className="flex items-start gap-2.5 text-sm text-[#333]">
+                    <div
+                      key={idx}
+                      className="flex items-start gap-2.5 text-sm text-[#333]"
+                    >
                       <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                       <span>{crit}</span>
                     </div>
@@ -437,28 +477,34 @@ export default function ScholarshipsDirectory({ activeNav = "/scholarships" }: P
               </div>
 
               {/* Perks */}
-              {selectedOpportunity.perks && selectedOpportunity.perks.length > 0 && (
-                <div className="mb-8">
-                  <h4 className="font-mono text-xs uppercase tracking-wider text-black/60 font-bold mb-3">
-                    Scholarship Privileges:
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {selectedOpportunity.perks.map((perk, idx) => (
-                      <span
-                        key={idx}
-                        className="text-xs bg-white border border-black/10 px-3 py-1.5 rounded-lg text-black/80 font-medium"
-                      >
-                        ✓ {perk}
-                      </span>
-                    ))}
+              {selectedOpportunity.perks &&
+                selectedOpportunity.perks.length > 0 && (
+                  <div className="mb-8">
+                    <h4 className="font-mono text-xs uppercase tracking-wider text-black/60 font-bold mb-3">
+                      Scholarship Privileges:
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedOpportunity.perks.map((perk, idx) => (
+                        <span
+                          key={idx}
+                          className="text-xs bg-white border border-black/10 px-3 py-1.5 rounded-lg text-black/80 font-medium"
+                        >
+                          ✓ {perk}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
 
               {/* Actions */}
               <div className="pt-6 border-t border-[rgba(20,21,26,0.1)] flex flex-wrap items-center justify-between gap-4">
                 <button
-                  onClick={() => handleCopyLink(selectedOpportunity.id, selectedOpportunity.applicationUrl)}
+                  onClick={() =>
+                    handleCopyLink(
+                      selectedOpportunity.id,
+                      selectedOpportunity.applicationUrl,
+                    )
+                  }
                   className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-black/20 text-xs font-mono text-black hover:bg-[#F6F2E7] transition-colors"
                 >
                   {copiedId === selectedOpportunity.id ? (
@@ -499,11 +545,12 @@ export default function ScholarshipsDirectory({ activeNav = "/scholarships" }: P
             Get 2026 Scholarship Alerts First.
           </h2>
           <p className="text-[rgba(246,242,231,0.75)] mb-8 max-w-[540px] mx-auto text-base md:text-lg leading-relaxed font-normal">
-            New corporate tuition schemes drop throughout the semester. Join our student WhatsApp dispatch for deadline reminders and essay tips.
+            New corporate tuition schemes drop throughout the semester. Join our
+            student WhatsApp dispatch for deadline reminders and essay tips.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <a
-              href="https://wa.me/2348164670694?text=Hi%20UniLife%2C%20please%20add%20me%20to%20the%202026%20Scholarship%20Alerts%20broadcast."
+              href="https://wa.me/2349038163213?text=Hi%20UniLife%2C%20please%20add%20me%20to%20the%202026%20Scholarship%20Alerts%20broadcast."
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-bold text-base bg-[#FFD23F] text-[#14151A] border-2 border-[#14151A] shadow-[3px_3px_0px_#14151A] hover:scale-105 active:scale-95 transition-all"

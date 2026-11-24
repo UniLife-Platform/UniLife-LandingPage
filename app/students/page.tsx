@@ -27,7 +27,9 @@ export default function StudentsPage() {
                 <span className="text-[#ff3d81]">finally together.</span>
               </h1>
               <p className="text-[#46473f] text-lg leading-relaxed mb-8 max-w-[500px]">
-                Join verified classmates, access past questions, form study groups, and stay inside your actual university community — no randoms, no bots.
+                Join verified classmates, access past questions, form study
+                groups, and stay inside your actual university community — no
+                randoms, no bots.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link
@@ -51,7 +53,9 @@ export default function StudentsPage() {
               transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
               className="w-full h-auto aspect-square md:aspect-[4/3] rounded-[32px] overflow-hidden shadow-2xl bg-[#EFE9D9] relative"
             >
-              <img loading="lazy" decoding="async"
+              <img
+                loading="lazy"
+                decoding="async"
                 src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1000&auto=format&fit=crop"
                 alt="Nigerian university students on campus"
                 className="w-full h-full object-cover"
@@ -74,7 +78,10 @@ export default function StudentsPage() {
         </section>
 
         {/* ---- FOUR THINGS YOU ACTUALLY NEED ---- */}
-        <section id="features" className="py-20 px-6 md:px-16 max-w-[1160px] mx-auto">
+        <section
+          id="features"
+          className="py-20 px-6 md:px-16 max-w-[1160px] mx-auto"
+        >
           <div className="text-center mb-16 max-w-[700px] mx-auto">
             <span className="inline-block font-mono text-xs tracking-widest text-[#059669] bg-[rgba(52,211,153,0.15)] border border-[rgba(52,211,153,0.3)] px-3 py-1 rounded-full mb-4 uppercase font-bold">
               Built around real campus life
@@ -119,7 +126,9 @@ export default function StudentsPage() {
                   {item.emoji}
                 </div>
                 <h3 className="font-bold text-[1.2rem] mb-3">{item.title}</h3>
-                <p className="text-[#46473f] text-[1rem] leading-relaxed">{item.desc}</p>
+                <p className="text-[#46473f] text-[1rem] leading-relaxed">
+                  {item.desc}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -166,7 +175,9 @@ export default function StudentsPage() {
                   {step.step}
                 </div>
                 <h3 className="font-bold text-[1.15rem] mb-3">{step.title}</h3>
-                <p className="text-[#46473f] text-[0.95rem] leading-relaxed">{step.desc}</p>
+                <p className="text-[#46473f] text-[0.95rem] leading-relaxed">
+                  {step.desc}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -199,8 +210,13 @@ export default function StudentsPage() {
                   "Hard to find serious study partners",
                   "Information gets lost quickly",
                 ].map((text, i) => (
-                  <li key={i} className="flex gap-4 items-start text-[#46473f] text-[0.95rem] leading-relaxed">
-                    <span className="text-[#ff3d81] font-mono font-bold mt-1 shrink-0">✕</span>
+                  <li
+                    key={i}
+                    className="flex gap-4 items-start text-[#46473f] text-[0.95rem] leading-relaxed"
+                  >
+                    <span className="text-[#ff3d81] font-mono font-bold mt-1 shrink-0">
+                      ✕
+                    </span>
                     {text}
                   </li>
                 ))}
@@ -219,8 +235,13 @@ export default function StudentsPage() {
                   "Easy to find study groups and peers",
                   "Everything stays in one place",
                 ].map((text, i) => (
-                  <li key={i} className="flex gap-4 items-start text-[#14151A] font-medium text-[0.95rem] leading-relaxed">
-                    <span className="text-[#34d399] font-mono font-bold mt-1 shrink-0">✓</span>
+                  <li
+                    key={i}
+                    className="flex gap-4 items-start text-[#14151A] font-medium text-[0.95rem] leading-relaxed"
+                  >
+                    <span className="text-[#34d399] font-mono font-bold mt-1 shrink-0">
+                      ✓
+                    </span>
                     {text}
                   </li>
                 ))}
@@ -242,7 +263,8 @@ export default function StudentsPage() {
               Ready to join your campus?
             </h2>
             <p className="text-[rgba(246,242,231,0.75)] mb-10 max-w-[500px] mx-auto leading-relaxed text-lg">
-              Download UniLife and connect with verified students at your university.
+              Download UniLife and connect with verified students at your
+              university.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
@@ -252,7 +274,7 @@ export default function StudentsPage() {
                 Download the app →
               </Link>
               <a
-                href="https://wa.me/2348164670694"
+                href="https://wa.me/2349038163213"
                 className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-bold text-[0.95rem] bg-transparent !text-white border-2 border-[rgba(255,255,255,0.2)] hover:bg-[#F6F2E7] hover:!text-[#14151A] transition-all whitespace-nowrap"
               >
                 Chat on WhatsApp

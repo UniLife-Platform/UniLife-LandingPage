@@ -9,7 +9,7 @@ import { useTheme } from "@/components/ThemeContext";
 const SOCIALS = [
   {
     label: "WhatsApp",
-    href: "https://wa.me/2348164670694",
+    href: "https://wa.me/2349038163213",
     icon: MessageCircle,
   },
   { label: "Email", href: "mailto:hello@unilife.com.ng", icon: Mail },
@@ -89,13 +89,28 @@ interface FooterLinkItem {
 }
 
 const PLATFORM_LINKS: FooterLinkItem[] = [
-  { label: "UniLife Challenges", href: "/challenge", badge: "Active", badgeColor: "bg-[#FFD23F] text-[#14151A]" },
-  { label: "Scholarships & Grants", href: "/scholarships", badge: "New", badgeColor: "bg-[#4f7fff] text-white" },
+  {
+    label: "UniLife Challenges",
+    href: "/challenge",
+    badge: "Active",
+    badgeColor: "bg-[#FFD23F] text-[#14151A]",
+  },
+  {
+    label: "Scholarships & Grants",
+    href: "/scholarships",
+    badge: "New",
+    badgeColor: "bg-[#4f7fff] text-white",
+  },
   { label: "For Students", href: "/students" },
   { label: "For Campus Sellers", href: "/sellers" },
   { label: "School Partners", href: "/partners" },
   { label: "Partnerships & Alliances", href: "/alliances" },
-  { label: "Request Your Campus", href: "/request", badge: "Vote", badgeColor: "bg-[#10b981] text-white" },
+  {
+    label: "Request Your Campus",
+    href: "/request",
+    badge: "Vote",
+    badgeColor: "bg-[#10b981] text-white",
+  },
 ];
 
 const ECOSYSTEM_LINKS: FooterLinkItem[] = [
@@ -117,7 +132,12 @@ const COMPANY_LINKS: FooterLinkItem[] = [
 const LEGAL_LINKS: FooterLinkItem[] = [
   { label: "Privacy Policy", href: "/policy" },
   { label: "Terms & Conditions", href: "/terms" },
-  { label: "Cookie Settings", href: "/cookies", badge: "NDPR", badgeColor: "bg-[#10b981]/20 text-[#10b981]" },
+  {
+    label: "Cookie Settings",
+    href: "/cookies",
+    badge: "NDPR",
+    badgeColor: "bg-[#10b981]/20 text-[#10b981]",
+  },
   { label: "Community Guidelines", href: "/guidelines" },
   { label: "Child Safety Standards", href: "/child-safety" },
   { label: "Delete Account", href: "/delete-account" },
@@ -206,7 +226,8 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-[rgba(246,242,231,0.6)] text-[0.96rem] leading-relaxed">
-              The digital campus ecosystem for Nigerian university students, everywhere. Built by students, for students.
+              The digital campus ecosystem for Nigerian university students,
+              everywhere. Built by students, for students.
             </p>
           </motion.div>
 
@@ -365,7 +386,8 @@ export default function Footer() {
         <div className="relative pt-6 border-t border-[rgba(246,242,231,0.08)]">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <span className="font-mono text-[0.7rem] tracking-widest uppercase text-[rgba(246,242,231,0.45)] text-center sm:text-left">
-              © 2026 UniLife — Built by Nigerian students, for university students
+              © 2026 UniLife — Built by Nigerian students, for university
+              students
             </span>
             <div className="flex flex-wrap items-center justify-center gap-4">
               <button
@@ -380,7 +402,9 @@ export default function Footer() {
                 ) : (
                   <Moon size={12} />
                 )}
-                <span>Theme: {resolvedTheme === "dark" ? "Dark" : "Light"}</span>
+                <span>
+                  Theme: {resolvedTheme === "dark" ? "Dark" : "Light"}
+                </span>
               </button>
               <Link
                 href="/cookies"
@@ -388,10 +412,7 @@ export default function Footer() {
               >
                 Cookie Preferences
               </Link>
-              <span className="font-mono text-[0.7rem] tracking-widest uppercase text-[rgba(246,242,231,0.45)] bg-[rgba(246,242,231,0.06)] border border-[rgba(246,242,231,0.12)] px-3 py-1 rounded-full flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse" />
-                Network Live Across Campuses
-              </span>
+             
             </div>
           </div>
         </div>

@@ -22,7 +22,7 @@ export default function StructuredData() {
           "https://x.com/unilife_connect",
           "https://www.tiktok.com/@unilifeconnect?_r=1&_t=ZS-992NpLGLfAC",
           "https://chat.whatsapp.com/I4DTryVfFCPDMqyceqxcQl",
-          "https://wa.me/2348164670694",
+          "https://wa.me/2349038163213",
         ],
       },
       {
