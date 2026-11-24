@@ -23,7 +23,7 @@ A serial that doesn't exist shows "No certificate found".
    ```
    (needs version 4.1 or newer, which is what npm installs today)
 3. **Environment.** Nothing new. The pages use the same `NEXT_PUBLIC_SUPABASE_URL` and
-   `NEXT_PUBLIC_SUPABASE_ANON_KEY` your site already uses.
+   `NEXT_SUPABASE_ANON_KEY` your site already uses.
 4. Run `npm run dev` and issue a test certificate (below).
 
 ## Issuing a certificate
