@@ -20,8 +20,8 @@ export default function ReferralContactPage() {
           <div className="contact-card" style={{ maxWidth: 460 }}>
             <div className="name">Harrison Ariwodo</div>
             <div className="role">Founder, UniLife</div>
-            <a className="contact-line" href="https://wa.me/2348164670694">
-              <span className="ic"></span> WhatsApp — +234 816 467 0694
+            <a className="contact-line" href="https://wa.me/2349038163213">
+              <span className="ic"></span> WhatsApp — +234 903 816 3213
             </a>
             <a className="contact-line" href="mailto:hello@unilife.com.ng">
               <span className="ic"></span> Email — hello@unilife.com.ng
@@ -33,7 +33,7 @@ export default function ReferralContactPage() {
         </Reveal>
         <Reveal delay={0.1}>
           <CtaRow style={{ marginTop: 26 }}>
-            <Btn href="https://wa.me/2348164670694">Message on WhatsApp →</Btn>
+            <Btn href="https://wa.me/2349038163213">Message on WhatsApp →</Btn>
             <Btn href="mailto:hello@unilife.com.ng" variant="ghost">
               Email the founder
             </Btn>

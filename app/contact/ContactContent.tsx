@@ -7,7 +7,7 @@ import InitialsAvatar from "@/components/Avatar";
 import { motion } from "motion/react";
 import { MessageCircle, ArrowUpRight } from "lucide-react";
 
-const WHATSAPP_URL = "https://wa.me/2348164670694";
+const WHATSAPP_URL = "https://wa.me/2349038163213";
 const EMAIL_URL = "mailto:hello@unilife.com.ng";
 
 function InstagramIcon({ size = 22 }: { size?: number }) {
@@ -100,7 +100,7 @@ const CHANNELS = [
   {
     emoji: "💬",
     title: "WhatsApp",
-    detail: "+234 816 467 0694",
+    detail: "+234 903 816 3213",
     sub: "Fastest way to reach us — usually a reply within the hour.",
     href: WHATSAPP_URL,
     accent: "#34d399",

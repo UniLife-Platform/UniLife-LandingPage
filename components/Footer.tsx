@@ -111,6 +111,10 @@ const PLATFORM_LINKS: FooterLinkItem[] = [
     badge: "Vote",
     badgeColor: "bg-[#10b981] text-white",
   },
+  {
+    label: "Certificates",
+    href: "/verify",
+  },
 ];
 
 const ECOSYSTEM_LINKS: FooterLinkItem[] = [
