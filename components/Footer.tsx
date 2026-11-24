@@ -412,7 +412,6 @@ export default function Footer() {
               >
                 Cookie Preferences
               </Link>
-             
             </div>
           </div>
         </div>
